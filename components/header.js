@@ -12,10 +12,10 @@ const CustomHeader = ({ title, navigation }) => {
           onPress={() => navigation.goBack()}
         >
           <Box mr={"3"}>
-            <Ionicons name="arrow-back-outline" size={32} color="#F82F2D" />
+            <Ionicons name="arrow-back-outline" size={20} color="#F82F2D" />
           </Box>
         </TouchableOpacity>
-        <Heading color="#F82F2D">{title}</Heading>
+        <Heading color="#F82F2D" fontSize={"16"}>{title}</Heading>
       </HStack>
     </Box>
   );

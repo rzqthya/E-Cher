@@ -25,10 +25,10 @@ const BottomTabs = () => {
               iconName = "home-outline";
               break;
             case "History":
-              iconName = "document-text-outline";
+              iconName = "time-outline";
               break;
             case "Info":
-              iconName = "videocam-outline";
+              iconName = "information-circle-outline";
               break;
             case "Profile":
               iconName = "person-circle-outline";

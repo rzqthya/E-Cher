@@ -2,7 +2,7 @@ import React from "react";
 import { NativeBaseProvider, Text } from "native-base";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import CustomHeader from "./components/header";
 import InfoScreen from "./screens/info";
@@ -68,10 +68,13 @@ const Tabs = () => {
 
 const App = () => {
   return (
-    <NativeBaseProvider>
-      <CustomHeader title="Info E-Cher" />
-      <InfoScreen />
-    </NativeBaseProvider>
+    <NavigationContainer>
+      <NativeBaseProvider>
+        <CustomHeader title="Info E-Cher" />
+        <Tabs />
+      </NativeBaseProvider>
+    </NavigationContainer>
+
   );
 };
 

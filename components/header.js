@@ -1,5 +1,4 @@
 import React from "react";
-import { TouchableOpacity } from "react-native";
 import { Box, Heading, HStack } from "native-base";
 
 

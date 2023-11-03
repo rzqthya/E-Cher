@@ -4,7 +4,6 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
-import CustomHeader from "./components/header";
 import InfoScreen from "./screens/info";
 import HistoryScreen from "./screens/history.js";
 import HomeScreen from "./screens/home";
@@ -14,7 +13,7 @@ import ProfileScreen from "./screens/profile";
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const noHead = { headerShown: false };
+const noHead = { headerShown: true };
 
 const Tabs = () => {
   return (
@@ -58,10 +57,36 @@ const Tabs = () => {
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} options={noHead} />
-      <Tab.Screen name="History" component={HistoryScreen} options={noHead} />
-      <Tab.Screen name="Info" component={InfoScreen} options={noHead} />
-      <Tab.Screen name="Profile" component={ProfileScreen} options={noHead} />
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{
+          title: "HISTORY", 
+          headerTitleAlign: "center", 
+        }}
+      />
+      <Tab.Screen
+        name="Info"
+        component={InfoScreen}
+        options={{
+          title: "INFO E-CHER",  
+          headerTitleAlign: "center",
+           
+        }}
+      />
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          title: "PROFILE", 
+          headerTitleAlign: "center", 
+        }}
+      />
     </Tab.Navigator>
   );
 };
@@ -70,7 +95,6 @@ const App = () => {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <CustomHeader title="Info E-Cher" />
         <Tabs />
       </NativeBaseProvider>
     </NavigationContainer>

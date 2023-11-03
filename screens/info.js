@@ -1,39 +1,25 @@
 import React from "react";
-import { Box, Text } from "native-base";
+import { Box, Text, VStack } from "native-base";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const InfoScreen = () => {
   return (
-    <Box
-      flex={1}
-      justifyContent="center"
-      alignItems="center"
-      bg="white"
-      p={4}
-    >
-      <Box
-        bg="white"
-        p={4}
-        shadow={2}
-        borderRadius={10}
-        width="80%"
-        alignItems="center"
-        mb={4}
-      >
-        <Text fontSize="xl" fontWeight="bold" mb={2}>
-          FAQ
-        </Text>
+    <Box flex={1} justifyContent="center" alignItems="center" bg="white" p={4}>
+      <Box bg="white" p={4} shadow={2} borderRadius={10} width="80%" alignItems="center" mb={4}>
+        <VStack alignItems="center" space={2}>
+          <Ionicons name="help-circle-sharp" size={48} color="black" />
+          <Text fontSize="xl" fontWeight="bold" mb={2}>
+            FAQ
+          </Text>
+        </VStack>
       </Box>
-      <Box
-        bg="white"
-        p={4}
-        shadow={2}
-        borderRadius={10}
-        width="80%"
-        alignItems="center"
-      >
-        <Text fontSize="xl" fontWeight="bold" mb={2}>
-          Tentang Kami
-        </Text>
+      <Box bg="white" p={4} shadow={2} borderRadius={10} width="80%" alignItems="center">
+        <VStack alignItems="center" space={2}>
+          <Ionicons name="people-outline" size={24} color="black" />
+          <Text fontSize="xl" fontWeight="bold" mb={2}>
+            Tentang Kami
+          </Text>
+        </VStack>
       </Box>
     </Box>
   );

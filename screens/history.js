@@ -1,7 +1,7 @@
 import { Heading, Center } from "native-base";
 
 
-const HomeScreen = () => {
+const HistoryScreen = () => {
   return (
     <>
 
@@ -12,4 +12,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default HistoryScreen;

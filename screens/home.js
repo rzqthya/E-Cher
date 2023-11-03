@@ -6,7 +6,7 @@ const HomeScreen = () => {
     <>
 
       <Center flex={1}>
-        <Heading>Profile</Heading>
+        <Heading>Home</Heading>
       </Center>
     </>
   );

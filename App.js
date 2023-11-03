@@ -39,7 +39,7 @@ const Tabs = () => {
             <Ionicons
               name={iconName}
               size={28}
-              color={focused ? "black" : color}
+              color={focused ? "#F82F2D" : color}
             />
           );
         },
@@ -50,7 +50,7 @@ const Tabs = () => {
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "black" : color} mb={2}>
+            <Text color={focused ? "#F82F2D" : color} mb={2}>
               {children}
             </Text>
           );
@@ -66,16 +66,18 @@ const Tabs = () => {
         name="History"
         component={HistoryScreen}
         options={{
-          title: "HISTORY", 
+          title: "History", 
           headerTitleAlign: "center", 
+          headerTitleStyle: { color: "#F82F2D" },
         }}
       />
       <Tab.Screen
         name="Info"
         component={InfoScreen}
         options={{
-          title: "INFO E-CHER",  
+          title: "Info",  
           headerTitleAlign: "center",
+          headerTitleStyle: { color: "#F82F2D" },
            
         }}
       />
@@ -83,8 +85,9 @@ const Tabs = () => {
         name="Profile"
         component={ProfileScreen}
         options={{
-          title: "PROFILE", 
-          headerTitleAlign: "center", 
+          title: "Profile", 
+          headerTitleAlign: "center",
+          headerTitleStyle: { color: "#F82F2D" }, 
         }}
       />
     </Tab.Navigator>

@@ -6,7 +6,7 @@ const HistoryScreen = () => {
     <>
 
       <Center flex={1}>
-        <Heading>Profile</Heading>
+        <Heading>History</Heading>
       </Center>
     </>
   );

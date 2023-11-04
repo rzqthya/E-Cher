@@ -12,7 +12,7 @@ import History from "./screens/history";
 const Stack = createNativeStackNavigator();
 const TabBottom = createBottomTabNavigator();
 
-const noHead = { headerShown: false };
+const noHead = { headerShown: true };
 
 const BottomTabs = () => {
   return (
@@ -22,43 +22,52 @@ const BottomTabs = () => {
           let iconName;
           switch (route.name) {
             case "Home":
-              iconName = "home-outline";
+              iconName = "home";
               break;
             case "History":
-              iconName = "time-outline";
+              iconName = "time";
               break;
             case "Info":
-              iconName = "information-circle-outline";
+              iconName = "information-circle";
               break;
             case "Profile":
-              iconName = "person-circle-outline";
+              iconName = "person-circle";
               break;
           }
           return (
             <Ionicons
               name={iconName}
               size={28}
-              color={focused ? "black" : color}
+              color={focused ? "#F82F2D" : color}
             />
           );
         },
         tabBarIconStyle: { marginTop: 5 },
         tabBarStyle: {
           height: 70,
-          borderTopWidth: 0,
+          borderTopWidth: 2,
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "black" : color} mb={2}>
+            <Text color={focused ? "#F82F2D" : color} mb={2}>
               {children}
             </Text>
           );
         },
       })}
     >
-      <TabBottom.Screen name="Home" component={Home} options={noHead} />
-      <TabBottom.Screen name="History" component={History} options={{ headerTitle: "Voucherku" }} />
-      <TabBottom.Screen name="Info" component={Info} options={noHead} />
+      <TabBottom.Screen name="Home" component={Home} options={{ headerShown: false }} />
+      <TabBottom.Screen name="History" component={History} 
+        options={{
+          title: "History", 
+          headerTitleAlign: "center", 
+          headerTitleStyle: { color: "#F82F2D" }, }} />
+      <TabBottom.Screen name="Info" component={Info}  
+        options={{
+            title: "Info",  
+            headerTitleAlign: "center",
+            headerTitleStyle: { color: "#F82F2D" },
+          }} />
       <TabBottom.Screen name="Profile" component={Profile} options={noHead} />
     </TabBottom.Navigator>
   );
@@ -69,7 +78,7 @@ const App = () => {
     <NativeBaseProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Tabs" component={BottomTabs} options={noHead}/>
+          <Stack.Screen name="Tabs" component={BottomTabs} options={{headerShown: false}}/>
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

@@ -1,4 +1,4 @@
-import { View, FlatList, Text, Image, Center, Button, ButtonText } from "native-base";
+import { View, FlatList, Text, Image, Center, Button } from "native-base";
 import { Header } from "../components";
 
 const datas = [
@@ -35,7 +35,7 @@ const Active = () => {
                 <View flex={6} p={5}>
                     <Text fontSize={14} fontWeight={"bold"}>{item.title}</Text>
                     <Text fontSize={11} fontWeight={500}>{item.desc}</Text>
-                    <Text color="#D32324" fontSize={11} fontWeight={500} pt={2}>{item.city}</Text>
+                    <Text color="#F82F2D" fontSize={11} fontWeight={500} pt={2}>{item.city}</Text>
                     <Text color="#7F7F7F" fontSize={9} fontWeight={500} pt={3}>
                         Berlaku sampai {item.date}
                     </Text>

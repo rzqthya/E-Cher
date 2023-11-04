@@ -1,77 +1,59 @@
 import React, { useState } from 'react';
-import { View, TextInput, Image, Text, StyleSheet } from 'react-native';
-import CustomButton from '../components/CustomButton';
+import { View, Text, Image } from 'react-native';
+import { NativeBaseProvider, Input, Button } from 'native-base';
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const handleLogin = () => {
+  const handleRegister = () => {
     navigation.navigate('Register');
   };
 
+  const handleLogin = () => {
+    navigation.navigate('Home');
+  }
+
   return (
-    <View style={styles.container}>
-      <View style={styles.logoContainer}>
-        <Image
-          source={require('../assets/logo.png')}
-          style={styles.logo}
-        />
+    <NativeBaseProvider>
+      <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
+        <View marginBottom={100}>
+          <Image source={require('../assets/logo.png')} style={{ width: 200, height: 200 }} />
+        </View>
+        <View width="80%" marginBottom={10}>
+          {/* Inputan Email */}
+          <Text marginBottom={10}>
+            Masukkan Email:
+          </Text>
+          <Input
+            placeholder="Email"
+            value={email}
+            onChangeText={(text) => setEmail(text)}
+            style={{ marginBottom: 10 }}
+          />
+
+          {/* Inputan No.Telpon */}
+          <Text marginBottom={20} marginTop={20}>
+            Masukkan No. Telpon:
+          </Text>
+          <Input
+            placeholder="Phone Number"
+            value={phoneNumber}
+            onChangeText={(text) => setPhoneNumber(text)}
+            style={{ marginBottom: 10 }}
+          />
+        </View>
+        <Button onPress={handleLogin} marginTop={10}
+            marginBottom={10}
+            style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}>
+          Login
+        </Button>
+        <Text onPress={handleRegister} marginTop={10}>
+          Don't have an Account ? Sign Up
+        </Text>
       </View>
-      <Text style={styles.label}>Masukkan Email:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        value={email}
-        onChangeText={(text) => setEmail(text)}
-      />
-      <Text style={styles.label}>Masukkan No. Telpon:</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Phone Number"
-        value={phoneNumber}
-        onChangeText={(text) => setPhoneNumber(text)}
-      />
-      <CustomButton
-        title="Login"
-        onPress={handleLogin}
-        style={styles.button}
-      />
-      <Text>Don't have an Account ? Sign Up</Text>
-    </View>
+    </NativeBaseProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-  },
-  logoContainer: {
-    marginBottom: 100,
-  },
-  logo: {
-    width: 200,
-    height: 200,
-  },
-  label: {
-    marginBottom: 10,
-    width: '80%',
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    padding: 10,
-    width: '80%',
-    borderRadius: 12,
-  },
-  button: {
-    marginTop: 10,
-  },
-});
 
 export default Login;

@@ -2,18 +2,19 @@ import React, { useState } from 'react';
 import { View, Text } from 'react-native';
 import { NativeBaseProvider, Input, Button } from 'native-base';
 
-const Register = ({ navigation }) => {
+const SignUp = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const handleRegister = () => {
+  const handleSignUp = () => {
     navigation.navigate('Login');
   };
 
   return (
     <NativeBaseProvider>
       <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
+      <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 220 }}>Sign Up</Text>
         <View width="80%" marginBottom={10}>
           {/* Inputan Email */}
           <Text marginBottom={10}>
@@ -48,10 +49,10 @@ const Register = ({ navigation }) => {
             style={{ marginBottom: 10 }}
           />
         </View>
-        <Button onPress={handleRegister} marginTop={10}
+        <Button onPress={handleSignUp} marginTop={10}
             marginBottom={10}
             style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}>
-          Register
+          Sign Up
         </Button>
         <Text onPress={() => navigation.navigate('Login')} marginTop={10}>
           Already have an account? Login
@@ -62,4 +63,4 @@ const Register = ({ navigation }) => {
 };
 
 
-export default Register;
+export default SignUp;

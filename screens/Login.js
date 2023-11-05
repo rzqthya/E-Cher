@@ -6,25 +6,24 @@ const Login = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 
-  const handleRegister = () => {
-    navigation.navigate('Register');
+  const handleSignUp = () => {
+    navigation.navigate('SignUp');
   };
 
   const handleLogin = () => {
     navigation.navigate('Home');
-  }
+  };
 
   return (
     <NativeBaseProvider>
       <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
-        <View marginBottom={100}>
+        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 45 }}>Login</Text>
+        <View marginBottom={80}>
           <Image source={require('../assets/logo.png')} style={{ width: 200, height: 200 }} />
         </View>
         <View width="80%" marginBottom={10}>
           {/* Inputan Email */}
-          <Text marginBottom={10}>
-            Masukkan Email:
-          </Text>
+          <Text marginBottom={10}>Masukkan Email:</Text>
           <Input
             placeholder="Email"
             value={email}
@@ -43,13 +42,16 @@ const Login = ({ navigation }) => {
             style={{ marginBottom: 10 }}
           />
         </View>
-        <Button onPress={handleLogin} marginTop={10}
-            marginBottom={10}
-            style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}>
+        <Button
+          onPress={handleLogin}
+          marginTop={10}
+          marginBottom={10}
+          style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}
+        >
           Login
         </Button>
-        <Text onPress={handleRegister} marginTop={10}>
-          Don't have an Account ? Sign Up
+        <Text onPress={handleSignUp} marginTop={10}>
+          Don't have an Account? Sign Up
         </Text>
       </View>
     </NativeBaseProvider>

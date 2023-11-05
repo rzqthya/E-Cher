@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Filter = () => {
+const Info = () => {
     return (
         <View>
-            <Text>Filter</Text>
+            <Text>Info</Text>
         </View>
     )
 }
 
-export default Filter
+export default Info
 
 const styles = StyleSheet.create({})

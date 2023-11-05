@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Filter = () => {
+const History = () => {
     return (
         <View>
-            <Text>Filter</Text>
+            <Text>History</Text>
         </View>
     )
 }
 
-export default Filter
+export default History
 
 const styles = StyleSheet.create({})

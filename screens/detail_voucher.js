@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const Filter = () => {
+const DetailVoucher = () => {
     return (
         <View>
-            <Text>Filter</Text>
+            <Text>DetailVoucher</Text>
         </View>
     )
 }
 
-export default Filter
+export default DetailVoucher
 
 const styles = StyleSheet.create({})

@@ -14,8 +14,8 @@ const SignUp = ({ navigation }) => {
   return (
     <NativeBaseProvider>
       <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
-      <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 220 }}>Sign Up</Text>
-        <View width="80%" marginBottom={10}>
+      <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 130 }}>Sign Up</Text>
+        <View width="80%" marginBottom={100}>
           {/* Inputan Email */}
           <Text marginBottom={10}>
             Masukkan Email

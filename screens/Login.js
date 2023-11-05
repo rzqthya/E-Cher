@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { View, Text, Image } from 'react-native';
 import { NativeBaseProvider, Input, Button } from 'native-base';
 
-const Login = ({ navigation }) => {
+
+const Login = ({ navigation }) => {  // navigation diisi adalah "props" yang yang diterima dari react navigator yang digunakan untuk mengatur "useState"
+  //code dibawah ini merupakan State
+  //penggunaan useState untuk membuat state lokal dalam komponen Login yang menyimpan nilai email dan phoneNumber
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
 

@@ -4,6 +4,7 @@ import { TouchableOpacity, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import datas from "../datas";
 import { Hi_profile } from "../components";
+import ButtonFilter from "../components/buttonFilter";
 
 const Home = () => {
     const navigation = useNavigation();
@@ -41,7 +42,7 @@ const Home = () => {
         <SafeAreaView>
             <Box py={"4"}>
                 <Hi_profile title={"Hi, Rizqy Athiyya "} />
-                
+                <ButtonFilter/>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {datas.slice(10).map((item, index) => {
                         return (

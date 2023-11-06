@@ -83,11 +83,11 @@ const BottomTabs = () => {
 const App = () => {
   return (
     <NativeBaseProvider>
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
-        </Stack.Navigator>
-      </NavigationContainer>
+        <NavigationContainer>
+          <Stack.Navigator>
+            <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
+          </Stack.Navigator>
+        </NavigationContainer>
     </NativeBaseProvider>
   );
 };

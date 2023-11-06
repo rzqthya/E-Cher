@@ -26,6 +26,7 @@ const datas = [
         date: "31 November 2023",
         title:
             "Voucher Diskon Rp 20.000",
+        desc: "Khusus Siswa dan Mahasiswa",
         image:
             require('./assets/voucher/Chatime1.jpg'),
         city: "Solo",
@@ -34,6 +35,7 @@ const datas = [
         id: 4,
         date: "16 Mei 2023",
         title: "THR Dari Kenangan Beli 3 Hanya 48 Ribu",
+        desc: "Khusus Siswa dan Mahasiswa",
         image:
             require('./assets/voucher/Chatime2.jpg'),
         city: "Boyolali",
@@ -42,7 +44,8 @@ const datas = [
         id: 5,
         date: "16 Mei 2023",
         title:
-            "Cashback 60% GoPay",
+            "Cashback 60%",
+        desc: "Untuk Pengguna GoPay",
         image:
             require('./assets/voucher/dcost-promo.jpg'),
         city: "Banyumas",
@@ -52,6 +55,7 @@ const datas = [
         date: "10 Desember 2023",
         title:
             "Diskon Nasi Lemak McD",
+        desc: "Promo Akhir Tahun",
         image:
             require('./assets/voucher/Gildak_1.jpg'),
         city: "Blora",
@@ -59,7 +63,8 @@ const datas = [
     {
         id: 7,
         date: "Setiap Hari 22.00",
-        title: "Diskon Scrumbled Egg Sandwich",
+        title: "Diskon Kopi",
+        desc: "All Days",
         image:
             require('./assets/voucher/kopikenangan_1.jpg'),
         city: "Brebes",
@@ -69,14 +74,16 @@ const datas = [
         date: "31 Oktober 2023",
         title:
             "Promo Oktober Xtra Puas",
+        desc: "Khusus siswa dan mahasiswa",
         image:
             require('./assets/voucher/kopikenangan_2.jpg'),
         city: "Cilacap",
     },
     {
         id: 9,
-        date: "31 Juli 2023",
+        date: "7 Juli 2023",
         title: "Voucher Belanja Chatime",
+        desc: "Promo 7.7 untuk pembelian melalui Ovo",
         image:
             require('./assets/voucher/Martabakku1.jpg'),
         city: "Demak",
@@ -86,6 +93,7 @@ const datas = [
         date: "20 Desember 2023",
         title:
             "Cashback 35% MartabakKu",
+        desc: "Promo Akhir Tahun",
         image:
             require('./assets/voucher/McD1.jpg'),
         city: "Kebumen",

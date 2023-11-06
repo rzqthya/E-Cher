@@ -40,7 +40,8 @@ const Home = () => {
     return (
         <SafeAreaView>
             <Box py={"4"}>
-                <Hi_profile title={"Hi, Rizqy Athyya"} />
+                <Hi_profile title={"Hi, Rizqy Athiyya "} />
+                
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
                     {datas.slice(10).map((item, index) => {
                         return (

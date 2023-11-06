@@ -72,7 +72,7 @@ const BottomTabs = () => {
           headerTitleStyle: { color: "#D32324" },
         }} />
       <TabBottom.Screen name="Profile" component={Profile} options={{
-        title: "Info",
+        title: "Profile",
         headerTitleAlign: "center",
         headerTitleStyle: { color: "#D32324" },
       }} />

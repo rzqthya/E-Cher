@@ -10,8 +10,14 @@ const Home = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView>
-            <Box py={"4"} bg={'#F0F2F7'}>
-                <Hi_profile title={"Hi, Rizqy Athiyya "} />
+            <Box bg={'#F0F2F7'} mx={45}>
+                <Box py={"2"}>
+                    <Hi_profile title={"Hi, Rizqy Athiyya "} />
+                </Box>
+                <Box py={2} alignItems={'flex-end'}>
+                    <ButtonFilter />
+                </Box>
+                
             </Box>
         </SafeAreaView>
     );

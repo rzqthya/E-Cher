@@ -8,7 +8,7 @@ const datas = [
         title:
             "Burger King Cash Back Hingga 50%",
         image:
-            "assets/BURGER KING Promo GOPAY PAYDAY - CASHBACK hingga 50%.jpg",
+            require('./assets/voucher/BurgerKing_promo1.jpg'),
         content: content,
     },
     {
@@ -16,7 +16,7 @@ const datas = [
         date: "28 Februari 2023",
         title: "Voucher Diskon Rp 15.000",
         image:
-            "../assets/BURGER KING Promo Voucher Cashback ShopeePay senilai Rp 15.000 Hanya Rp 1.000,-.jpg",
+            require('./assets/voucher/BurgerKing_Promo2.jpg'),
         content: content,
     },
     {
@@ -25,7 +25,7 @@ const datas = [
         title:
             "Voucher Diskon Rp 20.000",
         image:
-            "../assets/dcost-promo.jpg",
+            require('./assets/voucher/Chatime1.jpg'),
         content: content,
     },
     {
@@ -33,7 +33,7 @@ const datas = [
         date: "16 Mei 2023",
         title: "THR Dari Kenangan Beli 3 Hanya 48 Ribu",
         image:
-            "../assets/kopi-kenangan_thr_14052021p01.jpg",
+            require('./assets/voucher/Chatime2.jpg'),
         content: content,
     },
     {
@@ -42,7 +42,7 @@ const datas = [
         title:
             "Cashback 60% GoPay",
         image:
-            "../assets/kopi-kenangan_thr_14052021p02.jpg",
+            require('./assets/voucher/dcost-promo.jpg'),
         content: content,
     },
     {
@@ -51,7 +51,7 @@ const datas = [
         title:
             "Diskon Nasi Lemak McD",
         image:
-            "../assets/McD Nasi Lemak Promo.jpg",
+            require('./assets/voucher/Gildak_1.jpg'),
         content: content,
     },
     {
@@ -59,7 +59,7 @@ const datas = [
         date: "Setiap Hari 22.00",
         title: "Diskon Scrumbled Egg Sandwich",
         image:
-            "../assets/McD Scrambled Egg Sandwich Promo.jpg",
+            require('./assets/voucher/kopikenangan_1.jpg'),
         content: content,
     },
     {
@@ -68,7 +68,7 @@ const datas = [
         title:
             "Promo Oktober Xtra Puas",
         image:
-            "../assets/Promo GILDAK Paket Xtra Puas Oktober 2023 (1).jpg",
+            require('./assets/voucher/kopikenangan_2.jpg'),
         content: content,
     },
     {
@@ -76,7 +76,7 @@ const datas = [
         date: "31 Juli 2023",
         title: "Voucher Belanja Chatime",
         image:
-            "../assets/Promo GUARDIAN Dapat VOUCHER BELANJA CHATIME (1).jpg",
+            require('./assets/voucher/Martabakku1.jpg'),
         content: content,
     },
     {
@@ -85,16 +85,7 @@ const datas = [
         title:
             "Cashback 35% MartabakKu",
         image:
-            "../assets/Promo MARTABAKKU CASHBACK GOPAY 35% Via GOFOOD.jpg",
-        content: content,
-    },
-    {
-        id: 11,
-        date: "13 Maret 2023",
-        title:
-            "Diskon 50% Semua Minuman",
-        image:
-            "../assets/syioknya1_6229dfed8a1d7.jpg",
+            require('./assets/voucher/McD1.jpg'),
         content: content,
     },
 ];

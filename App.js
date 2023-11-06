@@ -38,7 +38,7 @@ const BottomTabs = () => {
             <Ionicons
               name={iconName}
               size={28}
-              color={focused ? "#F82F2D" : color}
+              color={focused ? "#D32324" : color}
             />
           );
         },
@@ -46,10 +46,12 @@ const BottomTabs = () => {
         tabBarStyle: {
           height: 70,
           borderTopWidth: 2,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "#F82F2D" : color} mb={2}>
+            <Text color={focused ? "#D32324" : color} mb={2}>
               {children}
             </Text>
           );
@@ -61,15 +63,19 @@ const BottomTabs = () => {
         options={{
           title: "History",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" },
+          headerTitleStyle: { color: "#D32324" },
         }} />
       <TabBottom.Screen name="Info" component={Info}
         options={{
           title: "Info",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" },
+          headerTitleStyle: { color: "#D32324" },
         }} />
-      <TabBottom.Screen name="Profile" component={Profile} options={noHead} />
+      <TabBottom.Screen name="Profile" component={Profile} options={{
+        title: "Info",
+        headerTitleAlign: "center",
+        headerTitleStyle: { color: "#D32324" },
+      }} />
     </TabBottom.Navigator>
   );
 };

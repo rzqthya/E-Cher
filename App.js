@@ -8,12 +8,12 @@ import InfoScreen from "./screens/info";
 import HistoryScreen from "./screens/history.js";
 import HomeScreen from "./screens/home";
 import ProfileScreen from "./screens/profile";
+// import ContentScreen from "./screens/ContentScreen.js"; 
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-const noHead = { headerShown: true };
 
 const Tabs = () => {
   return (
@@ -68,8 +68,8 @@ const Tabs = () => {
         name="History"
         component={HistoryScreen}
         options={{
-          title: "History", 
-          headerTitleAlign: "center", 
+          title: "History",
+          headerTitleAlign: "center",
           headerTitleStyle: { color: "#F82F2D" },
         }}
       />
@@ -77,19 +77,19 @@ const Tabs = () => {
         name="Info"
         component={InfoScreen}
         options={{
-          title: "Info",  
+          title: "Info",
           headerTitleAlign: "center",
           headerTitleStyle: { color: "#F82F2D" },
-           
+
         }}
       />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}
         options={{
-          title: "Profile", 
+          title: "Profile",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" }, 
+          headerTitleStyle: { color: "#F82F2D" },
         }}
       />
     </Tab.Navigator>
@@ -100,7 +100,11 @@ const App = () => {
   return (
     <NavigationContainer>
       <NativeBaseProvider>
-        <Tabs />
+        <Stack.Navigator>
+          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}  />
+          {/* <Stack.Screen name="ContentScreen" component={ContentScreen} /> */}
+        </Stack.Navigator>
+      
       </NativeBaseProvider>
     </NavigationContainer>
 

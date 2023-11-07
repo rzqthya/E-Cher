@@ -57,7 +57,7 @@ const Login = ({ navigation }) => { // navigation diisi adalah "props" yang yang
 
   return (
     <NativeBaseProvider>
-      <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
+      <View flex={1} justifyContent="center" alignItems="center" marginBottom={20} backgroundColor= '#F0F2F7'>
         <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 45 }}>Login</Text>
         <View marginBottom={80}>
           <Image source={require('../assets/logo.png')} style={{ width: 200, height: 200 }} />

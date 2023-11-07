@@ -17,7 +17,7 @@ const App = () => {
             options={{
               title: "FAQ",
               headerTitleAlign: "center",
-              // headerTitleStyle: { color: "#F82F2D" }
+              headerTitleStyle: { color: "#F82F2D" }
             }}
           />
         </Stack.Navigator>

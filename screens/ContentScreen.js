@@ -1,21 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Text, ScrollView } from "native-base";
+import { Accordion } from "native-base";
+import Ionicons from "@expo/vector-icons/Ionicons";
+
+const faqData = [
+  {
+    title: "Apa itu FAQ?",
+    content: "FAQ adalah singkatan dari Frequently Asked Questions. Ini adalah kumpulan pertanyaan yang sering diajukan oleh pengguna dan jawaban singkatnya.",
+  },
+  {
+    title: "Bagaimana cara menggunakan FAQ?",
+    content: "Anda dapat mengklik pada judul pertanyaan untuk melihat jawaban yang terkait. Jawaban akan ditampilkan atau disembunyikan saat Anda mengklik pertanyaan tersebut.",
+  },
+  {
+    title: "Apakah FAQ ini lengkap?",
+    content: "FAQ ini mungkin belum lengkap. Kami terus menambahkan pertanyaan-pertanyaan yang sering diajukan untuk membantu pengguna.",
+  },
+  
+];
 
 const ContentScreen = () => {
-    return (
-        <ScrollView flex={1} bg="#F0F2F7">
-            <Box p={4}>
-                <Text fontSize="xl" fontWeight="bold" textAlign="center" mb={2}>
-                    Tentang Kami
-                </Text>
-                <Text textAlign="justify">
-                    Selamat datang di E-Cher, sebuah aplikasi inovatif yang dirancang untuk memberikan apresiasi kepada masysrakat yang membayar pajak tepat waktu. Kami percaya bahwa kontribusi positif dalam membayar pajak adalah pondasi penting untuk pertumbuhan dan kemajuan bersama. Oleh karena itu, E-Cher hadir sebagai wujud penghargaan bagi kedisiplinan dan tanggung jawab pajak. Gunakan voucher reward di merchant mitra kami dengan mudah, tinggal pindai kode QR atau masukkan kode voucher saat bertransaksi.
+  const [activeIndexes, setActiveIndexes] = useState([]); 
 
-                    Di balik E-Cher, kami adalah tim yang berkomitmen untuk menciptakan pengalaman positif dan memberikan nilai tambah bagi setiap pengguna. Kami berharap bahwa melalui Klaim Pajak Rewards, kontribusi positif Anda dalam membayar pajak dapat dihargai dan memberikan dampak nyata bagi keberlanjutan negara. Bergabunglah dengan kami dan menjadi bagian dari gerakan positif dalam membentuk masa depan yang lebih baik melalui kepatuhan pajak. Terima kasih atas peran Anda dalam menjadikan pembayaran pajak sebagai langkah menuju kemajuan bersama.
-                </Text>
-            </Box>
-        </ScrollView>
-    );
+  return (
+    <ScrollView flex={1} bg="#F0F2F7">
+      <Box p={4}>
+        <Accordion allowMultiple activeIndexes={activeIndexes} onChange={setActiveIndexes}>
+          {faqData.map((item, index) => (
+            <Accordion.Item
+              key={index}
+              colorScheme={activeIndexes.includes(index) ? "danger" : "primary"} //tidak bisa berubah warnanya
+              > 
+
+              <Accordion.Summary>
+                <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+                  <Text fontSize="xl" fontWeight="bold">
+                    {item.title}
+                  </Text>
+                  <Ionicons
+                    name={activeIndexes.includes(index) ? "chevron-up" : "chevron-down"}
+                    size={24}
+                    color={activeIndexes.includes(index) ? "red" : "black"}
+                  />
+                </Box>
+              </Accordion.Summary>
+              <Accordion.Details>
+                <Text>{item.content}</Text>
+              </Accordion.Details>
+            </Accordion.Item>
+          ))}
+        </Accordion>
+      </Box>
+    </ScrollView>
+  );
 };
 
 export default ContentScreen;

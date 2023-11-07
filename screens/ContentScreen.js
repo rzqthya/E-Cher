@@ -6,9 +6,9 @@ const ContentScreen = () => {
         <ScrollView flex={1} bg="#F0F2F7">
             <Center flex={2} p={2}>
                 <Image
-                    source={require("../assets/logo.png")} // Ganti dengan path yang sesuai ke gambar logo
+                    source={require("../assets/logo.png")} 
                     alt="Logo"
-                    size={200} // Sesuaikan ukuran gambar logo sesuai kebutuhan
+                    size={200} 
                 />
             </Center>
             <Box p={4}>

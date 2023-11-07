@@ -17,7 +17,7 @@ const FormScreen = () => {
         }  else {
             Alert.alert(
                 "Konfirmasi",
-                "Apakah Anda yakin ingin mengirim data?",
+                "Apakah data yang Anda masukkan telah sesuai?",
                 [
                     {
                         text: "Tidak",

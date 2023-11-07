@@ -3,7 +3,7 @@ import { Box, Text } from "native-base";
 
 const ContentScreen = () => {
   return (
-    <Box flex={2} p={4} bg="F0F2F7">
+    <Box flex={2} p={4} bg="#FAF9F9">
       <Text fontSize="xl" fontWeight="bold" mb={4}>
         Petunjuk Klaim Voucher Kendaraan:
       </Text>

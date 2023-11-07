@@ -1,34 +1,28 @@
 import React from "react";
-import { Box, Text } from "native-base";
+import { Box, Center, Image, Text, ScrollView } from "native-base";
 
 const ContentScreen = () => {
-  return (
-    <Box flex={2} p={4} bg="F0F2F7">
-      <Text fontSize="xl" fontWeight="bold" mb={4}>
-        Petunjuk Klaim Voucher Kendaraan:
-      </Text>
-      <Text mb={2}>
-        <Text fontWeight="bold">1. </Text>
-        Pastikan Anda telah membayar pajak kendaraan sebelum jatuh tempo.
-      </Text>
-      <Text mb={2}>
-        <Text fontWeight="bold">2. </Text>
-        Pastikan bahwa Voucher tersebut dapat digunakan di kota tempat Anda berada.
-      </Text>
-      <Text mb={2}>
-        <Text fontWeight="bold">3. </Text>
-        Pastikan bahwa Anda telah mengupload bukti STNK yang sudah diperpanjang sebelum melakukan klaim voucher.
-      </Text>
-      <Text mb={2}>
-        <Text fontWeight="bold">4. </Text>
-        Pastikan data nama yang Anda isikan pada Form Klaim Voucher sesuai dengan data nama yang ada pada STNK.
-      </Text>
-      <Text mb={2}>
-        <Text fontWeight="bold">5. </Text>
-        Jika voucher memiliki kode QR atau dapat di-scan, minta kasir untuk memindainya atau lakukan sendiri dengan menggunakan aplikasi ponsel jika diperlukan.
-      </Text>
-    </Box>
-  );
+    return (
+        <ScrollView flex={1} bg="#F0F2F7">
+            <Center flex={2} p={2}>
+                <Image
+                    source={require("../assets/logo.png")} // Ganti dengan path yang sesuai ke gambar logo
+                    alt="Logo"
+                    size={200} // Sesuaikan ukuran gambar logo sesuai kebutuhan
+                />
+            </Center>
+            <Box p={4}>
+                <Text fontSize="xl" fontWeight="bold" textAlign="center" mb={2}>
+                    Tentang Kami
+                </Text>
+                <Text textAlign="justify">
+                    Selamat datang di E-Cher, sebuah aplikasi inovatif yang dirancang untuk memberikan apresiasi kepada masysrakat yang membayar pajak tepat waktu. Kami percaya bahwa kontribusi positif dalam membayar pajak adalah pondasi penting untuk pertumbuhan dan kemajuan bersama. Oleh karena itu, E-Cher hadir sebagai wujud penghargaan bagi kedisiplinan dan tanggung jawab pajak. Gunakan voucher reward di merchant mitra kami dengan mudah, tinggal pindai kode QR atau masukkan kode voucher saat bertransaksi.
+
+                    Di balik E-Cher, kami adalah tim yang berkomitmen untuk menciptakan pengalaman positif dan memberikan nilai tambah bagi setiap pengguna. Kami berharap bahwa melalui Klaim Pajak Rewards, kontribusi positif Anda dalam membayar pajak dapat dihargai dan memberikan dampak nyata bagi keberlanjutan negara. Bergabunglah dengan kami dan menjadi bagian dari gerakan positif dalam membentuk masa depan yang lebih baik melalui kepatuhan pajak. Terima kasih atas peran Anda dalam menjadikan pembayaran pajak sebagai langkah menuju kemajuan bersama.
+                </Text>
+            </Box>
+        </ScrollView>
+    );
 };
 
 export default ContentScreen;

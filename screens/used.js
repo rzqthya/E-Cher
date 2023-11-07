@@ -1,5 +1,4 @@
 import { View, FlatList, Text, Image, Center, Button } from "native-base";
-import { Header } from "../components";
 
 const datas = [
     {

@@ -1,13 +1,12 @@
-import { Heading, Center } from "native-base";
+import { Center, Button } from 'native-base';
 
-const Home = () => {
+const Home = ({ navigation }) => {
     return (
-        <>
-        {/* <Header title={"Used"} /> */}
         <Center flex={1}>
-            <Heading>Home</Heading>
+            <Button onPress={() => navigation.navigate('Form')}>
+                Go to Form Screen
+            </Button>
         </Center>
-        </>
     );
 };
 

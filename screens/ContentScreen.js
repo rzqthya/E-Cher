@@ -1,16 +1,11 @@
 import React from "react";
-import { IconButton, Box, Text } from "native-base";
+import { Box, Text } from "native-base";
 
 const ContentScreen = () => {
   return (
-    <Box flex={2} p={4} bg="#F0F2F7">
-    <IconButton
-      icon="arrow-back"
-      color="primary.500"
-      onPress={() => navigation.goBack()}
-    />
+    <Box flex={2} p={4} bg="F0F2F7">
       <Text fontSize="xl" fontWeight="bold" mb={4}>
-        Tentang Kami:
+        Petunjuk Klaim Voucher Kendaraan:
       </Text>
       <Text mb={2}>
         <Text fontWeight="bold">1. </Text>

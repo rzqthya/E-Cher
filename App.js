@@ -8,7 +8,7 @@ import InfoScreen from "./screens/info";
 import HistoryScreen from "./screens/history.js";
 import HomeScreen from "./screens/home";
 import ProfileScreen from "./screens/profile";
-// import ContentScreen from "./screens/ContentScreen.js"; 
+import ContentScreen from "./screens/ContentScreen.js";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -101,10 +101,17 @@ const App = () => {
     <NavigationContainer>
       <NativeBaseProvider>
         <Stack.Navigator>
-          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }}  />
-          {/* <Stack.Screen name="ContentScreen" component={ContentScreen} /> */}
+          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="ContentScreen"
+            component={ContentScreen}
+            options={{
+              title: "Tentang Kami",
+              headerTitleAlign: "center",
+              headerTitleStyle: { color: "#F82F2D" },
+            }}
+          />
         </Stack.Navigator>
-      
       </NativeBaseProvider>
     </NavigationContainer>
 

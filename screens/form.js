@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { VStack, Input, Box, HStack, Button, Text, Divider, Flex, ScrollView } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import { SafeAreaView, Alert } from 'react-native';
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { Header } from '../components';
 
 const FormScreen = () => {
+    const navigation = useNavigation();
+
     const [namaLengkap, setNamaLengkap] = useState('');
     const [email, setEmail] = useState('');
     const [alamat, setAlamat] = useState('');
     const [nomorPolisi, setNomorPolisi] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
-    const navigation = useNavigation();
 
     const handleSend = () => {
         // validasi dengan memeriksa nilai state
@@ -44,7 +45,8 @@ const FormScreen = () => {
 
     return (
         <>
-        <SafeAreaView flex={1} bg="#F0F2F7">
+        <Header title={"Form klaim voucher"} withBack={true} />
+        <SafeAreaView flex={1} bg="#D32324">
             <ScrollView>
             <Flex flex={1} p={10}>
                 <VStack space={4} w="100%" mb={24}>

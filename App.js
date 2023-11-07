@@ -44,14 +44,14 @@ const BottomTabs = () => {
         },
         tabBarIconStyle: { marginTop: 5 },
         tabBarStyle: {
-          height: 70,
+          height: 75,
           borderTopWidth: 2,
           borderTopLeftRadius: 20,
           borderTopRightRadius: 20,
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "#D32324" : color} mb={2}>
+            <Text color={focused ? "#F82F2D" : color} mb={2}>
               {children}
             </Text>
           );
@@ -63,7 +63,7 @@ const BottomTabs = () => {
         options={{
           title: "History",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#D32324" },
+          headerTitleStyle: { color: "#F82F2D" },
         }} />
       <TabBottom.Screen name="Info" component={Info}
         options={{
@@ -86,8 +86,8 @@ const App = () => {
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
-            <Stack.Screen name="Form" component={FormScreen} />
-            <Stack.Screen name="DetailScreen" component={DetailScreen} />
+            <Stack.Screen name="Form" component={FormScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: false }}  />
           </Stack.Navigator>
         </NavigationContainer>
     </NativeBaseProvider>

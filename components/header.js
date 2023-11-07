@@ -1,22 +1,33 @@
-import { TouchableOpacity } from "react-native";
 import { Box, Heading, HStack } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { StatusBar, TouchableOpacity } from "react-native";
 
-const Header = ({ title, navigation }) => {
+const Header = ({ title, withBack = false }) => {
+    const navigation = useNavigation();
+
     return (
-        <Box p={4} mt={10} bg="white" flexDirection="row" alignItems="center">
-            <HStack alignItems="center">
-                <TouchableOpacity
-                activeOpacity={0.5}
-                onPress={() => navigation.goBack()}
-                >
-                <Box mr={"3"}>
-                    <Ionicons name="arrow-back-outline" size={20} color="#F82F2D" />
-                </Box>
-                </TouchableOpacity>
-                <Heading color="#F82F2D" fontSize={"16"}>{title}</Heading>
-            </HStack>
-        </Box>
+        <SafeAreaView>
+            <StatusBar barStyle="light" backgroundColor="black" />
+            <Box bg={"white"} p={"4"}>  
+                <HStack alignItems="center">
+                    {withBack && (
+                        <TouchableOpacity
+                            activeOpacity={0.5}
+                            onPress={() => navigation.goBack()}
+                        >
+                            <Box mr={3}>
+                                <Ionicons name="arrow-back-outline" size={32} color="#F82F2D" />
+                            </Box>
+                        </TouchableOpacity>
+                    )}
+                    <HStack alignItems="center">
+                        <Heading color="#F82F2D" fontSize={"16"}>{title}</Heading>
+                    </HStack>
+                </HStack>
+            </Box>
+        </SafeAreaView>
     );
 };
 

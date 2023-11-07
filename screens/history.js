@@ -1,7 +1,6 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Active from "./active";
 import Used from "./used";
-// import DetailScreen from "./DetailScreen";
 
 const Tab = createMaterialTopTabNavigator();
 

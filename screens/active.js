@@ -1,4 +1,4 @@
-import { HStack, Box, FlatList, Text, Image, Center, Button, Modal, } from "native-base";
+import { HStack, Box, FlatList, Text, Image, Center, Button, Modal } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
 const datas = [
@@ -50,7 +50,7 @@ const Active = () => {
                             pt={2}
                             onPress={() => {navigation.navigate('DetailScreen');}}
                         >
-                            <Text fontSize={9} color="#F82F2D">Gunakan</Text>
+                            <Text fontSize={9} color="#F82F2D">Detail</Text>
                         </Button>
                     </Box>
                 </HStack>

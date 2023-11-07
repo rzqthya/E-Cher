@@ -1,6 +1,7 @@
 import { Box, Text, VStack, Image, Button, Modal, Pressable } from "native-base";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { Header } from '../components';
 
 const DetailScreen = () => {
     const navigation = useNavigation();
@@ -15,6 +16,8 @@ const DetailScreen = () => {
     };
 
     return (
+        <>
+        <Header title={"Detail Voucher"} withBack={true} />
         <Box flex={1} bg="#F0F2F7">
             <Image source={selectedItem.image} alt="content" w="full" h={250} mb={10} />
             <VStack space={4} alignItems="center">
@@ -66,6 +69,7 @@ const DetailScreen = () => {
                 </Modal.Content>
             </Modal>
         </Box>
+        </>
     );
 };
 

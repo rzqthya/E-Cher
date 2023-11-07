@@ -39,18 +39,20 @@ const Tabs = () => {
             <Ionicons
               name={iconName}
               size={28}
-              color={focused ? "#F82F2D" : color}
+              color={focused ? "#D32324" : color}
             />
           );
         },
         tabBarIconStyle: { marginTop: 5 },
         tabBarStyle: {
           height: 70,
-          borderTopWidth: 0,
+          borderTopWidth: 2,
+          borderTopLeftRadius: 20,
+          borderTopRightRadius: 20,
         },
         tabBarLabel: ({ children, color, focused }) => {
           return (
-            <Text color={focused ? "#F82F2D" : color} mb={2}>
+            <Text color={focused ? "#D32324" : color} mb={2}>
               {children}
             </Text>
           );

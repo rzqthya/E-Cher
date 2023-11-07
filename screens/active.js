@@ -1,6 +1,5 @@
 import { HStack, Box, FlatList, Text, Image, Center, Button, Modal, } from "native-base";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from 'react';
 
 const datas = [
     {
@@ -22,8 +21,6 @@ const datas = [
 ];
 
 const Active = () => {
-    const [showModal, setShowModal] = useState(false);
-    const [selectedItem, setSelectedItem] = useState(null);
     const navigation = useNavigation();
 
     const renderItem = ({ item }) => {
@@ -51,10 +48,7 @@ const Active = () => {
                             borderWidth={1}
                             mt={3}
                             pt={2}
-                            onPress={() => {
-                                setSelectedItem(item);
-                                setShowModal(true);
-                            }}  
+                            onPress={() => {navigation.navigate('DetailScreen');}}
                         >
                             <Text fontSize={9} color="#F82F2D">Gunakan</Text>
                         </Button>
@@ -71,44 +65,11 @@ const Active = () => {
     };
 
     return (
-        <>
-            <FlatList
-                data={datas}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
-            />
-            <Center>
-            <Modal isOpen={showModal} onClose={() => setShowModal(false)} _backdrop={{bg: "black"}}>
-                <Modal.Content maxWidth="400" maxH="350">
-                    <Modal.CloseButton />
-                    <Modal.Header>Konfirmasi Penggunaan</Modal.Header>
-                    <Modal.Body>
-                        {selectedItem && (
-                            <Text>Apakah kamu ingin menggunakan {selectedItem.title}? </Text>
-                        )}
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button.Group space={2}>
-                            <Button variant="ghost" colorScheme="blueGray" onPress={() => {
-                                setShowModal(false);
-                            }}>
-                                Cancel
-                            </Button>
-                            <Button 
-                                onPress={() => {navigation.navigate('Used');}}
-                                _text={{
-                                    color: 'white'
-                                }}
-                                backgroundColor="#F82F2D"
-                            >
-                                Gunakan
-                            </Button>
-                        </Button.Group>
-                    </Modal.Footer>
-                </Modal.Content>
-            </Modal>
-        </Center>
-        </>
+        <FlatList
+            data={datas}
+            renderItem={renderItem}
+            keyExtractor={(item) => item.id.toString()}
+        />
     );
 };
 

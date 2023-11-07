@@ -8,6 +8,7 @@ import Profile from "./screens/profile";
 import Home from "./screens/home";
 import History from "./screens/history";
 import FormScreen from "./screens/form";
+import DetailScreen from "./screens/DetailScreen";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -86,6 +87,7 @@ const App = () => {
           <Stack.Navigator>
             <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
             <Stack.Screen name="Form" component={FormScreen} />
+            <Stack.Screen name="DetailScreen" component={DetailScreen} />
           </Stack.Navigator>
         </NavigationContainer>
     </NativeBaseProvider>

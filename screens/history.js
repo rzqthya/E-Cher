@@ -1,6 +1,7 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
 import Active from "./active";
 import Used from "./used";
+// import DetailScreen from "./DetailScreen";
 
 const Tab = createMaterialTopTabNavigator();
 
@@ -13,6 +14,7 @@ const History = () => {
         }}>
             <Tab.Screen name="Active" component={Active} />
             <Tab.Screen name="Used" component={Used} />
+            {/* <Tab.Screen name="DetailScreen" component={DetailScreen} /> */}
         </Tab.Navigator>
     );
 };

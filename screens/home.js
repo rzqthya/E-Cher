@@ -1,5 +1,4 @@
 import { Heading, Center } from "native-base";
-import { Header } from "../components";
 
 const Home = () => {
     return (

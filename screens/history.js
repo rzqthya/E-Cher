@@ -1,5 +1,5 @@
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
-import { Header } from "../components";
+import { useNavigation } from "@react-navigation/native";
 import Active from "./active";
 import Used from "./used";
 

@@ -9,7 +9,7 @@ const ButtonFilter = () => {
             <Button variant="solid" endIcon={<Icon as={Ionicons} name="filter" size="sm" />}
                 backgroundColor="#D32324"
                 onPress={() => alert("Navigate to button sheet filter or screen filter")} >
-                <Text style={{ fontWeight: 500, color: '#FAF9F9' }}>Filter Voucher</Text>
+                <Text style={{ fontSize: 14, fontWeight: 500, color: '#FAF9F9' }}>Filter Voucher</Text>
             </Button>
         </Stack>
     )

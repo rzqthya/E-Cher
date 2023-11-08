@@ -7,7 +7,7 @@ const InfoScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <Box flex={1} justifyContent="center" alignItems="center" bg="#FAF9F9" p={4}>
+    <Box flex={1} justifyContent="center" alignItems="center" bg="#F0F2F7" p={4}>
       <Button
         bg="white"
         p={4} 

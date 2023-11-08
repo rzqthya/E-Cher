@@ -6,8 +6,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import InfoScreen from "./screens/info";
 import HistoryScreen from "./screens/history.js";
-import HomeScreen from "./screens/home";
-import ProfileScreen from "./screens/profile";
+import HomeScreen from "./screens/home.js";
+import ProfileScreen from "./screens/profile.js";
 import ContentScreen from "./screens/ContentScreen.js";
 
 // Navigator Declaration

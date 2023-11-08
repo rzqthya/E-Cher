@@ -38,7 +38,7 @@ const BottomTabs = () => {
             <Ionicons
               name={iconName}
               size={28}
-              color={focused ? "#D32324" : color}
+              color={focused ? "#F82F2D" : color}
             />
           );
         },
@@ -69,12 +69,12 @@ const BottomTabs = () => {
         options={{
           title: "Info",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#D32324" },
+          headerTitleStyle: { color: "#F82F2D" },
         }} />
       <TabBottom.Screen name="Profile" component={Profile} options={{
         title: "Profile",
         headerTitleAlign: "center",
-        headerTitleStyle: { color: "#D32324" },
+        headerTitleStyle: { color: "#F82F2D" },
       }} />
     </TabBottom.Navigator>
   );

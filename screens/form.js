@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { VStack, Input, Box, HStack, Button, Text, Divider, Flex, ScrollView, Modal, Center } from "native-base";
+import { VStack, Input, Box, HStack, Button, Text, Divider, Flex, ScrollView, Modal, Center, Select } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -9,6 +9,8 @@ const FormScreen = () => {
     const navigation = useNavigation();
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
+
+    const [wilayah, setWilayah] = useState('key0');
 
     const [namaLengkap, setNamaLengkap] = useState('');
     const [email, setEmail] = useState('');
@@ -35,7 +37,7 @@ const FormScreen = () => {
         <Header title={"Form klaim voucher"} withBack={true} />
         <SafeAreaView flex={1} bg="#D32324">
             <ScrollView>
-            <Flex flex={1} p={10}>
+            <Flex flex={1} p={8}>
                 <VStack space={4} w="100%" mb={24}>
                     <Box>
                         <Text>Nama Lengkap</Text>
@@ -75,6 +77,19 @@ const FormScreen = () => {
                         )}
                     </Box>
                     <Box>
+                        <Text>Pilih Wilayah</Text>
+                        <Select
+                            placeholder="Wilayah"
+                            selectedValue={wilayah}
+                            width={360}
+                            onValueChange={(itemValue) => setWilayah(itemValue)}
+                            >
+                            <Select.Item label="Samsat Krian" value="key0" />
+                            <Select.Item label="Samsat Candi" value="key1" />
+                            <Select.Item label="Samsat Sidoarjo" value="key2" />
+                        </Select>
+                    </Box>
+                    <Box>
                         <Text>Masukkan Nomor Polisi</Text>
                         <Input
                             variant="outline"
@@ -99,7 +114,7 @@ const FormScreen = () => {
                     </Box>
                 </VStack>
             </Flex>
-            <Divider my={4} mt={20} />
+            <Divider my={4} />
             <HStack justifyContent="flex-end" mb={4} pr={4}>
                 <Button rounded="2xl" w="40%" backgroundColor="#F82F2D" onPress={handleSend}>
                     <Text fontWeight="bold" color="#ffffff">Send</Text>

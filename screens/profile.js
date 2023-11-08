@@ -78,7 +78,7 @@ const Profile = () => {
                         Password
                         </Text>
                         <Text>
-                        rizqyathiyya8580
+                            {'************'}
                         </Text>
                     </VStack>
                     <Button

@@ -7,6 +7,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 const DetailScreen = () => {
     const navigation = useNavigation();
     const [showModal, setShowModal] = useState(false);
+    
     const selectedItem = {
         id: 1,
         title: "Voucher Diskon 50%",
@@ -39,6 +40,7 @@ const DetailScreen = () => {
                 mt={20}
                 alignSelf="center"
                 onPress={() => setShowModal(true)}
+                _pressed={{ bg: "gray.400" }}
             >
                 Tandai sebagai selesai
             </Button>
@@ -63,6 +65,7 @@ const DetailScreen = () => {
                                 }}
                                 colorScheme="#FFFFFF"
                                 backgroundColor="#F82F2D"
+                                _pressed={{ bg: "gray.400" }}
                             >
                                 OK
                             </Button>

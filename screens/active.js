@@ -1,4 +1,4 @@
-import { HStack, Box, FlatList, Text, Image, Center, Button, Modal } from "native-base";
+import { HStack, Box, FlatList, Text, Image, Center, Button } from "native-base";
 import { useNavigation } from "@react-navigation/native";
 
 const datas = [

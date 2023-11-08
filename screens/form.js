@@ -34,7 +34,7 @@ const FormScreen = () => {
 
     return (
         <>
-        <Header title={"Form klaim voucher"} withBack={true} />
+        <Header title={"Form Klaim Voucher"} withBack={true} />
         <SafeAreaView flex={1} bg="#D32324">
             <ScrollView>
             <Flex flex={1} p={8}>
@@ -108,6 +108,7 @@ const FormScreen = () => {
                             rounded="xl"
                             startIcon={<Ionicons name="cloud-upload-outline" size={20} color="black" />}
                             backgroundColor="#FFC700"
+                            _pressed={{ bg: "gray.400" }}
                         >
                             <Text fontWeight="bold">Upload</Text>
                         </Button>
@@ -116,8 +117,8 @@ const FormScreen = () => {
             </Flex>
             <Divider my={4} />
             <HStack justifyContent="flex-end" mb={4} pr={4}>
-                <Button rounded="2xl" w="40%" backgroundColor="#F82F2D" onPress={handleSend}>
-                    <Text fontWeight="bold" color="#ffffff">Send</Text>
+                <Button rounded="2xl" w="40%" backgroundColor="#F82F2D" onPress={handleSend} _pressed={{ bg: "gray.400" }}>
+                    <Text fontWeight="bold" color="#ffffff" >Send</Text>
                 </Button>
             </HStack>
             </ScrollView>
@@ -141,6 +142,7 @@ const FormScreen = () => {
                             <Button onPress={handleClaimVoucher} colorScheme="white"
                                 backgroundColor="#F82F2D"
                                 rounded="3xl"
+                                _pressed={{ bg: "gray.400" }}
                             >
                                 Ya, Saya Yakin
                             </Button>
@@ -173,6 +175,7 @@ const FormScreen = () => {
                             backgroundColor="#F82F2D"
                             rounded="2xl"
                             px={6}
+                            _pressed={{ bg: "gray.400" }}
                         >
                             <Text color="white">OK</Text>
                         </Button>

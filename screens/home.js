@@ -9,6 +9,7 @@ const Home = () => {
             <Button 
                 onPress={() => navigation.navigate('Form')} 
                 bg="#F82F2D" 
+                _pressed={{ bg: "gray.400" }}
             >
                 Klaim E-Voucher Wilayah Sidoarjo
             </Button>

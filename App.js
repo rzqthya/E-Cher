@@ -5,10 +5,11 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
 import InfoScreen from "./screens/info";
-import HistoryScreen from "./screens/history.js";
-import HomeScreen from "./screens/home.js";
-import ProfileScreen from "./screens/profile.js";
-import ContentScreen from "./screens/ContentScreen.js";
+import HistoryScreen from "./screens/history";
+import HomeScreen from "./screens/home";
+import ProfileScreen from "./screens/profile";
+import ContentScreen from "./screens/ContentScreen";
+import FaqScreen from "./screens/FaqScreen";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -107,6 +108,15 @@ const App = () => {
             component={ContentScreen}
             options={{
               title: "Tentang Kami",
+              headerTitleAlign: "center",
+              headerTitleStyle: { color: "#F82F2D" },
+            }}
+          />
+          <Stack.Screen
+            name="FaqScreen"
+            component={FaqScreen}
+            options={{
+              title: "FAQ",
               headerTitleAlign: "center",
               headerTitleStyle: { color: "#F82F2D" },
             }}

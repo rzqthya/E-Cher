@@ -18,7 +18,7 @@ const faqData = [
 
 ];
 
-const FAQ = () => {
+const FaqScreen = () => {
     const [activeIndexes, setActiveIndexes] = useState([]);
 
     return (
@@ -63,4 +63,4 @@ const FAQ = () => {
     );
 };
 
-export default FAQ;
+export default FaqScreen;

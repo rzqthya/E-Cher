@@ -16,7 +16,7 @@ const InfoScreen = () => {
         width="80%"
         alignItems="center"
         mb={4}
-        // onPress={() => navigation.navigate('ContentScreen')}
+        onPress={() => navigation.navigate('FaqScreen')}
       >
         <VStack alignItems="center" space={0}>
           <Ionicons name="help-sharp" size={48} color="#F82F2D" />

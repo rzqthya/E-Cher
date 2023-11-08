@@ -6,8 +6,11 @@ const Home = () => {
     
     return (
         <Center flex={1}>
-            <Button onPress={() => navigation.navigate('Form')}>
-                Go to Form Screen
+            <Button 
+                onPress={() => navigation.navigate('Form')} 
+                bg="#F82F2D" 
+            >
+                Klaim E-Voucher Wilayah Sidoarjo
             </Button>
         </Center>
     );

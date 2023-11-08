@@ -1,7 +1,8 @@
-import { Box, Text, VStack, Image, Button, Modal, Pressable } from "native-base";
+import { Box, Text, VStack, Image, Button, Modal, Center, Flex } from "native-base";
 import React, { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Header } from '../components';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 const DetailScreen = () => {
     const navigation = useNavigation();
@@ -32,37 +33,38 @@ const DetailScreen = () => {
                 </Box>
             </VStack>
             <Button
-                colorScheme="primary"
+                backgroundColor="#F82F2D"
+                colorScheme="white"
                 size="md"
                 mt={20}
                 alignSelf="center"
                 onPress={() => setShowModal(true)}
             >
-                Gunakan Voucher
+                Tandai sebagai selesai
             </Button>
             <Modal isOpen={showModal} onClose={() => setShowModal(false)} motionPreset="slide">
-                <Modal.Content maxWidth="400" maxH="350">
-                    <Modal.CloseButton />
-                    <Modal.Header>Konfirmasi Penggunaan</Modal.Header>
+                <Modal.Content maxWidth="400" maxH="400">
                     <Modal.Body>
-                        <Text>Apakah kamu ingin menggunakan {selectedItem.title}?</Text>
+                        <Center>
+                        <Flex direction="column" alignItems="center" justifyContent="center">
+                            <Ionicons name="checkmark-circle-outline" size={130} color="#F82F2D" />
+                            <Text mt={4} fontWeight="bold" fontSize="md">
+                                Selamat {selectedItem.title} mu berhasil diklaim.
+                            </Text>
+                        </Flex>
+                    </Center>
                     </Modal.Body>
                     <Modal.Footer>
                         <Button.Group space={2}>
-                            <Button variant="ghost" colorScheme="blueGray" onPress={() => setShowModal(false)}>
-                                Batal
-                            </Button>
                             <Button 
                                 onPress={() => {
                                     setShowModal(false);
                                     navigation.navigate('Used');
                                 }}
-                                _text={{
-                                    color: 'white'
-                                }}
+                                colorScheme="#FFFFFF"
                                 backgroundColor="#F82F2D"
                             >
-                                Gunakan
+                                OK
                             </Button>
                         </Button.Group>
                     </Modal.Footer>

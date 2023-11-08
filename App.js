@@ -16,7 +16,7 @@ const App = () => {
             component={ContentScreen}
             options={{
               title: "FAQ",
-              headerTitleAlign: "center",
+              headerTitleAlign: "left",
               headerTitleStyle: { color: "#F82F2D" }
             }}
           />

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { Box, Text, ScrollView, Button } from "native-base";
-import { Accordion } from "native-base";
+import { Box, Text, ScrollView, Button, Accordion } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 const faqData = [
@@ -29,10 +28,8 @@ const ContentScreen = () => {
                     {faqData.map((item, index) => (
                         <Accordion.Item
                             key={index}
-                            colorScheme={activeIndexes.includes(index) ? "white" : "danger"} //tidak bisa berubah warnanya
                         >
-
-                            <Accordion.Summary>
+                            <Accordion.Summary backgroundColor={"#F82F2D"}>
                                 <Box flexDirection="row" alignItems="center" justifyContent="space-between">
                                     <Text fontSize="xl" fontWeight="bold">
                                         {item.title}
@@ -40,11 +37,11 @@ const ContentScreen = () => {
                                     <Ionicons
                                         name={activeIndexes.includes(index) ? "chevron-up" : "chevron-down"}
                                         size={24}
-                                        color={activeIndexes.includes(index) ? "red" : "black"}
+                                        color={activeIndexes.includes(index) ? "black" : "black"}
                                     />
                                 </Box>
                             </Accordion.Summary>
-                            <Accordion.Details>
+                            <Accordion.Details backgroundColor={"white"}>
                                 <Text>{item.content}</Text>
                             </Accordion.Details>
                         </Accordion.Item>

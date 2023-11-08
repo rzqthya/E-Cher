@@ -1,7 +1,6 @@
 import React from "react";
 import { ScrollView } from "react-native";
 import { NativeBaseProvider, Box, Text, Card, Input, Button, Spacer } from "native-base";
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 const ChatScreen = () => {
     return (
@@ -38,7 +37,7 @@ const ChatScreen = () => {
 
             <Box bg="white" p={2} flexDirection="row" alignItems="center">
                 <Input
-                    flex={1}
+                    flex={20}
                     placeholder="Type a message..."
                     _light={{
                         bgColor: "white",
@@ -48,7 +47,7 @@ const ChatScreen = () => {
                 <Spacer flex={1} />
                 <Button
                     variant="solid"
-                    colorScheme="primary"
+                    bg="#F82F2D"
                     onPress={() => {
                     }}
                 >

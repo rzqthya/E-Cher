@@ -1,8 +1,5 @@
 import { Box, Text, Image, Button, Heading, HStack, ScrollView, NativeBaseProvider } from "native-base";
 import React, { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { Header } from '../components';
-import Ionicons from "@expo/vector-icons/Ionicons";
 
 const DetailVoucher = ({ route }) => {
     const params = route.params.item;
@@ -39,7 +36,7 @@ const DetailVoucher = ({ route }) => {
                             <Text fontWeight={600}>{params.title}</Text>
                         </Box>
                         <HStack py={4}>
-                            <Button onPress={handleOverviewButtonClick} mr={5} backgroundColor={selectedButton === 'Overview' ? '#D32324' : '#D9D9D9'}>
+                            <Button onPress={handleOverviewButtonClick} mr={4} backgroundColor={selectedButton === 'Overview' ? '#D32324' : '#D9D9D9'}>
                                 <Text fontWeight={500} color={selectedButton === 'Overview' ? '#F0F2F7' : '#000000'}>Overview</Text>
                             </Button>
                             <Button onPress={handleSKButtonClick} backgroundColor={selectedButton === 'SK' ? '#D32324' : '#D9D9D9'}>
@@ -54,7 +51,11 @@ const DetailVoucher = ({ route }) => {
                                 </>
                             )}
                         </Box>
-                        
+                        <Box my={3} alignItems={'flex-end'}>
+                            <Button variant="solid" bg={"#FFC700"} w={120} rounded={30}>
+                                <Text fontWeight={500} color={'#F0F2F7'} fontSize={16}>Klaim</Text>
+                            </Button>
+                        </Box>
                     </Box>
                 </Box>
             </ScrollView>

@@ -7,6 +7,7 @@ import Info from "./screens/info";
 import Profile from "./screens/profile";
 import Home from "./screens/home";
 import History from "./screens/history";
+import DetailVoucher from "./screens/detailvoucher";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -86,6 +87,11 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
+          <Stack.Screen
+            name="Detail Voucher"
+            component={DetailVoucher}
+            options={noHead}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

@@ -14,7 +14,7 @@ const Home = () => {
                     <ScrollView>
                         <TouchableOpacity
                             activeOpacity={0.5}
-                            onPress={() => navigation.navigate('DetailVoucher', { item: item })}>
+                            onPress={() => navigation.navigate('Detail Voucher', { item: item })}>
                             <Box
                                 flexDirection="row"
                                 borderRadius={5}

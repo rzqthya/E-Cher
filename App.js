@@ -87,11 +87,7 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
-          <Stack.Screen
-            name="Detail Voucher"
-            component={DetailVoucher}
-            options={noHead}
-          />
+          <Stack.Screen name="Detail Voucher" component={DetailVoucher} options={noHead} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

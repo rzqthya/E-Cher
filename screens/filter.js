@@ -1,7 +1,8 @@
 import { FlatList, SafeAreaView, Text, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { Box, Heading } from 'native-base'
-import { Colors } from 'react-native/Libraries/NewAppScreen';
+import Icon from "@expo/vector-icons/Ionicons";
+
 const Filter = () => {
   const [kategori, setKategori] = useState([
     {
@@ -27,6 +28,11 @@ const Filter = () => {
       <Box bg={'#F0F2F7'}>
         <Box marginX={5} mb={5} mt={5}>
           <Heading fontSize={18}>Kota</Heading>
+          <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'white', padding: 10, marginTop: 10 }}>
+            <Text>Kota</Text>
+            <Icon name="chevron-forward-outline"></Icon>
+
+          </TouchableOpacity>
           <Box py={2}>
             <Heading fontSize={'xl'}>Jenis</Heading>
             <FlatList
@@ -37,7 +43,7 @@ const Filter = () => {
               renderItem={({ item }) => (
                 <TouchableOpacity style={{
                   marginRight: 5,
-                  backgroundColor: selectedKategori.nama == item.nama ? '#D32324' : '#FAF9F9',
+                  backgroundColor: '#FAF9F9',
                   elevation: 2,
                   paddingHorizontal: 15,
                   marginBottom: 10,
@@ -45,7 +51,7 @@ const Filter = () => {
                   paddingVertical: 10,
                   marginLeft: 5,
                 }}>
-                  <Text style={{ color: selectedKategori.nama == item.nama ? '#FAF9F9' : '#1c1c1c', }}>{item.nama}</Text>
+                  <Text>{item.nama}</Text>
                 </TouchableOpacity>)} />
           </Box>
           <Heading fontSize={'xl'}>Masa Berlaku</Heading>

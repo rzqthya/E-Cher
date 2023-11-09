@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Box, Text, ScrollView, Button, Accordion } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import { useNavigation } from "@react-navigation/native";
+
 
 const faqData = [
     {
@@ -20,6 +22,7 @@ const faqData = [
 
 const FaqScreen = () => {
     const [activeIndexes, setActiveIndexes] = useState([]);
+    const navigation = useNavigation();
 
     return (
         <ScrollView flex={1} bg="#F0F2F7">
@@ -56,6 +59,7 @@ const FaqScreen = () => {
                 _pressed={{ bg: "light.400" }}
                 size="lg"
                 margin={4}
+                onPress={() => navigation.navigate('ChatScreen')}
             >
                 Kirim Pesan
             </Button>

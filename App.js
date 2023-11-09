@@ -10,6 +10,7 @@ import HomeScreen from "./screens/home";
 import ProfileScreen from "./screens/profile";
 import ContentScreen from "./screens/ContentScreen";
 import FaqScreen from "./screens/FaqScreen";
+import ChatScreen from "./screens/ChatScreen";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -121,6 +122,16 @@ const App = () => {
               headerTitleStyle: { color: "#F82F2D" },
             }}
           />
+          <Stack.Screen
+            name="ChatScreen"
+            component={ChatScreen}
+            options={{
+              title: "Message",
+              headerTitleAlign: "left",
+              headerTitleStyle: { color: "#F82F2D" },
+            }}
+          />
+      
         </Stack.Navigator>
       </NativeBaseProvider>
     </NavigationContainer>

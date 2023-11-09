@@ -43,8 +43,6 @@ const InfoScreen = () => {
           </Text>
         </VStack>
       </Button>
-
-    
     </Box>
   );
 };

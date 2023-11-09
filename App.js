@@ -8,6 +8,8 @@ import Profile from "./screens/profile";
 import Home from "./screens/home";
 import History from "./screens/history";
 import DetailVoucher from "./screens/detailvoucher";
+import filter from "./screens/filter";
+import Filter from "./screens/filter";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -87,7 +89,28 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
-          <Stack.Screen name="Detail Voucher" component={DetailVoucher} options={noHead} />
+          <Stack.Screen
+            name="Detail Voucher"
+            component={DetailVoucher}
+            options={{
+              ...noHead,
+              title: "Detail Voucher",
+              headerTitleStyle: {
+                color: "#D32324",
+              },
+              headerTintColor: "#D32324",
+            }} />
+          <Stack.Screen
+            name="Filter"
+            component={Filter}
+            options={{
+              ...noHead,
+              title: "Filter",
+              headerTitleStyle: {
+                color: "#D32324",
+              },
+              headerTintColor: "#D32324",
+            }} />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

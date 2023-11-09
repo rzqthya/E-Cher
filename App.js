@@ -87,7 +87,18 @@ const App = () => {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
-          <Stack.Screen name="Detail Voucher" component={DetailVoucher} options={noHead} />
+          <Stack.Screen
+            name="Detail Voucher"
+            component={DetailVoucher}
+            options={{
+              ...noHead,
+              title: "Detail Voucher",
+              headerTitleStyle: {
+                color: "#D32324",
+              },
+              headerTintColor: "#D32324",
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

@@ -1,6 +1,6 @@
-import { FlatList, SafeAreaView, Text, TouchableOpacity } from 'react-native'
+import { FlatList, SafeAreaView, Text, TextInput, TouchableOpacity, Alert } from 'react-native'
 import React, { useState } from 'react'
-import { Box, Heading } from 'native-base'
+import { Box, Heading, Button } from 'native-base'
 import Icon from "@expo/vector-icons/Ionicons";
 
 const Filter = () => {
@@ -19,10 +19,6 @@ const Filter = () => {
     },
   ]);
 
-  const [selectedKategori, setSelectedKategori] = useState({
-
-  });
-
   return (
     <SafeAreaView>
       <Box bg={'#F0F2F7'}>
@@ -31,10 +27,9 @@ const Filter = () => {
           <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'white', padding: 10, marginTop: 10 }}>
             <Text>Kota</Text>
             <Icon name="chevron-forward-outline"></Icon>
-
           </TouchableOpacity>
-          <Box py={2}>
-            <Heading fontSize={'xl'}>Jenis</Heading>
+          <Box py={3}>
+            <Heading fontSize={18}>Jenis</Heading>
             <FlatList
               data={kategori}
               horizontal
@@ -46,7 +41,7 @@ const Filter = () => {
                   backgroundColor: '#FAF9F9',
                   elevation: 2,
                   paddingHorizontal: 15,
-                  marginBottom: 10,
+                  marginBottom: 5,
                   borderRadius: 10,
                   paddingVertical: 10,
                   marginLeft: 5,
@@ -54,7 +49,19 @@ const Filter = () => {
                   <Text>{item.nama}</Text>
                 </TouchableOpacity>)} />
           </Box>
-          <Heading fontSize={'xl'}>Masa Berlaku</Heading>
+          <Box>
+            <Heading fontSize={18}>Masa Berlaku</Heading>
+            <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'white', padding: 10, marginTop: 10 }}>
+              <TextInput placeholder={'D/M/Y'}></TextInput>
+            </TouchableOpacity>
+          </Box>
+          <Box my={3} alignItems={'flex-end'}>
+            <Button variant="solid"
+              backgroundColor="#D32324" elevation={2}
+              onPress={() => ('#')} w={120} >
+              <Text style={{ fontSize: 16, fontWeight: 500, color: '#FAF9F9' }}>Apply</Text>
+            </Button>
+          </Box>
         </Box>
       </Box>
     </SafeAreaView >

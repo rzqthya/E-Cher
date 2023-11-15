@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { NativeBaseProvider, Input, Button } from 'native-base';
+import { Input, Button } from 'native-base';
 
 const EditProfile = ({ navigation }) => {
   const [username, setUsername] = useState('');
@@ -13,7 +13,6 @@ const EditProfile = ({ navigation }) => {
   };
 
   return (
-    <NativeBaseProvider>
       <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
         <View width="80%" marginBottom={100}>
           {/* Ubah Username */}
@@ -63,7 +62,6 @@ const EditProfile = ({ navigation }) => {
           Save
         </Button>
       </View>
-    </NativeBaseProvider>
   );
 };
 

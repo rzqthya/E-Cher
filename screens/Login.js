@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, Image } from 'react-native';
-import { NativeBaseProvider, Input, Button } from 'native-base';
+import { Input, Button } from 'native-base';
 import { useNavigation } from "@react-navigation/native";
 
-const Login = () => { // navigation diisi adalah "props" yang yang diterima dari react navigator yang digunakan untuk mengatur "useState"
+const Login = () => { 
   //code dibawah ini merupakan State
   //penggunaan useState untuk membuat state lokal dalam komponen Login yang menyimpan
   const [email, setEmail] = useState('');
@@ -11,7 +11,7 @@ const Login = () => { // navigation diisi adalah "props" yang yang diterima dari
   const [emailError, setEmailError] = useState('');
   const [phoneNumberError, setPhoneNumberError] = useState('');
 
-  const navigation = useNavigation();
+  const navigation = useNavigation(); // navigation diisi adalah "props" yang yang diterima dari react navigator yang digunakan untuk mengatur "useState"
 
   const dummyUserData = [
     { email: 'aida@gmail.com', phoneNumber: '1234567890' },
@@ -59,7 +59,6 @@ const Login = () => { // navigation diisi adalah "props" yang yang diterima dari
   };
 
   return (
-    <NativeBaseProvider>
       <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
         <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 45 }}>Login</Text>
         <View marginBottom={80}>
@@ -106,7 +105,7 @@ const Login = () => { // navigation diisi adalah "props" yang yang diterima dari
           Don't have an Account? Sign Up
         </Text>
       </View>
-    </NativeBaseProvider>
+    // </NativeBaseProvider>
   );
 };
 

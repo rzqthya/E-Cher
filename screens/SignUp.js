@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text } from 'react-native';
-import { NativeBaseProvider, Input, Button } from 'native-base';
+import { Input, Button } from 'native-base';
 import { useNavigation } from "@react-navigation/native";
 
 const SignUp = () => {
@@ -61,7 +61,7 @@ const SignUp = () => {
   };
 
   return (
-    <NativeBaseProvider>
+    // <NativeBaseProvider>
       <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
         <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 130 }}>Sign Up</Text>
         <View width="80%" marginBottom={100}>
@@ -119,7 +119,7 @@ const SignUp = () => {
           Already have an account? Login
         </Text>
       </View>
-    </NativeBaseProvider>
+    // </NativeBaseProvider>
   );
 };
 

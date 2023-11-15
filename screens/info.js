@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Heading, Center } from "native-base";
+
 
 const Info = () => {
-    return (
-        <View>
-            <Text>Info</Text>
-        </View>
-    )
-}
+  return (
+    <>
+      <Center flex={1} bg="#F0F2F7">
+        <Heading>Info</Heading>
+      </Center>
+    </>
+  );
+};
 
-export default Info
-
-const styles = StyleSheet.create({})
+export default Info;

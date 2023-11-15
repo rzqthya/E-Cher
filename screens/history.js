@@ -1,14 +1,14 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { Heading, Center } from "native-base";
+
 
 const History = () => {
-    return (
-        <View>
-            <Text>History</Text>
-        </View>
-    )
-}
+  return (
+    <>
+      <Center flex={1} bg="#F0F2F7">
+        <Heading>History</Heading>
+      </Center>
+    </>
+  );
+};
 
-export default History
-
-const styles = StyleSheet.create({})
+export default History;

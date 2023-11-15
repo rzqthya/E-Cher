@@ -1,23 +1,26 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
 import { NativeBaseProvider, Text } from "native-base";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { NavigationContainer } from '@react-navigation/native';
 import Ionicons from "@expo/vector-icons/Ionicons";
-import Info from "./screens/info";
-import Profile from "./screens/profile";
+import Login from './screens/Login';
+import SignUp from './screens/SignUp';
 import Home from "./screens/home";
-import History from "./screens/history";
 import DetailVoucher from "./screens/detailvoucher";
 import filter from "./screens/filter";
 import Filter from "./screens/filter";
+import History from "./screens/history";
+import Info from "./screens/info"
+import Profile from "./screens/profile";
+import EditProfile from "./screens/edit-profile";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
 const TabBottom = createBottomTabNavigator();
 
 const noHead = { headerShown: true };
-
-const BottomTabs = () => {
+const Tabs = () => {
   return (
     <TabBottom.Navigator
       screenOptions={({ route }) => ({
@@ -25,16 +28,16 @@ const BottomTabs = () => {
           let iconName;
           switch (route.name) {
             case "Home":
-              iconName = "home";
+              iconName = "home-outline";
               break;
             case "History":
-              iconName = "time";
+              iconName = "time-outline";
               break;
             case "Info":
-              iconName = "information-circle";
+              iconName = "information-circle-outline";
               break;
             case "Profile":
-              iconName = "person-circle";
+              iconName = "person-outline";
               break;
           }
           return (
@@ -61,24 +64,39 @@ const BottomTabs = () => {
         },
       })}
     >
-      <TabBottom.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <TabBottom.Screen name="History" component={History}
+      <TabBottom.Screen
+        name="Home"
+        component={Home} // "Home" diambil dari fungsi component dari file home.js
+        options={{ headerShown: false }}
+      />
+      <TabBottom.Screen
+        name="History"
+        component={History}// "History" diambil dari fungsi component dari history.js
         options={{
-          title: "History",
-          headerTitleAlign: "center",
-          headerTitleStyle: { color: "#D32324" },
-        }} />
-      <TabBottom.Screen name="Info" component={Info}
+          title: "History", 
+          headerTitleAlign: "center", 
+          headerTitleStyle: { color: "#F82F2D" },
+        }}
+      />
+      <TabBottom.Screen
+        name="Info"
+        component={Info}
         options={{
-          title: "Info",
+          title: "Info",  
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#D32324" },
-        }} />
-      <TabBottom.Screen name="Profile" component={Profile} options={{
-        title: "Profile",
-        headerTitleAlign: "center",
-        headerTitleStyle: { color: "#D32324" },
-      }} />
+          headerTitleStyle: { color: "#F82F2D" },
+           
+        }}
+      />
+      <TabBottom.Screen
+        name="Profile"
+        component={Profile}
+        options={{
+          title: "Profile", 
+          headerTitleAlign: "center",
+          headerTitleStyle: { color: "#F82F2D" }, 
+        }}
+      />
     </TabBottom.Navigator>
   );
 };
@@ -87,8 +105,10 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Tabs" component={BottomTabs} options={{ headerShown: false }} />
+        <Stack.Navigator initialRouteName="Login"> 
+          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
+          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
+          <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }}/>
           <Stack.Screen
             name="Detail Voucher"
             component={DetailVoucher}
@@ -111,6 +131,15 @@ const App = () => {
               },
               headerTintColor: "#D32324",
             }} />
+          <Stack.Screen
+            name="edit-profile"
+            component={EditProfile}
+            options={{
+              title: "Edit Profile",
+              headerTitleAlign: "center",
+              headerTitleStyle: { color: "#F82F2D" },
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

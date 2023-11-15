@@ -7,6 +7,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import Home from "./screens/home";
+import DetailVoucher from "./screens/detailvoucher";
+import filter from "./screens/filter";
+import Filter from "./screens/filter";
 import History from "./screens/history";
 import Info from "./screens/info"
 import Profile from "./screens/profile";
@@ -16,6 +19,7 @@ import EditProfile from "./screens/edit-profile";
 const Stack = createNativeStackNavigator();
 const TabBottom = createBottomTabNavigator();
 
+const noHead = { headerShown: true };
 const Tabs = () => {
   return (
     <TabBottom.Navigator
@@ -99,13 +103,34 @@ const Tabs = () => {
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <NativeBaseProvider>
+    <NativeBaseProvider>
+      <NavigationContainer>
         <Stack.Navigator initialRouteName="Login"> 
           <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
           <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
           <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }}/>
-          {/* <Stack.Screen name="Home" component={Home} options={{ headerShown: false }} /> */}
+          <Stack.Screen
+            name="Detail Voucher"
+            component={DetailVoucher}
+            options={{
+              ...noHead,
+              title: "Detail Voucher",
+              headerTitleStyle: {
+                color: "#D32324",
+              },
+              headerTintColor: "#D32324",
+            }} />
+          <Stack.Screen
+            name="Filter"
+            component={Filter}
+            options={{
+              ...noHead,
+              title: "Filter",
+              headerTitleStyle: {
+                color: "#D32324",
+              },
+              headerTintColor: "#D32324",
+            }} />
           <Stack.Screen
             name="edit-profile"
             component={EditProfile}
@@ -116,9 +141,8 @@ const App = () => {
             }}
           />
         </Stack.Navigator>
-      </NativeBaseProvider>
-    </NavigationContainer>
-
+      </NavigationContainer>
+    </NativeBaseProvider>
   );
 };
 

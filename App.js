@@ -11,7 +11,7 @@ import DetailVoucher from "./screens/detailvoucher";
 import Filter from "./screens/filter";
 
 // Navigator Declaration
-// const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator();
 const TabBottom = createBottomTabNavigator();
 
 const noHead = { headerShown: true };

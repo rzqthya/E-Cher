@@ -3,7 +3,7 @@ import { Image, SafeAreaView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Hi_profile } from "../components";
 import ButtonFilter from "../components/buttonFilter";
-import datas from "../datas"
+import datas from "../datas";
 
 const Home = () => {
     const navigation = useNavigation();
@@ -64,6 +64,4 @@ const Home = () => {
         </SafeAreaView>
     );
 }
-
-
 export default Home

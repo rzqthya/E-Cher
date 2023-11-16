@@ -8,11 +8,10 @@ import Profile from "./screens/profile";
 import Home from "./screens/home";
 import History from "./screens/history";
 import DetailVoucher from "./screens/detailvoucher";
-import filter from "./screens/filter";
 import Filter from "./screens/filter";
 
 // Navigator Declaration
-const Stack = createNativeStackNavigator();
+// const Stack = createNativeStackNavigator();
 const TabBottom = createBottomTabNavigator();
 
 const noHead = { headerShown: true };

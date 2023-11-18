@@ -13,7 +13,10 @@ import Filter from "./screens/filter";
 import History from "./screens/history";
 import FormScreen from "./screens/form";
 import DetailScreen from "./screens/DetailScreen";
-import Info from "./screens/info"
+import InfoScreen from "./screens/info";
+import ContentScreen from "./screens/ContentScreen";
+import FaqScreen from "./screens/FaqScreen";
+import ChatScreen from "./screens/ChatScreen";
 import Profile from "./screens/profile";
 import EditProfile from "./screens/edit-profile";
 
@@ -145,6 +148,33 @@ const App = () => {
           />
           <Stack.Screen name="Form" component={FormScreen} options={{ headerShown: false }} />
           <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: false }}  />
+          <Stack.Screen
+            name="ContentScreen"
+            component={ContentScreen}
+            options={{
+              title: "Tentang Kami",
+              headerTitleAlign: "center",
+              headerTitleStyle: { color: "#F82F2D" },
+            }}
+          />
+          <Stack.Screen
+            name="FaqScreen"
+            component={FaqScreen}
+            options={{
+              title: "FAQ",
+              headerTitleAlign: "center",
+              headerTitleStyle: { color: "#F82F2D" },
+            }}
+          />
+          <Stack.Screen
+            name="ChatScreen"
+            component={ChatScreen}
+            options={{
+              title: "Message",
+              headerTitleAlign: "left",
+              headerTitleStyle: { color: "#F82F2D" },
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>

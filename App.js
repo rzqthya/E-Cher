@@ -11,6 +11,8 @@ import DetailVoucher from "./screens/detailvoucher";
 import filter from "./screens/filter";
 import Filter from "./screens/filter";
 import History from "./screens/history";
+import FormScreen from "./screens/form";
+import DetailScreen from "./screens/DetailScreen";
 import Info from "./screens/info"
 import Profile from "./screens/profile";
 import EditProfile from "./screens/edit-profile";
@@ -18,6 +20,7 @@ import EditProfile from "./screens/edit-profile";
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
 const TabBottom = createBottomTabNavigator();
+
 
 const noHead = { headerShown: true };
 const Tabs = () => {
@@ -140,10 +143,13 @@ const App = () => {
               headerTitleStyle: { color: "#F82F2D" },
             }}
           />
+          <Stack.Screen name="Form" component={FormScreen} options={{ headerShown: false }} />
+          <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: false }}  />
         </Stack.Navigator>
       </NavigationContainer>
     </NativeBaseProvider>
   );
 };
+
 
 export default App;

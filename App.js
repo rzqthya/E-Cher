@@ -8,7 +8,7 @@ import Login from './screens/Login';
 import SignUp from './screens/SignUp';
 import Home from "./screens/home";
 import DetailVoucher from "./screens/detailvoucher";
-import filter from "./screens/filter";
+// import filter from "./screens/filter";
 import Filter from "./screens/filter";
 import History from "./screens/history";
 import FormScreen from "./screens/form";
@@ -86,7 +86,7 @@ const Tabs = () => {
       />
       <TabBottom.Screen
         name="Info"
-        component={Info}
+        component={InfoScreen}
         options={{
           title: "Info",  
           headerTitleAlign: "center",

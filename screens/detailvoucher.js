@@ -1,6 +1,7 @@
 import { Box, Text, Image, Button, Heading, HStack, ScrollView } from "native-base";
 import React, { useState } from "react";
 import { Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const DetailVoucher = ({ route }) => {
     const params = route.params.item;
@@ -25,6 +26,7 @@ const DetailVoucher = ({ route }) => {
         });
         setSelectedButton('SK'); // Mengatur state tombol yang sedang diklik
     };
+    const navigation = useNavigation();
 
     return (
         <ScrollView>
@@ -53,7 +55,22 @@ const DetailVoucher = ({ route }) => {
                     <Box my={3} alignItems={'flex-end'}>
                         <Button variant="solid"
                             backgroundColor="#FFC700" elevation={2}
-                            onPress={() => Alert.alert('Apakah yakin akan klaim voucher?')} w={120} rounded={30}>
+                            onPress={() => {
+                                Alert.alert(
+                                    'Apakah yakin akan klaim voucher?',
+                                    '',
+                                    [
+                                        // { text: 'Cancel', style: 'cancel' },
+                                        {
+                                            text: 'OK',
+                                            onPress: () => {
+                                                navigation.navigate('Form');
+                                            },
+                                        },
+                                    ],
+                                    { cancelable: false }
+                                );
+                            }} w={120} rounded={30}>
                             <Text style={{ fontSize: 16, fontWeight: 500, color: '#FAF9F9' }}>Klaim</Text>
                         </Button>
                     </Box>

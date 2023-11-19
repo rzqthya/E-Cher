@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Text, VStack, Button, HStack, ScrollView } from "native-base";
+import { Box, Text, VStack, Button, HStack, ScrollView, Avatar } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
@@ -20,11 +20,16 @@ const Profile = () => {
     <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Box flex={1} justifyContent="center" alignItems="center" bg="#FAF9F9" p={4}>
             <Box bg="white" p={10} shadow={2} borderRadius={12} width="70%" alignItems="center" mb={20} style={{ marginTop: 40 }} >
-                <Ionicons 
-                name="person-outline" 
-                size={60} color="#F82F2D" 
-                style={{ position: "absolute", top: -35 }} // untuk mengatur icon berada si tengah dan bernilai tetap
-                />
+                <Avatar bg="green.500" source={{
+                    uri: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                }} size={60}
+                style={{ position: "absolute", top: -30 }}>
+                </Avatar>
+                {/* <Ionicons 
+                    name="person-outline" 
+                    size={60} color="#F82F2D" 
+                    style={{ position: "absolute", top: -35 }} // untuk mengatur icon berada si tengah dan bernilai tetap
+                /> */}
                 <VStack alignItems="center" space={1}>
                 <Text fontSize="xl" fontWeight="bold" mb={4}> {/* "mb" mengatur panjang content  */}
                     Rizqy Athiyya

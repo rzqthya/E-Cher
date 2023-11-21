@@ -14,7 +14,7 @@ const Login = () => {
   const navigation = useNavigation(); // navigation diisi adalah "props" yang yang diterima dari react navigator yang digunakan untuk mengatur "useState"
 
   const dummyUserData = [
-    { email: 'aida@gmail.com', phoneNumber: '1234567890' },
+    { email: 'rizqyathiyya@gmail.com', phoneNumber: '1234567890' },
   ];
 
   const handleSignUp = () => {
@@ -62,7 +62,7 @@ const Login = () => {
       <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
         <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 45 }}>Login</Text>
         <View marginBottom={80}>
-          <Image source={require('../assets/logo.png')} style={{ width: 200, height: 200 }} />
+          <Image source={require('../assets/E-Cher.png')} style={{ width: 190, height: 200 }} />
         </View>
         <View width="80%" marginBottom={10}>
           {/* Inputan Email */}

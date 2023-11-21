@@ -6,9 +6,10 @@ const ContentScreen = () => {
         <ScrollView flex={1} bg="#F0F2F7">
             <Center flex={2} p={2}>
                 <Image
-                    source={require("../assets/logo.png")} 
+                    source={require("../assets/E-Cher.png")} 
                     alt="Logo"
-                    size={200} 
+                    size={200}
+                    style={{ width: 190 }}
                 />
             </Center>
             <Box p={4}>

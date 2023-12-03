@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
 import { Input, Button } from 'native-base';
 import { useNavigation } from "@react-navigation/native";
 
@@ -61,7 +61,7 @@ const Login = () => {
   return (
       <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
         <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 45 }}>Login</Text>
-        <View marginBottom={80}>
+        <View marginBottom={50} marginTop={20}>
           <Image source={require('../assets/E-Cher.png')} style={{ width: 190, height: 200 }} />
         </View>
         <View width="80%" marginBottom={10}>
@@ -79,7 +79,7 @@ const Login = () => {
           <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
 
           {/* Inputan No.Telpon */}
-          <Text marginBottom={20} marginTop={20}>
+          <Text marginBottom={20}>
             Masukkan No. Telpon
           </Text>
           <Input
@@ -95,17 +95,20 @@ const Login = () => {
         </View>
         <Button
           onPress={handleLogin}
-          marginTop={10}
           marginBottom={10}
           style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}
         >
           Login
         </Button>
-        <Text onPress={handleSignUp} marginTop={10}>
+        <Text onPress={handleSignUp} marginBottom={20} marginTop={-20}>
           Don't have an Account? Sign Up
         </Text>
+        <TouchableOpacity>
+          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
+            <Image source={require('../assets/icon_google.png')} style={{ width: 55, height: 55 }} />
+          </View>
+        </TouchableOpacity>
       </View>
-    // </NativeBaseProvider>
   );
 };
 

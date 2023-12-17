@@ -1,4 +1,4 @@
-import { FlatList, SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native'
+import {SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 import { Box, Heading, Button, Select } from 'native-base'
 

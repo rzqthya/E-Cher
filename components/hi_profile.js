@@ -1,14 +1,17 @@
-import { SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
+import { Dimensions, SafeAreaView, TouchableOpacity, StatusBar } from 'react-native';
 import { Avatar, Box, HStack, Text } from 'native-base';
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Hi_profile = ({ title }) => {
     const navigation = useNavigation();
     return (
         <SafeAreaView>
             <StatusBar barStyle="light" backgroundColor={'#7F7F7F'} alignItems={'center'} />
-            <Box mt={22} justifyContent={'center'} w={290} h={75}>
+            <Box mt={windowHeight * 0.03} justifyContent={'center'} w={windowWidth * 0.8} h={windowHeight * 0.1}>
                 <TouchableOpacity style={{
                     flexDirection: 'row',
                     backgroundColor: '#FAF9F9',

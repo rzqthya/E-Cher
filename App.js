@@ -164,6 +164,7 @@ const App = () => {
               title: "FAQ",
               headerTitleAlign: "center",
               headerTitleStyle: { color: "#F82F2D" },
+              headerTintColor: "#D32324",
             }}
           />
           <Stack.Screen
@@ -173,6 +174,7 @@ const App = () => {
               title: "Message",
               headerTitleAlign: "left",
               headerTitleStyle: { color: "#F82F2D" },
+              headerTintColor: "#D32324",
             }}
           />
         </Stack.Navigator>

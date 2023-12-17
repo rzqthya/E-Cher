@@ -1,26 +1,9 @@
-import { FlatList, SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
+import { SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native'
+import React from 'react'
 import { Box, Heading, Button, Select } from 'native-base'
 
 
 const Filter = () => {
-  const [kategori, setKategori] = useState([
-    {
-      nama: 'Makanan',
-    },
-    {
-      nama: 'Minuman',
-    },
-    {
-      nama: 'Service',
-    },
-    {
-      nama: 'Hotel',
-    },
-  ]);
-
-  const [kota, setKota] = useState('');
-
   return (
     <SafeAreaView>
       <Box bg={'#F0F2F7'}>
@@ -42,27 +25,7 @@ const Filter = () => {
               <Select.Item label="Semarang" value="key4" />
             </Select>
           </TouchableOpacity>
-          <Box py={3}>
-            <Heading fontSize={18}>Jenis</Heading>
-            <FlatList
-              data={kategori}
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              style={{ marginTop: 10 }}
-              renderItem={({ item }) => (
-                <TouchableOpacity style={{
-                  marginRight: 5,
-                  backgroundColor: '#FAF9F9',
-                  elevation: 2,
-                  paddingHorizontal: 15,
-                  marginBottom: 5,
-                  borderRadius: 10,
-                  paddingVertical: 10,
-                  marginLeft: 5,
-                }}>
-                  <Text>{item.nama}</Text>
-                </TouchableOpacity>)} />
-          </Box>
+
           <Box>
             <Heading fontSize={18}>Masa Berlaku</Heading>
             <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: 'white', padding: 10, marginTop: 10 }}>

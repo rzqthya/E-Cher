@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { Input, Button } from 'native-base';
+import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Input, Button, StatusBar } from 'native-base';
 import { useNavigation } from "@react-navigation/native";
 
-const Login = () => { 
+const Login = () => {
   //code dibawah ini merupakan State
   //penggunaan useState untuk membuat state lokal dalam komponen Login yang menyimpan
   const [email, setEmail] = useState('');
@@ -59,10 +59,12 @@ const Login = () => {
   };
 
   return (
-      <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
-        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 45 }}>Login</Text>
-        <View marginBottom={50} marginTop={20}>
-          <Image source={require('../assets/E-Cher.png')} style={{ width: 190, height: 200 }} />
+    <SafeAreaView>
+      <StatusBar Style="light" backgroundColor={'#7F7F7F'} alignItems={'center'} />
+      <View marginTop={2} justifyContent="center" alignItems="center">
+        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginTop: 5 }}>Login</Text>
+        <View marginTop={30} marginBottom={20}>
+          <Image source={require('../assets/E-Cher.png')} style={{ width: 140, height: 160 }} />
         </View>
         <View width="80%" marginBottom={10}>
           {/* Inputan Email */}
@@ -109,6 +111,7 @@ const Login = () => {
           </View>
         </TouchableOpacity>
       </View>
+    </SafeAreaView>
   );
 };
 

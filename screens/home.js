@@ -45,13 +45,13 @@ const Home = () => {
         );
     };
     return (
-        <SafeAreaView>
-            <Box bg={'#F0F2F7'} mb={8}>
+        <SafeAreaView style={{ flex: 1 }}>
+            <Box bg={'#F0F2F7'} flex={1}>
                 <Box flexDirection={'column'} justifyItems={'center'} justifyContent={'center'} mx={9}>
                     <Box>
                         <Hi_profile title={"Hi, Rizqy Athiyya"} />
                     </Box>
-                    <Box pb={3} pt={3} alignItems={'flex-end'}>
+                    <Box pt={2} pb={2} alignItems={'flex-end'}>
                         <ButtonFilter />
                     </Box>
                 </Box>
@@ -62,6 +62,7 @@ const Home = () => {
                 />
             </Box>
         </SafeAreaView>
+
     );
 }
 

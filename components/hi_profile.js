@@ -8,7 +8,7 @@ const Hi_profile = ({ title }) => {
     return (
         <SafeAreaView>
             <StatusBar barStyle="light" backgroundColor={'#7F7F7F'} alignItems={'center'} />
-            <Box mt={22} justifyContent={'center'} w={295} h={75}>
+            <Box mt={22} justifyContent={'center'} w={290} h={75}>
                 <TouchableOpacity style={{
                     flexDirection: 'row',
                     backgroundColor: '#FAF9F9',

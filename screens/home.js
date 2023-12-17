@@ -10,7 +10,7 @@ const Home = () => {
     const renderItem = ({ item }) => {
         return (
             <Box flex={1}>
-                <Box bg={'#F0F2F7'} mx={6}>
+                <Box bg={'#F0F2F7'} mx={4}>
                     <ScrollView>
                         <TouchableOpacity
                             activeOpacity={0.5}
@@ -19,7 +19,7 @@ const Home = () => {
                                 flexDirection="row"
                                 borderRadius={5}
                                 marginHorizontal={20}
-                                mt={3}
+                                mb={2}
                                 backgroundColor='#FAF9F9'
                                 elevation={2}
                             >
@@ -45,25 +45,24 @@ const Home = () => {
         );
     };
     return (
-        <SafeAreaView marginBottom={30}>
-            <Box bg={'#F0F2F7'}>
-                <Box mx={45}>
-                    <Box py={2}>
-                        <Hi_profile title={"Hi, Rizqy Athiyya "} />
+        <SafeAreaView>
+            <Box bg={'#F0F2F7'} mb={8}>
+                <Box flexDirection={'column'} justifyItems={'center'} justifyContent={'center'} mx={9}>
+                    <Box>
+                        <Hi_profile title={"Hi, Rizqy Athiyya"} />
                     </Box>
-                    <Box paddingBottom={3} alignItems={'flex-end'}>
+                    <Box pb={3} pt={3} alignItems={'flex-end'}>
                         <ButtonFilter />
                     </Box>
                 </Box>
+                <FlatList
+                    data={datas}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id.toString()}
+                />
             </Box>
-            <FlatList
-                data={datas}
-                renderItem={renderItem}
-                keyExtractor={(item) => item.id.toString()}
-            />
         </SafeAreaView>
     );
 }
-
 
 export default Home

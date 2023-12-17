@@ -1,9 +1,12 @@
-import { SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native'
-import React from 'react'
+import { FlatList, SafeAreaView, Text, TextInput, TouchableOpacity } from 'react-native'
+import React, { useState } from 'react'
 import { Box, Heading, Button, Select } from 'native-base'
 
 
 const Filter = () => {
+
+  const [kota, setKota] = useState('');
+
   return (
     <SafeAreaView>
       <Box bg={'#F0F2F7'}>

@@ -21,7 +21,7 @@ const ChatScreen = () => {
         type: "bot",
         content: (
           <Text bold>
-            Kamu butuh bantuan apa? {"\n1. Cara Klaim voucher \n2. Cara Menukarkan Voucher \n3. Keluhan"}
+            Kamu butuh bantuan apa? {"\n1. Cara Klaim Voucher \n2. Cara Menukarkan Voucher \n3. Apakah ada batasan untuk klaim voucher?"}
           </Text>
         ),
       },
@@ -46,12 +46,7 @@ const ChatScreen = () => {
         </Text>
       );
     } else if (userInput.toLowerCase() === "3") {
-      responseContent = (
-        <Text>
-          <Text bold>Cara Klaim Voucher :</Text>
-          {"\n1. Pilih Voucher yang akan Anda Klaim. \n2. Isi Formulir yang sudah disediakan. \n3. Pastikan Wilayah Samsat sesuai dengan tempat Anda membayar pajak. \n4. Pastikan STNK yang Anda upload sesuai."}
-        </Text>
-      );
+      responseContent = "Tidak ada batasan untuk Anda klaim voucher, selama anda sudah melakukan pembayaran pajak secara tepat waktu dan memiliki bukti STNK tidak ada ";
     } else {
       responseContent = "Mohon maaf, saya tidak mengerti.";
     }

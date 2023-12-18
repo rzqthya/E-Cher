@@ -19,6 +19,7 @@ import FaqScreen from "./screens/FaqScreen";
 import ChatScreen from "./screens/ChatScreen";
 import Profile from "./screens/profile";
 import EditProfile from "./screens/edit-profile";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 // Navigator Declaration
 const Stack = createNativeStackNavigator();
@@ -79,8 +80,8 @@ const Tabs = () => {
         name="History"
         component={History}// "History" diambil dari fungsi component dari history.js
         options={{
-          title: "History", 
-          headerTitleAlign: "center", 
+          title: "History",
+          headerTitleAlign: "center",
           headerTitleStyle: { color: "#F82F2D" },
         }}
       />
@@ -88,19 +89,19 @@ const Tabs = () => {
         name="Info"
         component={InfoScreen}
         options={{
-          title: "Info",  
+          title: "Info",
           headerTitleAlign: "center",
           headerTitleStyle: { color: "#F82F2D" },
-           
+
         }}
       />
       <TabBottom.Screen
         name="Profile"
         component={Profile}
         options={{
-          title: "Profile", 
+          title: "Profile",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" }, 
+          headerTitleStyle: { color: "#F82F2D" },
         }}
       />
     </TabBottom.Navigator>
@@ -111,73 +112,75 @@ const App = () => {
   return (
     <NativeBaseProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Login"> 
-          <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
-          <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
-          <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }}/>
-          <Stack.Screen
-            name="Detail Voucher"
-            component={DetailVoucher}
-            options={{
-              ...noHead,
-              title: "Detail Voucher",
-              headerTitleStyle: {
-                color: "#D32324",
-              },
-              headerTintColor: "#D32324",
-            }} />
-          <Stack.Screen
-            name="Filter"
-            component={Filter}
-            options={{
-              ...noHead,
-              title: "Filter",
-              headerTitleStyle: {
-                color: "#D32324",
-              },
-              headerTintColor: "#D32324",
-            }} />
-          <Stack.Screen
-            name="edit-profile"
-            component={EditProfile}
-            options={{
-              title: "Edit Profile",
-              headerTitleAlign: "center",
-              headerTitleStyle: { color: "#F82F2D" },
-            }}
-          />
-          <Stack.Screen name="Form" component={FormScreen} options={{ headerShown: false }} />
-          <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: false }}  />
-          <Stack.Screen
-            name="ContentScreen"
-            component={ContentScreen}
-            options={{
-              title: "Tentang Kami",
-              headerTitleAlign: "center",
-              headerTitleStyle: { color: "#F82F2D" },
-            }}
-          />
-          <Stack.Screen
-            name="FaqScreen"
-            component={FaqScreen}
-            options={{
-              title: "FAQ",
-              headerTitleAlign: "center",
-              headerTitleStyle: { color: "#F82F2D" },
-              headerTintColor: "#D32324",
-            }}
-          />
-          <Stack.Screen
-            name="ChatScreen"
-            component={ChatScreen}
-            options={{
-              title: "Message",
-              headerTitleAlign: "left",
-              headerTitleStyle: { color: "#F82F2D" },
-              headerTintColor: "#D32324",
-            }}
-          />
-        </Stack.Navigator>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
+            <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
+            <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
+            <Stack.Screen
+              name="Detail Voucher"
+              component={DetailVoucher}
+              options={{
+                ...noHead,
+                title: "Detail Voucher",
+                headerTitleStyle: {
+                  color: "#D32324",
+                },
+                headerTintColor: "#D32324",
+              }} />
+            <Stack.Screen
+              name="Filter"
+              component={Filter}
+              options={{
+                ...noHead,
+                title: "Filter",
+                headerTitleStyle: {
+                  color: "#D32324",
+                },
+                headerTintColor: "#D32324",
+              }} />
+            <Stack.Screen
+              name="edit-profile"
+              component={EditProfile}
+              options={{
+                title: "Edit Profile",
+                headerTitleAlign: "center",
+                headerTitleStyle: { color: "#F82F2D" },
+              }}
+            />
+            <Stack.Screen name="Form" component={FormScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="DetailScreen" component={DetailScreen} options={{ headerShown: false }} />
+            <Stack.Screen
+              name="ContentScreen"
+              component={ContentScreen}
+              options={{
+                title: "Tentang Kami",
+                headerTitleAlign: "center",
+                headerTitleStyle: { color: "#F82F2D" },
+              }}
+            />
+            <Stack.Screen
+              name="FaqScreen"
+              component={FaqScreen}
+              options={{
+                title: "FAQ",
+                headerTitleAlign: "center",
+                headerTitleStyle: { color: "#F82F2D" },
+                headerTintColor: "#D32324",
+              }}
+            />
+            <Stack.Screen
+              name="ChatScreen"
+              component={ChatScreen}
+              options={{
+                title: "Message",
+                headerTitleAlign: "left",
+                headerTitleStyle: { color: "#F82F2D" },
+                headerTintColor: "#D32324",
+              }}
+            />
+          </Stack.Navigator>
+        </GestureHandlerRootView>
       </NavigationContainer>
     </NativeBaseProvider>
   );

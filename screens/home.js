@@ -1,13 +1,31 @@
-import { Text, FlatList, Box, ScrollView, Center, Heading } from "native-base";
+import { Text, FlatList, Box, ScrollView, Center, Heading, Stack, Button, Icon, View } from "native-base";
 import { Image, SafeAreaView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from 'react'
+import React, { useState, useRef, useMemo } from 'react'
 import { Hi_profile } from "../components";
-import ButtonFilter from "../components/buttonFilter";
 import datas from "../datas"
+import Ionicons from "@expo/vector-icons/Ionicons";
+import BottomSheet, { BottomSheetBackdrop } from "@gorhom/bottom-sheet";
+import { useCallback } from "react";
 
 const Home = () => {
     const navigation = useNavigation();
+    // ref
+    const bottomSheetRef = useRef(null);
+    // variables
+    const snapPoints = useMemo(() => ['25%', '50%', '90%'], []);
+
+    // const handleOpenPress = () => bottomSheetRef.current?.expand();
+    const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+
+    const renderBackdrop = useCallback((props) => (
+        <BottomSheetBackdrop appearsOnIndex={0} disappearsOnIndex={-1} {...props}
+            onPress={() => setIsBottomSheetOpen(false)}
+        />
+    ), []);
+
+
+    // useState Jenis
     const [kategori, setKategori] = useState([
         {
             nama: 'Makanan',
@@ -92,7 +110,16 @@ const Home = () => {
                                     }}>
                                         <Text>{item.nama}</Text>
                                     </TouchableOpacity>)} />
-                            <ButtonFilter />
+                            {/* Flatlist For Kategori Filter End*/}
+
+                            {/* Button Filter Voucher Start*/}
+                            <Stack direction={{ base: 'row' }}>
+                                <Button title="Open" variant="solid" endIcon={<Icon as={Ionicons} name="filter" size="sm" />}
+                                    backgroundColor="#D32324"
+                                    onPress={() => setIsBottomSheetOpen(true)}>
+                                </Button>
+                            </Stack>
+                            {/* Button Filter Voucher End*/}
                         </Box>
                     </Box>
                 </Box>
@@ -102,6 +129,19 @@ const Home = () => {
                     keyExtractor={(item) => item.id.toString()}
                 />
             </Box>
+            {isBottomSheetOpen && (
+                <BottomSheet
+                    ref={bottomSheetRef}
+                    index={0}
+                    snapPoints={snapPoints}
+                    enablePanDownToClose={true}
+                    backdropComponent={renderBackdrop}
+                >
+                    <View>
+                        <Text>Hello This Try Buttom Sheet</Text>
+                    </View>
+                    {/* Your filter component goes here */}
+                </BottomSheet>)}
         </SafeAreaView>
 
     );

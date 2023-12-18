@@ -157,6 +157,7 @@ const App = () => {
                 title: "Tentang Kami",
                 headerTitleAlign: "center",
                 headerTitleStyle: { color: "#F82F2D" },
+                headerTintColor: "#D32324",
               }}
             />
             <Stack.Screen

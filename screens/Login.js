@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity } from 'react-native';
-import { Input, Button } from 'native-base';
+import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
+import { Input, Button, StatusBar } from 'native-base';
 import { useNavigation } from "@react-navigation/native";
 
-const Login = () => { 
+const Login = () => {
   //code dibawah ini merupakan State
   //penggunaan useState untuk membuat state lokal dalam komponen Login yang menyimpan
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [PasswordError, setPasswordError] = useState('');
 
   const navigation = useNavigation(); // navigation diisi adalah "props" yang yang diterima dari react navigator yang digunakan untuk mengatur "useState"
 
   const dummyUserData = [
-    { email: 'rizqyathiyya@gmail.com', phoneNumber: '1234567890' },
+    { email: 'rizqyathiyya@gmail.com', password: '1234567890' },
   ];
 
   const handleSignUp = () => {
@@ -24,7 +24,7 @@ const Login = () => {
   const handleLogin = () => {
     // error message
     setEmailError('');
-    setPhoneNumberError('');
+    setPasswordError('');
 
     let hasError = false;
 
@@ -35,8 +35,8 @@ const Login = () => {
     }
 
     // jika phone number tidak diisi akan muncul error
-    if (!phoneNumber) {
-      setPhoneNumberError('Phone Number is required');
+    if (!password) {
+      setPasswordError('Password is required');
       hasError = true;
     }
 
@@ -46,7 +46,7 @@ const Login = () => {
     }
 
     // Check apakah email dan phone number yang dimasukan sudah sesuai dengan data dummy
-    const user = dummyUserData.find((user) => user.email === email && user.phoneNumber === phoneNumber); //user.email dan user.phoneNumber diambil dari value
+    const user = dummyUserData.find((user) => user.email === email && user.password === password); //user.email dan user.phoneNumber diambil dari value
 
     // Kondisi ketika email atau phone number yang dimasukkan salah
     if (!user) {
@@ -59,56 +59,62 @@ const Login = () => {
   };
 
   return (
-      <View flex={1} justifyContent="center" alignItems="center" marginBottom={20}>
-        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 45 }}>Login</Text>
-        <View marginBottom={50} marginTop={20}>
-          <Image source={require('../assets/E-Cher.png')} style={{ width: 190, height: 200 }} />
-        </View>
-        <View width="80%" marginBottom={10}>
-          {/* Inputan Email */}
-          <Text marginBottom={10}>Masukkan Email</Text>
-          <Input
-            placeholder="Email"
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-              setEmailError('');
-            }}
-            style={{ marginBottom: 10 }}
-          />
-          <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
-
-          {/* Inputan No.Telpon */}
-          <Text marginBottom={20}>
-            Masukkan No. Telpon
-          </Text>
-          <Input
-            placeholder="Phone Number"
-            value={phoneNumber}
-            onChangeText={(text) => {
-              setPhoneNumber(text);
-              setPhoneNumberError('');
-            }}
-            style={{ marginBottom: 10 }}
-          />
-          <Text style={{ color: 'red', marginBottom: 5 }}>{phoneNumberError}</Text>
-        </View>
-        <Button
-          onPress={handleLogin}
-          marginBottom={10}
-          style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}
-        >
-          Login
-        </Button>
-        <Text onPress={handleSignUp} marginBottom={20} marginTop={-20}>
-          Don't have an Account? Sign Up
-        </Text>
-        <TouchableOpacity>
-          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Image source={require('../assets/icon_google.png')} style={{ width: 55, height: 55 }} />
+    <SafeAreaView>
+      <StatusBar Style="light" backgroundColor={'#7F7F7F'} alignItems={'center'} />
+        <View justifyContent="center" alignItems="center">
+          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginTop: 30 }}>Login</Text>
+          <View marginTop={60} marginBottom={50}>
+            <Image source={require('../assets/E-Cher.png')} style={{ width: 160, height: 170 }} />
           </View>
-        </TouchableOpacity>
-      </View>
+          <View width="80%" marginBottom={40}>
+
+            {/* Inputan Email */}
+            <Text marginBottom={10}>Masukkan Email</Text>
+            <Input
+              placeholder="Email"
+              value={email}
+              onChangeText={(text) => {
+                setEmail(text);
+                setEmailError('');
+              }}
+            />
+            <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
+
+            {/* Inputan No.Telpon */}
+            <Text marginBottom={10} marginTop={20}>
+              Masukkan Password
+            </Text>
+            <Input
+              placeholder="Password"
+              value={password}
+              onChangeText={(text) => {
+                setPassword(text);
+                setPasswordError('');
+              }}
+              secureTextEntry={true}
+            />
+            <Text style={{ color: 'red', marginBottom: 5 }}>{PasswordError}</Text>
+          </View>
+
+          <Button
+            onPress={handleLogin}
+            marginBottom={3}
+            style={{ backgroundColor: '#D32324', width: '65%', borderRadius: 30, alignItems: 'center' }}
+          >
+            Login
+          </Button>
+
+          {/* Handle Sign Up */}
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text>Don't have an Account?{' '}</Text>
+            <TouchableOpacity onPress={handleSignUp}>
+              <Text style={{ color: 'blue', textDecorationLine: 'underline' }}>
+                Sign Up
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+    </SafeAreaView>
   );
 };
 

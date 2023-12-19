@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, FlatList, Box, ScrollView, Center } from "native-base";
 import { Image, SafeAreaView, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import React, { useState, useRef, useMemo } from 'react'
 import { Hi_profile } from "../components";
 import ButtonFilter from "../components/buttonFilter";
 import api from '../api';

@@ -18,12 +18,12 @@ const Header = ({ title, withBack = false }) => {
                             onPress={() => navigation.goBack()}
                         >
                             <Box mr={3}>
-                                <Ionicons name="arrow-back-outline" size={32} color="#F82F2D" />
+                                <Ionicons name="arrow-back-outline" size={32} color="#D32324" />
                             </Box>
                         </TouchableOpacity>
                     )}
                     <HStack alignItems="center">
-                        <Heading color="#F82F2D" fontSize={"16"}>{title}</Heading>
+                        <Heading color="#D32324" fontSize={"16"}>{title}</Heading>
                     </HStack>
                 </HStack>
             </Box>

@@ -1,6 +1,7 @@
 import { Box, Text, Image, Button, Heading, HStack, ScrollView } from "native-base";
 import React, { useState } from "react";
 import { Alert } from "react-native";
+import { Header } from '../components';
 import { useNavigation } from "@react-navigation/native";
 
 const DetailVoucher = ({ route }) => {

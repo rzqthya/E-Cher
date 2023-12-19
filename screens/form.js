@@ -7,17 +7,22 @@ import { Header } from '../components';
 
 const FormScreen = () => {
     const navigation = useNavigation();
+
+    // deklarasi state awal untuk Modal
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
 
+    // deklarasi state awal untuk pick input atau select
     const [wilayah, setWilayah] = useState('key0');
 
+    // deklarasi state awal untuk validasi
     const [namaLengkap, setNamaLengkap] = useState('');
     const [email, setEmail] = useState('');
     const [alamat, setAlamat] = useState('');
     const [nomorPolisi, setNomorPolisi] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
+    // membuat fungsi yang dijalankan ketika klik button send
     const handleSend = () => {
         // validasi dengan memeriksa nilai state
         if (namaLengkap === '' || email === '' || alamat === '' || nomorPolisi === '') {
@@ -27,6 +32,7 @@ const FormScreen = () => {
         }
     };
 
+    // membuat fungsi yang dijalankan ketika selesai konfirmasi
     const handleClaimVoucher = () => {
         setShowModal(false); // menutup modal sebelumnya
         setShowModal2(true); 

@@ -61,56 +61,66 @@ const Login = () => {
   return (
     <SafeAreaView>
       <StatusBar Style="light" backgroundColor={'#7F7F7F'} alignItems={'center'} />
-      <View marginTop={2} justifyContent="center" alignItems="center">
-        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginTop: 5 }}>Login</Text>
-        <View marginTop={30} marginBottom={20}>
-          <Image source={require('../assets/E-Cher.png')} style={{ width: 140, height: 160 }} />
-        </View>
-        <View width="80%" marginBottom={10}>
-          {/* Inputan Email */}
-          <Text marginBottom={10}>Masukkan Email</Text>
-          <Input
-            placeholder="Email"
-            value={email}
-            onChangeText={(text) => {
-              setEmail(text);
-              setEmailError('');
-            }}
-            style={{ marginBottom: 10 }}
-          />
-          <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
-
-          {/* Inputan No.Telpon */}
-          <Text marginBottom={20}>
-            Masukkan No. Telpon
-          </Text>
-          <Input
-            placeholder="Phone Number"
-            value={phoneNumber}
-            onChangeText={(text) => {
-              setPhoneNumber(text);
-              setPhoneNumberError('');
-            }}
-            style={{ marginBottom: 10 }}
-          />
-          <Text style={{ color: 'red', marginBottom: 5 }}>{phoneNumberError}</Text>
-        </View>
-        <Button
-          onPress={handleLogin}
-          marginBottom={10}
-          style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}
-        >
-          Login
-        </Button>
-        <Text onPress={handleSignUp} marginBottom={20} marginTop={-20}>
-          Don't have an Account? Sign Up
-        </Text>
-        <TouchableOpacity>
-          <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-            <Image source={require('../assets/icon_google.png')} style={{ width: 55, height: 55 }} />
+        <View justifyContent="center" alignItems="center">
+          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginTop: 5 }}>Login</Text>
+          <View marginTop={60} marginBottom={50}>
+            <Image source={require('../assets/E-Cher.png')} style={{ width: 140, height: 160 }} />
           </View>
-        </TouchableOpacity>
-      </View>
+
+          {/* Content */}
+          <View width="80%" marginBottom={40}>
+            {/* Inputan Email */}
+            <Text marginBottom={10}>Masukkan Email</Text>
+            <Input
+              placeholder="Email"
+              value={email}
+              onChangeText={(text) => {
+                setEmail(text);
+                setEmailError('');
+              }}
+            />
+            <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
+
+            {/* Inputan No.Telpon */}
+            <Text marginBottom={10} marginTop={20}>
+              Masukkan No. Telpon
+            </Text>
+            <Input
+              placeholder="Phone Number"
+              value={phoneNumber}
+              onChangeText={(text) => {
+                setPhoneNumber(text);
+                setPhoneNumberError('');
+              }}
+            />
+            <Text style={{ color: 'red', marginBottom: 5 }}>{phoneNumberError}</Text>
+          </View>
+
+          <Button
+            onPress={handleLogin}
+            marginBottom={3}
+            style={{ backgroundColor: '#D32324', width: '65%', borderRadius: 30, alignItems: 'center' }}
+          >
+            Login
+          </Button>
+
+          {/* Handle Sign Up */}
+          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Text>Don't have an Account?{' '}</Text>
+            <TouchableOpacity onPress={handleSignUp}>
+              <Text style={{ color: 'blue', textDecorationLine: 'underline' }}>
+                Sign Up
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          {/* Icon Google */}
+          <TouchableOpacity>
+            <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 20 }}>
+              <Image source={require('../assets/icon_google.png')} style={{ width: 55, height: 55 }} />
+            </View>
+          </TouchableOpacity>
+        </View>
     </SafeAreaView>
   );
 };

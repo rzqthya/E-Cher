@@ -4,7 +4,6 @@ import { View, Text, SafeAreaView} from 'react-native';
 import { Input, Button, ScrollView } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import api from '../api';
-import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const SignUp = () => {

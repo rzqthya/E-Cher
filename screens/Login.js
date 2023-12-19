@@ -113,13 +113,6 @@ const Login = () => {
               </Text>
             </TouchableOpacity>
           </View>
-
-          {/* Icon Google */}
-          <TouchableOpacity>
-            <View style={{ alignItems: 'center', justifyContent: 'center', marginTop: 20 }}>
-              <Image source={require('../assets/icon_google.png')} style={{ width: 55, height: 55 }} />
-            </View>
-          </TouchableOpacity>
         </View>
     </SafeAreaView>
   );

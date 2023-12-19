@@ -83,7 +83,7 @@ const Login = () => {
 
             {/* Inputan No.Telpon */}
             <Text marginBottom={10} marginTop={20}>
-              Masukkan No. Telpon
+              Masukkan No. Telepon
             </Text>
             <Input
               placeholder="Phone Number"

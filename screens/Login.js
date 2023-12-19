@@ -7,14 +7,14 @@ const Login = () => {
   //code dibawah ini merupakan State
   //penggunaan useState untuk membuat state lokal dalam komponen Login yang menyimpan
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
-  const [phoneNumberError, setPhoneNumberError] = useState('');
+  const [PasswordError, setPasswordError] = useState('');
 
   const navigation = useNavigation(); // navigation diisi adalah "props" yang yang diterima dari react navigator yang digunakan untuk mengatur "useState"
 
   const dummyUserData = [
-    { email: 'rizqyathiyya@gmail.com', phoneNumber: '1234567890' },
+    { email: 'rizqyathiyya@gmail.com', password: '1234567890' },
   ];
 
   const handleSignUp = () => {
@@ -24,7 +24,7 @@ const Login = () => {
   const handleLogin = () => {
     // error message
     setEmailError('');
-    setPhoneNumberError('');
+    setPasswordError('');
 
     let hasError = false;
 
@@ -35,8 +35,8 @@ const Login = () => {
     }
 
     // jika phone number tidak diisi akan muncul error
-    if (!phoneNumber) {
-      setPhoneNumberError('Phone Number is required');
+    if (!password) {
+      setPasswordError('Password is required');
       hasError = true;
     }
 
@@ -46,7 +46,7 @@ const Login = () => {
     }
 
     // Check apakah email dan phone number yang dimasukan sudah sesuai dengan data dummy
-    const user = dummyUserData.find((user) => user.email === email && user.phoneNumber === phoneNumber); //user.email dan user.phoneNumber diambil dari value
+    const user = dummyUserData.find((user) => user.email === email && user.password === password); //user.email dan user.phoneNumber diambil dari value
 
     // Kondisi ketika email atau phone number yang dimasukkan salah
     if (!user) {
@@ -62,13 +62,12 @@ const Login = () => {
     <SafeAreaView>
       <StatusBar Style="light" backgroundColor={'#7F7F7F'} alignItems={'center'} />
         <View justifyContent="center" alignItems="center">
-          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginTop: 5 }}>Login</Text>
+          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginTop: 30 }}>Login</Text>
           <View marginTop={60} marginBottom={50}>
-            <Image source={require('../assets/E-Cher.png')} style={{ width: 140, height: 160 }} />
+            <Image source={require('../assets/E-Cher.png')} style={{ width: 160, height: 170 }} />
           </View>
-
-          {/* Content */}
           <View width="80%" marginBottom={40}>
+
             {/* Inputan Email */}
             <Text marginBottom={10}>Masukkan Email</Text>
             <Input
@@ -83,17 +82,18 @@ const Login = () => {
 
             {/* Inputan No.Telpon */}
             <Text marginBottom={10} marginTop={20}>
-              Masukkan No. Telepon
+              Masukkan Password
             </Text>
             <Input
-              placeholder="Phone Number"
-              value={phoneNumber}
+              placeholder="Password"
+              value={password}
               onChangeText={(text) => {
-                setPhoneNumber(text);
-                setPhoneNumberError('');
+                setPassword(text);
+                setPasswordError('');
               }}
+              secureTextEntry={true}
             />
-            <Text style={{ color: 'red', marginBottom: 5 }}>{phoneNumberError}</Text>
+            <Text style={{ color: 'red', marginBottom: 5 }}>{PasswordError}</Text>
           </View>
 
           <Button

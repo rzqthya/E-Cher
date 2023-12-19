@@ -5,8 +5,9 @@ import { useNavigation } from "@react-navigation/native";
 
 const Profile = () => {
     // Penggunaan State
-    const [username] = useState("rizqyathiyya");
+    const [namalengkap] = useState("Rizqy Athiyya");
     const [email] = useState("rizqyathiyya@gmail.com");
+    const [notelp] = useState("1234567890");
     const [password] = useState("************");
 
     const navigation = useNavigation();
@@ -35,7 +36,7 @@ const Profile = () => {
                     Rizqy Athiyya
                 </Text>
                 <Text>
-                    085806279332
+                    1234567890
                 </Text>
                 </VStack>
             </Box>
@@ -45,10 +46,10 @@ const Profile = () => {
                 <HStack space={10}>
                     <VStack alignItems="flex-start" flex={3}>{/* flex-start mengatur tulisan untuk berada di sebelah kiri dan "flex" disini digunakan untuk membagi content antara text dengan button menjadi 2 kolom */}
                         <Text fontSize="xl" fontWeight="semibold">
-                        Username
+                        Nama Lengkap
                         </Text>
                         <Text>
-                        {username}
+                        {namalengkap}
                         </Text>
                     </VStack>
 
@@ -75,6 +76,30 @@ const Profile = () => {
                         </Text>
                         <Text>
                         {email}
+                        </Text>
+                    </VStack>
+                    <Button
+                        borderRadius={8}
+                        bg="#F82F2D"
+                        height={9}
+                        _pressed={{ bg: "#D71310" }} // digunakan untuk memberikan efek warnaa ketika button di klik
+                        onPress={handleUbah}
+                        flex={1}
+                    >
+                        Ubah
+                    </Button>
+                </HStack>
+            </Box>
+
+            {/* Content No.telp */}
+            <Box bg="white" p={6} shadow={2} borderRadius={12} width="90%" justifyContent="flex-end" mb={30}>
+                <HStack space={10}>
+                    <VStack alignItems="flex-start" flex={3}>{/* flex-start mengatur tulisan untuk berada di sebelah kiri dan "flex" disini digunakan untuk membagi content antara text dengan button menjadi 2 kolom */}
+                        <Text fontSize="xl" fontWeight="semibold">
+                        No. Telphone
+                        </Text>
+                        <Text>
+                        {notelp}
                         </Text>
                     </VStack>
                     <Button

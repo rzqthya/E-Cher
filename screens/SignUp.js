@@ -1,7 +1,10 @@
+// SignUp.js
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, SafeAreaView  } from 'react-native';
-import { Input, Button, ScrollView, StatusBar } from 'native-base';
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, SafeAreaView} from 'react-native';
+import { Input, Button, ScrollView } from 'native-base';
+import { useNavigation } from '@react-navigation/native';
+import api from '../api';
+
 
 const SignUp = () => {
   const [namalengkap, setNamaLengkap] = useState('');
@@ -15,18 +18,7 @@ const SignUp = () => {
 
   const navigation = useNavigation();
 
-  const dummyUserData = {
-    namaLengkap: 'Rizqy Athiyya',
-    email: 'rizqyathiyya@gmail.com',
-    password: '1234567890',
-    confirmPassword: '1234567890',
-  };
-
-  const handleLogin= () => {
-    navigation.navigate('Login');
-  };
-
-  const handleSignUp = () => {
+  const handleSignUp = async () => {
     // error messages
     setNamaLengkapError('');
     setEmailError('');
@@ -38,22 +30,13 @@ const SignUp = () => {
     if (!namalengkap) {
       setNamaLengkapError('Nama Lengkap is required');
       hasError = true;
-    } else if (namalengkap !== dummyUserData.namaLengkap) {
-      setNamaLengkapError('Invalid Nama Lengkap');
-      hasError = true;
     }
 
-    //email diambil dari value pada inputan
     if (!email) {
       setEmailError('Email is required');
       hasError = true;
-    // memngambil email dari data variabel dummyUserData
-    } else if (email !== dummyUserData.email) {
-      setEmailError('Invalid email');
-      hasError = true;
     }
 
-    // Error message No. Telphone
     if (!noTelp) {
       setNoTelpError('No. Telphone is required');
       hasError = true;
@@ -62,26 +45,37 @@ const SignUp = () => {
     if (!password) {
       setPasswordError('Password is required');
       hasError = true;
-    } else if (password !== dummyUserData.password) {
-      setPasswordError('Invalid password');
-      hasError = true;
     }
 
     if (hasError) {
       return;
     }
+
+    try {
+      const response = await api.post('/register', {
+        nama: namalengkap,
+        email: email,
+        noTelp: noTelp,
+        password: password,
+      });
+
+      console.log('Registration successful:', response.data.user);
+      navigation.navigate('Login');
+    } catch (error) {
+      console.error('Registration failed:', error.message);
+    }
   };
+
 
   return (
     <SafeAreaView>
-      <StatusBar Style="light" backgroundColor={'#7F7F7F'} alignItems={'center'} />
-      <ScrollView>
-      <View justifyContent="center" alignItems="center">
-        <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginTop: 30 }}>Sign Up</Text>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+        <View flex={1} justifyContent="center" alignItems="center" marginBottom={10}>
+          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 70, marginTop: -20 }}>
+            Sign Up
+          </Text>
           <View width="80%" marginBottom={10}>
-
-            {/* Inputan Nama Lengkap */}
-            <Text marginBottom={10} marginTop={60}>
+            <Text marginBottom={15} marginTop={20}>
               Nama Lengkap
             </Text>
             <Input
@@ -93,6 +87,32 @@ const SignUp = () => {
               }}
             />
             <Text style={{ color: 'red', marginBottom: 5 }}>{namalengkapError}</Text>
+
+            <Text marginBottom={15} marginTop={20}>
+              Masukkan Email
+            </Text>
+            <Input
+              placeholder="Email"
+              value={email}
+              onChangeText={(text) => {
+                setEmail(text);
+                setEmailError('');
+              }}
+            />
+            <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
+
+            <Text marginBottom={15} marginTop={20}>
+              Masukkan No. Telphone
+            </Text>
+            <Input
+              placeholder="No. Telphone"
+              value={noTelp}
+              onChangeText={(text) => {
+                setNoTelp(text);
+                setNoTelpError('');
+              }}
+            />
+            <Text style={{ color: 'red', marginBottom: 5 }}>{noTelpError}</Text>
 
             {/* Inputan Email */}
             <Text marginBottom={10} marginTop={20}>
@@ -119,7 +139,7 @@ const SignUp = () => {
                 setNoTelp(text);
                 setNoTelpError('');
               }}
-              />
+            />
             <Text style={{ color: 'red', marginBottom: 5 }}>{noTelpError}</Text>
 
             {/* Inputan Password */}
@@ -135,7 +155,7 @@ const SignUp = () => {
               }}
               secureTextEntry={true}
             />
-            <Text style={{ color: 'red'}}>{passwordError}</Text>
+            <Text style={{ color: 'red' }}>{passwordError}</Text>
           </View>
           <Button
             onPress={handleSignUp}
@@ -145,7 +165,6 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
-
           {/* Hanndle Login */}
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text>Already have an acccount? {' '}</Text>
@@ -156,9 +175,20 @@ const SignUp = () => {
             </TouchableOpacity>
           </View>
         </View>
+        <Button
+          onPress={handleSignUp}
+          marginTop={10}
+          marginBottom={10}
+          style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}
+        >
+          Sign Up
+        </Button>
+        <Text onPress={() => navigation.navigate('Login')}>Already have an account? Login</Text>
       </ScrollView>
     </SafeAreaView>
+
   );
 };
+
 
 export default SignUp;

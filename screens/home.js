@@ -74,7 +74,6 @@ const Home = () => {
             <Hi_profile title={"Hi, Rizqy Athiyya"} />
           </Box>
           <Box pt={2} pb={2} alignItems={'flex-end'}>
-            <ButtonFilter />
           </Box>
         </Box>
         <FlatList

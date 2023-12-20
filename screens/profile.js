@@ -96,7 +96,7 @@ const Profile = () => {
                 <HStack space={10}>
                     <VStack alignItems="flex-start" flex={3}>{/* flex-start mengatur tulisan untuk berada di sebelah kiri dan "flex" disini digunakan untuk membagi content antara text dengan button menjadi 2 kolom */}
                         <Text fontSize="xl" fontWeight="semibold">
-                        No. Telphone
+                        No. Telepon
                         </Text>
                         <Text>
                         {notelp}

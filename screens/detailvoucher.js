@@ -2,7 +2,7 @@ import { Box, Text, Image, Button, Heading, HStack, ScrollView } from "native-ba
 import React, { useState } from "react";
 import { Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import api from '../api';
+
 
 const DetailVoucher = ({ route }) => {
 
@@ -35,10 +35,10 @@ const DetailVoucher = ({ route }) => {
     return (
         <ScrollView>
             <Box flex={1} bg={'#F0F2F7'}>
-                <Image source={params.image} w={'full'} h={340} borderBottomRightRadius={5} borderBottomLeftRadius={5} alt="voucher_img" />
+                <Image source={{ uri: `http://192.168.118.127:8000/storage/${params.image}` }} w={'full'} h={340} borderBottomRightRadius={5} borderBottomLeftRadius={5} alt="voucher_img" />
                 <Box p={25}>
                     <Box borderBottomColor={'#D32324'} borderBottomWidth={1} paddingBottom={2}>
-                        <Text fontWeight={600}>{params.title}</Text>
+                        <Text fontWeight={600}>{params.voucher}</Text>
                     </Box>
                     <HStack py={4}>
                         <Button onPress={handleOverviewButtonClick} mr={4} backgroundColor={selectedButton === 'Overview' ? '#D32324' : '#D9D9D9'}>
@@ -49,12 +49,8 @@ const DetailVoucher = ({ route }) => {
                         </Button>
                     </HStack>
                     <Box backgroundColor={'white'} rounded={10} p={25}>
-                        {params.title && (
-                            <>
-                                <Heading>{voucherInfo.title2}</Heading>
-                                <Text py={2}>{voucherInfo.describe}</Text>
-                            </>
-                        )}
+                        <Heading>{voucherInfo.title2}</Heading>
+                        <Text py={2}>{voucherInfo.describe}</Text>
                     </Box>
                     <Box my={3} alignItems={'flex-end'}>
                         <Button variant="solid"

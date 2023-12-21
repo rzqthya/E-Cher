@@ -1,6 +1,6 @@
 // SignUp.js
-import React, { useState } from 'react';
-import { View, Text, SafeAreaView} from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Input, Button, ScrollView } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import api from '../api';
@@ -15,8 +15,27 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [noTelpError, setNoTelpError] = useState('');
+  const [csrfToken, setCsrfToken] = useState('');
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    fetchCsrfToken();
+  }, []);
+
+  const fetchCsrfToken = async () => {
+    try {
+      const csrfResponse = await api.get('/csrf-token');
+      const token = csrfResponse.data.csrf_token;
+      setCsrfToken(token);
+    } catch (error) {
+      console.error('Failed to fetch CSRF token:', error.message);
+    }
+  };
+
+  const handleLogin = () => {
+    navigation.navigate('Login')
+  }
 
   const handleSignUp = async () => {
     // error messages
@@ -57,13 +76,32 @@ const SignUp = () => {
         email: email,
         noTelp: noTelp,
         password: password,
+      }, {
+        headers: {
+          'X-CSRF-Token': csrfToken,
+        },
       });
 
       console.log('Registration successful:', response.data.user);
       navigation.navigate('Login');
     } catch (error) {
       console.error('Registration failed:', error.message);
+      if (error.response && error.response.data && error.response.data.error) {
+        const validationErrors = error.response.data.error;
+
+        if (validationErrors.email) {
+          setEmailError(validationErrors.email[0]);
+        }
+        if (validationErrors.noTelp) {
+          setNoTelpError(validationErrors.noTelp[0]);
+        }
+        if (validationErrors.password) {
+          setPasswordError(validationErrors.password[0]);
+        }
+      }
+
     }
+
   };
 
 
@@ -102,6 +140,19 @@ const SignUp = () => {
             <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
 
             <Text marginBottom={15} marginTop={20}>
+              Password
+            </Text>
+            <Input
+              placeholder="Password"
+              value={password}
+              onChangeText={(text) => {
+                setPassword(text);
+                setPasswordError('');
+              }}
+            />
+            <Text style={{ color: 'red', marginBottom: 5 }}>{passwordError}</Text>
+
+            <Text marginBottom={15} marginTop={20}>
               Masukkan No. Telphone
             </Text>
             <Input
@@ -114,48 +165,6 @@ const SignUp = () => {
             />
             <Text style={{ color: 'red', marginBottom: 5 }}>{noTelpError}</Text>
 
-            {/* Inputan Email */}
-            <Text marginBottom={10} marginTop={20}>
-              Masukkan Email
-            </Text>
-            <Input
-              placeholder="Email"
-              value={email}
-              onChangeText={(text) => {
-                setEmail(text);
-                setEmailError('');
-              }}
-            />
-            <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
-
-            {/* Inputan No. Telepon */}
-            <Text marginBottom={10} marginTop={20}>
-              Masukkan No. Telepon
-            </Text>
-            <Input
-              placeholder="No. Telepon"
-              value={noTelp}
-              onChangeText={(text) => {
-                setNoTelp(text);
-                setNoTelpError('');
-              }}
-            />
-            <Text style={{ color: 'red', marginBottom: 5 }}>{noTelpError}</Text>
-
-            {/* Inputan Password */}
-            <Text marginBottom={10} marginTop={20}>
-              Masukkan Password
-            </Text>
-            <Input
-              placeholder="Password"
-              value={password}
-              onChangeText={(text) => {
-                setPassword(text);
-                setPasswordError('');
-              }}
-              secureTextEntry={true}
-            />
-            <Text style={{ color: 'red' }}>{passwordError}</Text>
           </View>
           <Button
             onPress={handleSignUp}
@@ -175,18 +184,9 @@ const SignUp = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <Button
-          onPress={handleSignUp}
-          marginTop={10}
-          marginBottom={10}
-          style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}
-        >
-          Sign Up
-        </Button>
-        <Text onPress={() => navigation.navigate('Login')}>Already have an account? Login</Text>
+
       </ScrollView>
     </SafeAreaView>
-
   );
 };
 

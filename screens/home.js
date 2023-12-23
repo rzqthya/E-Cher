@@ -10,15 +10,36 @@ import datas from "../datas";
 
 
 const Home = () => {
+
     const navigation = useNavigation();
     const [data, setData] = useState([]);
+    const [kota, setKota] = useState('');
+    const [selectedCategory, setSelectedCategory] = useState('');
+    const [selectedBottomSheetCategory, setSelectedBottomSheetCategory] = useState('');
+    const [selectedBottomSheetDate, setSelectedBottomSheetDate] = useState('');
+    const [selectedDate, setSelectedDate] = useState('');
 
     useEffect(() => {
-        // Panggil fungsi untuk mengambil data dari API voucher
         fetchData();
     }, []);
+    const handleFilter = (category, date) => {
+        console.log('handleFilter called');
+        setSelectedCategory(category);
+        setKota(kota);
+        setSelectedBottomSheetCategory(category);
+
+        // Format date as UTC string or adjust as needed
+        const formattedDate = new Date(date).toISOString();
+        setSelectedDate(formattedDate);
+        console.log('Selected Date in handleFilter:', formattedDate);
+
+        setIsBottomSheetOpen(false);
+    };
 
 
+
+
+    // console.log(selectedDate);
     const fetchData = async () => {
         try {
             const response = await api.get('/APIvoucher');
@@ -32,35 +53,62 @@ const Home = () => {
     // useState Jenis
     const [kategori, setKategori] = useState([
         {
+            nama: 'Semua',
+            kategori: '',
+        },
+        {
             nama: 'Makanan',
+            kategori: 'Makanan',
         },
         {
             nama: 'Minuman',
+            kategori: 'Minuman',
         },
         {
             nama: 'Service',
+            kategori: 'Service',
         },
         {
             nama: 'Hotel',
         },
-        {
-            nama: 'Travel',
-        },
-        {
-            nama: 'Travel',
-        },
-        {
-            nama: 'Travel',
-        },
-        {
-            nama: 'Travel',
-        },
-        {
-            nama: 'Travel',
-        },
     ]);
+    console.log('ini kotaku :', kota)
+    console.log('ini kategoriku :', selectedCategory)
+    console.log('ini filter waktu ', selectedDate)
+    const filterData = () => {
+        let filteredData = datas;
 
-    const [kota, setKota] = useState('');
+        // Filter Kota
+        if (kota !== '') {
+            filteredData = filteredData.filter(item => item.city === kota);
+        }
+
+        // Filter kategori
+        if (selectedBottomSheetCategory !== '') {
+            filteredData = filteredData.filter(item =>
+                item.kategori && item.kategori.toLowerCase() === selectedBottomSheetCategory.toLowerCase()
+            );
+        }
+
+        // Filter tanggal
+        if (selectedDate) {
+            const selectedDateObj = new Date(selectedDate);
+            // console.log('Selected Date in filterData:', selectedDate); // Add this log
+            // console.log('Selected Date in filterData (formatted):', selectedDateObj.toISOString()); // Add this log
+
+            filteredData = filteredData.filter(item => {
+                // console.log('Item Date:', item.date); // Add this log
+                const itemDateObj = new Date(item.date);
+                // console.log('Item Date (formatted):', itemDateObj.toISOString()); // Add this log
+                return itemDateObj <= selectedDateObj;
+            });
+        }
+
+        return filteredData;
+    };
+
+
+
     const renderItem = ({ item }) => {
         return (
             <Box flex={1}>
@@ -118,11 +166,13 @@ const Home = () => {
                                     backgroundColor={'#FAF9F9'}
                                     borderColor={'#FAF9F9'}
                                 >
-                                    <Select.Item label="Semarang" value="key0" />
-                                    <Select.Item label="Solo" value="key1" />
-                                    <Select.Item label="Bojonegoro" value="key2" />
-                                    <Select.Item label="Boyolali" value="key3" />
-                                    <Select.Item label="Semarang" value="key4" />
+                                    <Select.Item label="Semua kota" value="" />
+                                    <Select.Item label="Sidoarjo" value="Sidoarjo" />
+                                    <Select.Item label="Semarang" value="Semarang" />
+                                    <Select.Item label="Solo" value="Solo" />
+                                    <Select.Item label="Bojonegoro" value="Bojonegoro" />
+                                    <Select.Item label="Boyolali" value="Boyolali" />
+                                    <Select.Item label="Semarang" value="Semarang" />
                                 </Select>
                             </TouchableOpacity>
                             {/* Flatlist For Kategori Filter End*/}
@@ -139,13 +189,21 @@ const Home = () => {
                     </Box>
                 </Box>
                 <FlatList
-                    data={datas}
+                    data={filterData()}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id.toString()}
                 />
             </Box>
-            {isBottomSheetOpen && <BottomSheetComponent isBottomSheetOpen={isBottomSheetOpen}
-                setIsBottomSheetOpen={setIsBottomSheetOpen} kategori={kategori} />}
+            {isBottomSheetOpen &&
+                <BottomSheetComponent
+                    isBottomSheetOpen={isBottomSheetOpen}
+                    setIsBottomSheetOpen={setIsBottomSheetOpen}
+                    kategori={kategori}
+                    handleFilter={handleFilter}
+                />
+
+            }
+
         </SafeAreaView>
 
     );

@@ -5,9 +5,15 @@ import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { TextInput } from 'react-native-gesture-handler';
 
-const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategori }) => {
+const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategori, handleFilter }) => {
     // ref
     const bottomSheetRef = useRef(null);
+    // State
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [date, setDate] = useState(new Date());
+    const [dateOfExp, setDateOfExp] = useState("");
+    const [showPicker, setShowPicker] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState('');
     // variables
     const snapPoints = useMemo(() => ['50%', '90%'], []);
 
@@ -19,33 +25,71 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
             onPress={() => setIsBottomSheetOpen(false)}
         />
     ), []);
+    const handleCategorySelection = (category) => {
+        handleFilter(category, date);
+        setSelectedCategory(category);
+
+        setIsBottomSheetOpen(false);
+    };
+    // console.log('date baru',selectedDate)
+    const handleDateSelection = (event, selectedDate) => {
+        if (event.type === 'set') {
+            const currentDate = selectedDate || date;
+            toggleDatepicker();
+            const formattedDate = formatDate(currentDate);
+            setDateOfExp(formattedDate);
+
+            // Pass a callback to ensure the correct value is used
+            setSelectedDate((prevSelectedDate) => {
+                handleFilter(selectedCategory, prevSelectedDate || currentDate);
+                return currentDate;
+            });
+
+            console.log('Selected Date:', formattedDate);
+        } else {
+            toggleDatepicker();
+        }
+    };
+
+
+    // ...
+
+
+    <DateTimePicker
+        mode='date'
+        display='spinner'
+        value={date}
+        onChange={handleDateSelection}
+    />
+
 
     // DatePicker
-    const [date, setDate] = useState(new Date());
-    const [showPicker, setShowPicker] = useState(false);
+
+    console.log('ini date',date)
+
     const toggleDatepicker = () => {
         setShowPicker(!showPicker);
     };
-    const [dateOfExp, setDateOfExp] = useState("");
+
     const onChange = ({ type }, selectedDate) => {
-        if (type == 'set') {
+        if (type === 'set') {
             const currentDate = selectedDate;
             setDate(currentDate);
             if (Platform.OS === 'android') {
                 toggleDatepicker();
-                setDateOfExp(formatDate(currentDate));
+                const formattedDate = formatDate(currentDate);
+                setDateOfExp(formattedDate);
+                setDate(formattedDate)
+                setSelectedDate(currentDate); // Set state selectedDate
+                console.log('Selected Date:', formattedDate);
             }
         } else {
             toggleDatepicker();
         }
     };
-    const formatDate = (rawDate) => {
-        let date = new Date(rawDate);
-        let year = date.getFullYear();
-        let month = date.getMonth() + 1;
-        let day = date.getDate();
-        return `${day}-${month}-${year}`;
-    };
+
+
+
     return (
         <BottomSheet
             ref={bottomSheetRef}
@@ -62,18 +106,21 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
                     style={{ marginTop: 10, marginBottom: 10 }}
                     numColumns={3}
                     renderItem={({ item }) => (
-                        <TouchableOpacity style={{
-                            backgroundColor: '#FAF9F9',
-                            elevation: 2,
-                            paddingHorizontal: 10,
-                            margin: 5,
-                            borderRadius: 10,
-                            paddingVertical: 7,
-                            width: 'auto',
-                            height: 40,
-                            alignItems: 'center',
-                            alignContent: 'center'
-                        }}>
+                        <TouchableOpacity
+                            style={{
+                                backgroundColor: '#FAF9F9',
+                                elevation: 2,
+                                paddingHorizontal: 10,
+                                margin: 5,
+                                borderRadius: 10,
+                                paddingVertical: 7,
+                                width: 'auto',
+                                height: 40,
+                                alignItems: 'center',
+                                alignContent: 'center',
+                            }}
+                            onPress={() => handleCategorySelection(item.kategori)}
+                        >
                             <Text>{item.nama}</Text>
                         </TouchableOpacity>)} />
                 <Box>
@@ -86,19 +133,21 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
                     />)}
                     {!showPicker && (
                         <Pressable onPress={toggleDatepicker}>
-
-                            <TextInput style={{
-                                height: 40,
-                                margin: 12,
-                                borderWidth: 1,
-                                borderColor: '#A9A9A9',
-                                borderRadius: 6,
-                                padding: 10
-                            }} placeholder='Aug 21 2024'
-                                value={dateOfExp}
-                                onChangeText={setDateOfExp}
+                            <TextInput
+                                style={{
+                                    height: 40,
+                                    margin: 12,
+                                    borderWidth: 1,
+                                    borderColor: '#A9A9A9',
+                                    borderRadius: 6,
+                                    padding: 10
+                                }}
+                                placeholder='Pilih Tanggal'
+                                value={date.toLocaleDateString()}
+                                editable={false}
                                 placeholderTextColor={"#A9A9A9"}
-                                editable={false} />
+                            />
+
                         </Pressable>)}
                 </Box>
             </Box>

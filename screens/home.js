@@ -23,20 +23,18 @@ const Home = () => {
         fetchData();
     }, []);
     const handleFilter = (category, date) => {
+        console.log(date)
         console.log('handleFilter called');
         setSelectedCategory(category);
         setKota(kota);
         setSelectedBottomSheetCategory(category);
-
-        // Format date as UTC string or adjust as needed
-        const formattedDate = new Date(date).toISOString();
-        setSelectedDate(formattedDate);
+        // Format date as UTC string or set it to an empty string if no date is selected
+        const formattedDate = date ? new Date(date).toISOString() : '';
+        setSelectedDate(formattedDate); // Set '' if bottom sheet is open
         console.log('Selected Date in handleFilter:', formattedDate);
 
         setIsBottomSheetOpen(false);
     };
-
-
 
 
     // console.log(selectedDate);
@@ -93,15 +91,14 @@ const Home = () => {
         // Filter tanggal
         if (selectedDate) {
             const selectedDateObj = new Date(selectedDate);
-            // console.log('Selected Date in filterData:', selectedDate); // Add this log
-            // console.log('Selected Date in filterData (formatted):', selectedDateObj.toISOString()); // Add this log
 
             filteredData = filteredData.filter(item => {
-                // console.log('Item Date:', item.date); // Add this log
                 const itemDateObj = new Date(item.date);
-                // console.log('Item Date (formatted):', itemDateObj.toISOString()); // Add this log
                 return itemDateObj <= selectedDateObj;
             });
+        } else {
+            // Log ' ' when selectedDate is not defined or empty
+            console.log('Filter waktu: ', "' '");
         }
 
         return filteredData;

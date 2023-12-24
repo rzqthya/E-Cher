@@ -9,8 +9,9 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
     // ref
     const bottomSheetRef = useRef(null);
     // State
+    const initialDate = new Date();
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [date, setDate] = useState(new Date());
+    const [date, setDate] = useState(new Date(2030, 10, 20));
     const [dateOfExp, setDateOfExp] = useState("");
     const [showPicker, setShowPicker] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -34,18 +35,18 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
     // console.log('date baru',selectedDate)
     const handleDateSelection = (event, selectedDate) => {
         if (event.type === 'set') {
-            const currentDate = selectedDate || date;
+            const currentDate = selectedDate || ''; // Use empty string if selectedDate is not available
             toggleDatepicker();
-            const formattedDate = formatDate(currentDate);
+            const formattedDate = selectedDate ? formatDate(currentDate) : ''; // Format the date only if selected
             setDateOfExp(formattedDate);
 
             // Pass a callback to ensure the correct value is used
             setSelectedDate((prevSelectedDate) => {
-                handleFilter(selectedCategory, prevSelectedDate || currentDate);
+                handleFilter(selectedCategory, formattedDate || prevSelectedDate);
                 return currentDate;
             });
 
-            console.log('Selected Date:', formattedDate);
+            // console.log('Selected Date:', formattedDate);
         } else {
             toggleDatepicker();
         }
@@ -65,7 +66,7 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
 
     // DatePicker
 
-    console.log('ini date',date)
+    // console.log('ini date', date)
 
     const toggleDatepicker = () => {
         setShowPicker(!showPicker);
@@ -79,14 +80,16 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
                 toggleDatepicker();
                 const formattedDate = formatDate(currentDate);
                 setDateOfExp(formattedDate);
-                setDate(formattedDate)
+                setDate(formattedDate);
                 setSelectedDate(currentDate); // Set state selectedDate
-                console.log('Selected Date:', formattedDate);
+                // console.log('Selected Date:', formattedDate);
             }
         } else {
             toggleDatepicker();
         }
     };
+
+
 
 
 
@@ -114,7 +117,7 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
                                 margin: 5,
                                 borderRadius: 10,
                                 paddingVertical: 7,
-                                width: 'auto',
+                                width: 100,
                                 height: 40,
                                 alignItems: 'center',
                                 alignContent: 'center',

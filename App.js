@@ -146,6 +146,7 @@ const App = () => {
                 title: "Edit Profile",
                 headerTitleAlign: "center",
                 headerTitleStyle: { color: "#F82F2D" },
+                headerTintColor: "#D32324",
               }}
             />
             <Stack.Screen name="Form" component={FormScreen} options={{ headerShown: false }} />

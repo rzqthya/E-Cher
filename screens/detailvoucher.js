@@ -4,18 +4,27 @@ import { Alert } from "react-native";
 import { Header } from '../components';
 import { useNavigation } from "@react-navigation/native";
 
+
 const DetailVoucher = ({ route }) => {
-    const params = route.params.item;
+    const { voucherId } = route.params;
+    console.log('Route Params:', route.params);
+
+    // const [voucherId, setVoucherId] = useState('');
+    // const params = route.params.item;
+
+    const params = route.params && route.params.item ? route.params.item : {};
+    // console.log('Voucher ID:', voucherId);
     const [voucherInfo, setvoucherInfo] = useState({
         title2: "Overview",
-        describe: params.overview,
+        describe: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     });
     const [selectedButton, setSelectedButton] = useState('Overview'); // Tambahkan state untuk melacak tombol mana yang sedang diklik
 
     const handleOverviewButtonClick = () => {
         setvoucherInfo({
             title2: 'Overview',
-            describe: params.overview,
+            // describe: params.overview,
+            describe: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         });
         setSelectedButton('Overview'); // Mengatur state tombol yang sedang diklik
     };
@@ -23,7 +32,8 @@ const DetailVoucher = ({ route }) => {
     const handleSKButtonClick = () => {
         setvoucherInfo({
             title2: 'S&K',
-            describe: params.sk,
+            // describe: params.sk,
+            describe: '1. Voucher ini berlaku sesuai dengan tanggal yang tertera pada voucher \n2. Hanya bisa digunakan pada merchant yang sudah dipilih kotanya.',
         });
         setSelectedButton('SK'); // Mengatur state tombol yang sedang diklik
     };
@@ -32,10 +42,10 @@ const DetailVoucher = ({ route }) => {
     return (
         <ScrollView>
             <Box flex={1} bg={'#F0F2F7'}>
-                <Image source={params.image} w={'full'} h={340} borderBottomRightRadius={5} borderBottomLeftRadius={5} alt="voucher_img" />
+                <Image source={{ uri: `http://192.168.118.127:8000/storage/${params.image}` }} w={'full'} h={340} borderBottomRightRadius={5} borderBottomLeftRadius={5} alt="voucher_img" />
                 <Box p={25}>
                     <Box borderBottomColor={'#D32324'} borderBottomWidth={1} paddingBottom={2}>
-                        <Text fontWeight={600}>{params.title}</Text>
+                        <Text fontWeight={600}>{params.voucher}</Text>
                     </Box>
                     <HStack py={4}>
                         <Button onPress={handleOverviewButtonClick} mr={4} backgroundColor={selectedButton === 'Overview' ? '#D32324' : '#D9D9D9'}>
@@ -46,12 +56,8 @@ const DetailVoucher = ({ route }) => {
                         </Button>
                     </HStack>
                     <Box backgroundColor={'white'} rounded={10} p={25}>
-                        {params.title && (
-                            <>
-                                <Heading>{voucherInfo.title2}</Heading>
-                                <Text py={2}>{voucherInfo.describe}</Text>
-                            </>
-                        )}
+                        <Heading>{voucherInfo.title2}</Heading>
+                        <Text py={2}>{voucherInfo.describe}</Text>
                     </Box>
                     <Box my={3} alignItems={'flex-end'}>
                         <Button variant="solid"
@@ -65,7 +71,8 @@ const DetailVoucher = ({ route }) => {
                                         {
                                             text: 'OK',
                                             onPress: () => {
-                                                navigation.navigate('Form');
+                                                // setVoucherId('your_voucher_id');
+                                                navigation.navigate('Form', { voucherId });
                                             },
                                         },
                                     ],

@@ -3,12 +3,15 @@ import { VStack, Input, Box, HStack, Button, Text, Divider, Flex, ScrollView, Mo
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
 import { Header } from '../components';
 import api from '../api';
 
 const FormScreen = ({ route }) => {
     const { voucherId } = route.params;
+    console.log('Voucher ID:', voucherId);
+
     const navigation = useNavigation();
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
@@ -16,8 +19,8 @@ const FormScreen = ({ route }) => {
     const [image, setImage] = useState(null);
 
     const [wilayahOptions, setWilayahOptions] = useState([]);
-    const [wilayah, setWilayah] = useState('');
 
+    const [wilayah, setWilayah] = useState('');
     const [namaLengkap, setNamaLengkap] = useState('');
     const [nomorPolisi, setNomorPolisi] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -56,20 +59,47 @@ const FormScreen = ({ route }) => {
         fetchWilayahOptions();
     }, []);
 
+    const getUserIdFromStorage = async () => {
+        try {
+            const userId = await AsyncStorage.getItem('users_id');
+            return userId;
+        } catch (error) {
+            console.error('Error getting user ID:', error);
+        }
+    };
+
     const handleSend = async () => {
-        // validasi dengan memeriksa nilai state
+        console.log('Sending form with voucherId:', voucherId);
+
+        const usersId = await getUserIdFromStorage();
+
         if (namaLengkap === '' || wilayah === '' || nomorPolisi === '') {
             setErrorMessage('this field is required');
         } else {
             const formData = new FormData();
             formData.append('voucher_id', voucherId);
+            formData.append('users_id', usersId);
             formData.append('wilayah_id', wilayah);
             formData.append('nama', namaLengkap);
             formData.append('nopol', nomorPolisi);
-            formData.append('image', {
-                uri: image,
-                name: image.split('/').pop(), // Menggunakan nama asli file
-            });
+            if (image) {
+                // Mendapatkan ekstensi file dari URI gambar
+                const fileExtension = image.split('.').pop(); // Misalnya, 'jpg' atau 'jpeg'
+
+                let mimeType = 'image/jpeg'; // Default MIME type
+                if (fileExtension === 'jpg') {
+                    mimeType = 'image/jpeg';
+                } else if (fileExtension === 'jpeg') {
+                    mimeType = 'image/jpeg';
+                } 
+
+                // Menambahkan gambar ke FormData
+                formData.append('image', {
+                    uri: image,
+                    type: mimeType, 
+                    name: `stnk.${fileExtension}`,
+                });
+            }
 
             try {
                 const response = await api.post('/api/formulir', formData, {
@@ -78,25 +108,18 @@ const FormScreen = ({ route }) => {
                     },
                 });
 
-                // Handle response jika diperlukan
                 console.log('API Response:', response.data);
 
                 setShowModal(true);
             } catch (error) {
-                console.error('Send failed:', error);
-
-                if (error.response && error.response.data) {
-                    console.error('Server error data:', error.response.data);
-                }
-
-                console.error('Full error object:', error);
-
-                if (error.response && error.response.data && error.response.data.error) {
-                    const validationErrors = error.response.data.error;
-                }
-
-                if (error.response && error.response.status) {
-                    console.error('Server status code:', error.response.status);
+                if (error.response) {
+                    console.log('Error response data:', error.response.data);
+                    console.log('Error response status:', error.response.status);
+                    console.log('Error response headers:', error.response.headers);
+                } else if (error.request) {
+                    console.log('Error request:', error.request);
+                } else {
+                    console.log('Error message:', error.message);
                 }
             }
         }

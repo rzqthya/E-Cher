@@ -45,12 +45,11 @@ const Home = () => {
 
   const fetchDataByKota = async () => {
     if (!kota) {
-      console.log("Kota belum dipilih."); 
       return;
     }
     try {
       const response = await api.get(`/api/vouchers/by-city/${kota}`);
-      console.log("Data diterima:", response.data);  // Untuk debugging
+      console.log("Data diterima:", response.data); 
 
       setData({ data: response.data });
     } catch (error) {
@@ -86,7 +85,7 @@ const Home = () => {
           <ScrollView>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.navigate('Detail Voucher', { item: item })}
+              onPress={() => navigation.navigate('Detail Voucher',  { voucherId: item.id })}
             >
               <Box
                 flexDirection="row"

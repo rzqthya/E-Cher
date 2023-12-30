@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, TouchableOpacity, SafeAreaView } from 'react-native';
 import { Input, Button, StatusBar, ScrollView } from 'native-base';
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
 
 const Login = () => {
@@ -45,6 +46,15 @@ const Login = () => {
       });
 
       console.log('Login successful', response);
+
+      const usersId = response.data.users_id;
+      console.log('User ID:', usersId);
+
+      if (usersId) {
+        await AsyncStorage.setItem('users_id', usersId.toString());
+        console.log('User ID saved to AsyncStorage');
+      }
+
       navigation.navigate('Tabs');
     } catch (error) {
       console.error('Login failed:', error);

@@ -16,7 +16,7 @@ const Home = () => {
 
   const fetchData = async () => {
     try {
-      const response = await api.get('/APIvoucher');
+      const response = await api.get('/api/getVoucher');
       setData(response.data);
     } catch (error) {
       console.error('Error fetching data:', error);

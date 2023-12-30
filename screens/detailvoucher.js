@@ -6,6 +6,7 @@ import { useNavigation } from "@react-navigation/native";
 
 const DetailVoucher = ({ route }) => {
 
+    const [voucherId, setVoucherId] = useState('');
     const params = route.params.item;
     const [voucherInfo, setvoucherInfo] = useState({
         title2: "Overview",
@@ -64,7 +65,8 @@ const DetailVoucher = ({ route }) => {
                                         {
                                             text: 'OK',
                                             onPress: () => {
-                                                navigation.navigate('Form');
+                                                setVoucherId('your_voucher_id'); // Gantilah dengan cara Anda mendapatkan voucherId
+                                                navigation.navigate('Form', { voucherId });
                                             },
                                         },
                                     ],

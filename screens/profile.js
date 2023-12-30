@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Box, Text, VStack, Button, HStack, ScrollView, Avatar } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
+import api from '../api';
 
 const Profile = () => {
     // Penggunaan State
@@ -12,6 +13,20 @@ const Profile = () => {
 
     const navigation = useNavigation();
 
+    const handleLogout= async () => {
+        try {
+     
+            const response = await api.post('/api/logout');
+            console.log('Logout successful',response);
+            navigation.navigate('Login');
+          } catch (error) {
+            console.error('Login failed:', error);
+      
+            if (error.response && error.response.data) {
+              console.error('Server error data:', error.response.data);
+            }
+        }
+    }
     // Handel Navigation Button Ubah
     const handleUbah = () => {
         navigation.navigate('edit-profile');
@@ -150,7 +165,7 @@ const Profile = () => {
                     <Ionicons 
                         name="exit-outline" 
                         size={35} color="#F82F2D"
-                        onPress={() => navigation.navigate('Login')}
+                        onPress={handleLogout}
                     />
                 </HStack>
             </Box>

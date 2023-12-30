@@ -32,12 +32,12 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
 
         setIsBottomSheetOpen(false);
     };
-    // console.log('date baru',selectedDate)
+
     const handleDateSelection = (event, selectedDate) => {
         if (event.type === 'set') {
-            const currentDate = selectedDate || ''; // Use empty string if selectedDate is not available
+            const currentDate = selectedDate || ''; 
             toggleDatepicker();
-            const formattedDate = selectedDate ? formatDate(currentDate) : ''; // Format the date only if selected
+            const formattedDate = selectedDate ? formatDate(currentDate) : ''; 
             setDateOfExp(formattedDate);
 
             // Pass a callback to ensure the correct value is used
@@ -89,10 +89,6 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
         }
     };
 
-
-
-
-
     return (
         <BottomSheet
             ref={bottomSheetRef}
@@ -103,6 +99,9 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
             margin={10}
         >
             <Box flexDirection="Column" padding={5}>
+                <Box>
+                    <Text fontSize={18} fontWeight={600}>Kota</Text>
+                </Box>
                 <Text fontSize={18} fontWeight={600}>Kategori</Text>
                 <FlatList
                     data={kategori}
@@ -153,6 +152,7 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
 
                         </Pressable>)}
                 </Box>
+
             </Box>
         </BottomSheet >
     );

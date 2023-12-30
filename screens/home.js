@@ -1,18 +1,72 @@
 import React, { useState, useEffect } from "react";
-import { Text, FlatList, Box, ScrollView, Center} from "native-base";
+import { Text, FlatList, Box, ScrollView, Center, Select, Stack, Icon, Button } from "native-base";
 import { Image, TouchableOpacity, SafeAreaView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Hi_profile } from "../components";
+import { Hi_profile, BottomSheetComponent } from "../components";
+import Ionicons from '@expo/vector-icons/Ionicons';
 import api from '../api';
 
 const Home = () => {
   const navigation = useNavigation();
   const [data, setData] = useState([]);
 
+  //BUTTON FILTER
+  const [selectedCategory, setSelectedCategory] = useState('');
+  const [selectedBottomSheetCategory, setSelectedBottomSheetCategory] = useState('');
+  const [selectedBottomSheetDate, setSelectedBottomSheetDate] = useState('');
+  const [selectedDate, setSelectedDate] = useState('');
+
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
+
+
+  //KOTA FILTER
+  const [listKota, setListKota] = useState([]);
+  const [kota, setKota] = useState('');
+
+  useEffect(() => {
+    const fetchKota = async () => {
+      try {
+        const response = await api.get('/api/getKota');
+        const kotaData = await response.data;
+
+        const options = kotaData.map((kota) => ({
+          label: kota.kota,
+          value: kota.id,
+        }));
+
+        setListKota(options);
+      } catch (error) {
+        console.error('Error fetching kota:', error.message);
+      }
+    };
+
+    fetchKota();
+  }, []);
+
+  const fetchDataByKota = async () => {
+    if (!kota) {
+      console.log("Kota belum dipilih."); 
+      return;
+    }
+    try {
+      const response = await api.get(`/api/vouchers/by-city/${kota}`);
+      console.log("Data diterima:", response.data);  // Untuk debugging
+
+      setData({ data: response.data });
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    fetchDataByKota();
+  }, [kota]);
+
+
+  //DATA VOUCHER
   useEffect(() => {
     fetchData();
   }, []);
-
 
   const fetchData = async () => {
     try {
@@ -23,8 +77,9 @@ const Home = () => {
     }
   };
 
+
   const renderItem = ({ item }) => {
-    console.log("isi", item)
+    console.log(item)
     return (
       <Box flex={1}>
         <Box bg={'#F0F2F7'} mx={4}>
@@ -72,8 +127,42 @@ const Home = () => {
           <Box>
             <Hi_profile title={"Hi, Rizqy Athiyya"} />
           </Box>
-          <Box pt={2} pb={2} alignItems={'flex-end'}>
-  
+          <Box pt={1} pb={2} alignItems={'flex-end'}>
+            <Box flexDirection="row" alignItems="center" justifyContent="space-between">
+              {/* Flatlist For Kategori Filter */}
+              <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10 }}>
+                <Select
+                  placeholder="Kota"
+                  selectedValue={kota}
+                  width={265}
+                  height={38}
+                  onValueChange={(itemValue) => {
+                    setKota(itemValue);
+                    fetchDataByKota();
+                  }}
+
+                  backgroundColor={'#FAF9F9'}
+                  borderColor={'#FAF9F9'}
+                >
+                  <Select.Item label="Semua kota" value="" />
+                  {
+                    listKota.map((option) => (
+                      <Select.Item label={option.label} value={option.value} key={option.value} />
+                    ))
+                  }
+                </Select>
+              </TouchableOpacity>
+              {/* Flatlist For Kategori Filter End*/}
+
+              {/* Button Filter Voucher Start*/}
+              <Stack direction={{ base: 'row' }}>
+                <Button title="Open" variant="solid" endIcon={<Icon as={Ionicons} name="filter" size="sm" />}
+                  backgroundColor="#D32324"
+                  onPress={() => setIsBottomSheetOpen(true)}>
+                </Button>
+              </Stack>
+              {/* Button Filter Voucher End*/}
+            </Box>
           </Box>
         </Box>
         <FlatList
@@ -82,7 +171,28 @@ const Home = () => {
           keyExtractor={(item) => item.id.toString()}
         />
       </Box>
-    </SafeAreaView>
+      {
+        isBottomSheetOpen &&
+        <BottomSheetComponent
+          isBottomSheetOpen={isBottomSheetOpen}
+          setIsBottomSheetOpen={setIsBottomSheetOpen}
+          kategori={kategori}
+          handleFilter={handleFilter}
+        />
+
+      }
+
+      {
+        isBottomSheetOpen &&
+        <BottomSheetComponent
+          isBottomSheetOpen={isBottomSheetOpen}
+          setIsBottomSheetOpen={setIsBottomSheetOpen}
+        // kategori={kategori}
+        // handleFilter={handleFilter}
+        />
+
+      }
+    </SafeAreaView >
   );
 };
 

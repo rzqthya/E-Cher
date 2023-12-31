@@ -36,7 +36,7 @@ const Profile = () => {
                 console.error('Error fetching user data:', error);
             }
         };
-      
+
         const unsubscribe = navigation.addListener('focus', () => {
             fetchUserData();
         });
@@ -121,7 +121,7 @@ const Profile = () => {
                 {/* Content Logout */}
                 <Box bg="white" p={6} shadow={2} borderRadius={12} width="90%" justifyContent="flex-end" mb={30}>
                     <HStack space={10}>
-                        <VStack alignItems="flex-start" flex={3}>{/* flex-start mengatur tulisan untuk berada di sebelah kiri dan "flex" disini digunakan untuk membagi content antara text dengan button menjadi 2 kolom */}
+                        <VStack alignItems="flex-start" flex={3}>
                             <Text fontSize="xl" fontWeight="semibold">
                                 Logout
                             </Text>

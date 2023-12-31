@@ -11,10 +11,10 @@ const Home = () => {
   const [data, setData] = useState([]);
 
   //BUTTON FILTER
-  const [selectedCategory, setSelectedCategory] = useState('');
-  const [selectedBottomSheetCategory, setSelectedBottomSheetCategory] = useState('');
-  const [selectedBottomSheetDate, setSelectedBottomSheetDate] = useState('');
-  const [selectedDate, setSelectedDate] = useState('');
+  // const [selectedCategory, setSelectedCategory] = useState('');
+  // const [selectedBottomSheetCategory, setSelectedBottomSheetCategory] = useState('');
+  // const [selectedBottomSheetDate, setSelectedBottomSheetDate] = useState('');
+  // const [selectedDate, setSelectedDate] = useState('');
 
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
@@ -170,7 +170,6 @@ const Home = () => {
           </Box>
           <Box pt={1} pb={2} alignItems={'flex-end'}>
             <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-              {/* Flatlist For Kategori Filter */}
               <TouchableOpacity style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 10 }}>
                 <Select
                   placeholder="Kota"
@@ -193,16 +192,14 @@ const Home = () => {
                   }
                 </Select>
               </TouchableOpacity>
-              {/* Flatlist For Kategori Filter End*/}
 
-              {/* Button Filter Voucher Start*/}
               <Stack direction={{ base: 'row' }}>
                 <Button title="Open" variant="solid" endIcon={<Icon as={Ionicons} name="filter" size="sm" />}
                   backgroundColor="#D32324"
                   onPress={() => setIsBottomSheetOpen(true)}>
                 </Button>
               </Stack>
-              {/* Button Filter Voucher End*/}
+
             </Box>
           </Box>
         </Box>

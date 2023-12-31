@@ -4,16 +4,18 @@ import { useNavigation } from "@react-navigation/native";
 import { Header } from '../components';
 import Ionicons from "@expo/vector-icons/Ionicons";
 
-const DetailScreen = () => {
+const DetailScreen = ( route ) => {
     const navigation = useNavigation();
     const [showModal, setShowModal] = useState(false);
 
     const selectedItem = {
         id: 1,
-        title: "Voucher Diskon 50%",
-        desc: "All Outlet Mixue",
-        image: require('../assets/voucher1.png'),
-        date: "1 Januari 2024",
+        date: "29 Oktober 2023",
+        title:
+            "Burger King Cash Back Hingga 50%",
+        desc: "All Outlet Burger King",
+        image:
+            require('../assets/voucher/BurgerKing_promo1.jpg'),
         city: "Semarang",
     };
 

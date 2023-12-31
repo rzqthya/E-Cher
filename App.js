@@ -82,7 +82,7 @@ const Tabs = () => {
         options={{
           title: "History",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" },
+          headerTitleStyle: { color: "#D32324" },
         }}
       />
       <TabBottom.Screen
@@ -91,7 +91,7 @@ const Tabs = () => {
         options={{
           title: "Info",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" },
+          headerTitleStyle: { color: "#D32324" },
 
         }}
       />
@@ -101,7 +101,7 @@ const Tabs = () => {
         options={{
           title: "Profile",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" },
+          headerTitleStyle: { color: "#D32324" },
         }}
       />
     </TabBottom.Navigator>

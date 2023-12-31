@@ -3,7 +3,7 @@ import { FlatList, Box, Text } from 'native-base';
 import { TouchableOpacity, Pressable, Platform } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { TextInput } from 'react-native-gesture-handler';
+// import { TextInput } from 'react-native-gesture-handler';
 
 const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategori, handleFilter }) => {
     // ref
@@ -11,7 +11,7 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
     // State
     const initialDate = new Date();
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [date, setDate] = useState(new Date(2030, 10, 20));
+    const [date, setDate] = useState(new Date(2025, 10, 20));
     const [dateOfExp, setDateOfExp] = useState("");
     const [showPicker, setShowPicker] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -52,7 +52,10 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
         }
     };
 
-
+    const formattedDate = date.toLocaleDateString(undefined, {
+        year: 'numeric',
+        month: 'long', // You can use 'short' for abbreviated month name
+    });
     // ...
 
 
@@ -65,7 +68,7 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
 
 
     // DatePicker
-
+    console.log(date)
     // console.log('ini date', date)
 
     const toggleDatepicker = () => {
@@ -88,9 +91,6 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
             toggleDatepicker();
         }
     };
-
-
-
 
 
     return (
@@ -128,30 +128,28 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
                         </TouchableOpacity>)} />
                 <Box>
                     <Text fontSize={18} fontWeight={600}>Masa Berlaku</Text>
-                    {showPicker && (<DateTimePicker
-                        mode='date'
-                        display='spinner'
-                        value={date}
-                        onChange={onChange}
-                    />)}
-                    {!showPicker && (
-                        <Pressable onPress={toggleDatepicker}>
-                            <TextInput
-                                style={{
-                                    height: 40,
-                                    margin: 12,
-                                    borderWidth: 1,
-                                    borderColor: '#A9A9A9',
-                                    borderRadius: 6,
-                                    padding: 10
-                                }}
-                                placeholder='Pilih Tanggal'
-                                value={date.toLocaleDateString()}
-                                editable={false}
-                                placeholderTextColor={"#A9A9A9"}
-                            />
-
-                        </Pressable>)}
+                    <Pressable onPress={toggleDatepicker} style={{ padding: 10 }}>
+                        <Text p={2} borderWidth={1} borderRadius={5} marginBottom={20}
+                            color={'#A9A9A9'}
+                            borderColor='#A9A9A9'>
+                            {formattedDate}
+                        </Text>
+                    </Pressable>
+                    {showPicker && (
+                        <DateTimePicker
+                            value={date}
+                            mode="date"
+                            display="calendar"
+                            onChange={onChange}
+                            style={{
+                                borderBottomWidth: 3,
+                                borderEndWidth: 3,
+                                borderTopWidth: 1,
+                                borderStartWidth: 1,
+                                borderColor: '#021C35',
+                            }}
+                        />
+                    )}
                 </Box>
             </Box>
         </BottomSheet >

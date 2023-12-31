@@ -10,7 +10,9 @@ import api from '../api';
 
 const FormScreen = ({ route }) => {
     const { voucherId } = route.params;
-    console.log('Voucher ID:', voucherId);
+    // console.log('Voucher ID:', voucherId);
+
+    const [usersId, setUsersId] = useState(null);
 
     const navigation = useNavigation();
     const [showModal, setShowModal] = useState(false);
@@ -62,16 +64,46 @@ const FormScreen = ({ route }) => {
     const getUserIdFromStorage = async () => {
         try {
             const userId = await AsyncStorage.getItem('users_id');
+            setUsersId(userId);
             return userId;
         } catch (error) {
-            console.error('Error getting user ID:', error);
+            console.error('Error getting user ID from AsyncStorage:', error);
+            return null;
         }
     };
+
+    useEffect(() => {
+        const fetchUserId = async () => {
+            try {
+                const userId = await getUserIdFromStorage();
+                setUsersId(userId);
+            } catch (error) {
+                console.error('Error fetching user ID:', error);
+            }
+        };
+
+        fetchUserId();
+    }, []);
+
+
 
     const handleSend = async () => {
         console.log('Sending form with voucherId:', voucherId);
 
         const usersId = await getUserIdFromStorage();
+        console.log('Sending form with usersId before:', usersId);
+
+        // const usersId = await getUserIdFromStorage();
+        // // setUsersId(userId);
+        // console.log('users_id:', usersId);
+
+        if (usersId === null) {
+            console.log('Users ID is not available yet. Waiting...');
+            return;
+        }
+
+        console.log('Sending form with usersId after:', usersId);
+
 
         if (namaLengkap === '' || wilayah === '' || nomorPolisi === '') {
             setErrorMessage('this field is required');
@@ -83,20 +115,20 @@ const FormScreen = ({ route }) => {
             formData.append('nama', namaLengkap);
             formData.append('nopol', nomorPolisi);
             if (image) {
-                // Mendapatkan ekstensi file dari URI gambar
-                const fileExtension = image.split('.').pop(); // Misalnya, 'jpg' atau 'jpeg'
+
+                const fileExtension = image.split('.').pop();
 
                 let mimeType = 'image/jpeg'; // Default MIME type
                 if (fileExtension === 'jpg') {
                     mimeType = 'image/jpeg';
                 } else if (fileExtension === 'jpeg') {
                     mimeType = 'image/jpeg';
-                } 
+                }
 
                 // Menambahkan gambar ke FormData
                 formData.append('image', {
                     uri: image,
-                    type: mimeType, 
+                    type: mimeType,
                     name: `stnk.${fileExtension}`,
                 });
             }

@@ -3,13 +3,16 @@ import { Box, Text, VStack, Button, HStack, ScrollView, Avatar } from "native-ba
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../api';
 
 const Profile = () => {
     // Penggunaan State
-    const [namalengkap, setNamalengkap] = useState("");
-    const [email, setEmail] = useState("");
-    const [notelp, setNotelp] = useState("");
-    const [password, setPassword] = useState("");
+    // const [namalengkap, setNamalengkap] = useState("");
+    // const [email, setEmail] = useState("");
+    // const [notelp, setNotelp] = useState("");
+    // const [password, setPassword] = useState("");
+
+    const [userData, setUserData] = useState({});
 
     const navigation = useNavigation();
 
@@ -18,27 +21,31 @@ const Profile = () => {
         navigation.navigate('edit-profile');
     };
 
-    // Mengambil data profil dari AsyncStorage saat komponen dimount
     useEffect(() => {
-        const fetchProfileData = async () => {
+        const fetchUserData = async () => {
             try {
-                // Mengambil data dari AsyncStorage
-                const storedNamalengkap = await AsyncStorage.getItem('namalengkap');
-                const storedEmail = await AsyncStorage.getItem('email');
-                const storedNotelp = await AsyncStorage.getItem('notelp');
-                const storedPassword = await AsyncStorage.getItem('password');
+                const userId = await AsyncStorage.getItem('users_id');
+                if (userId) {
 
-                // Mengupdate state dengan data yang diambil
-                setNamalengkap(storedNamalengkap || "");
-                setEmail(storedEmail || "");
-                setNotelp(storedNotelp || "");
-                setPassword(storedPassword || "");
+                    const response = await api.get(`/api/users/${userId}`);
+
+                    const userData = {
+                        id: response.data.user.id,
+                        nama: response.data.user.nama,
+                        email: response.data.user.email,
+                        password: response.data.user.password,
+                        noTelp: response.data.user.noTelp,
+
+                    };
+                    setUserData(userData);
+                }
             } catch (error) {
-                console.error('Error fetching profile data:', error);
+                console.error('Error fetching user data:', error);
             }
         };
 
-        fetchProfileData();
+
+        fetchUserData();
     }, []);
 
     return (
@@ -51,11 +58,11 @@ const Profile = () => {
                         style={{ position: "absolute", top: -30 }}>
                     </Avatar>
                     <VStack alignItems="center" space={1}>
-                        <Text fontSize="xl" fontWeight="bold" mb={4}> {/* "mb" mengatur panjang content  */}
-                            Rizqy Athiyya
+                        <Text fontSize="xl" fontWeight="bold" mb={4}>
+                            {userData.nama}
                         </Text>
                         <Text>
-                            1234567890
+                            {userData.noTelp}
                         </Text>
                     </VStack>
                 </Box>
@@ -68,7 +75,7 @@ const Profile = () => {
                                 Nama Lengkap
                             </Text>
                             <Text>
-                                {namalengkap}
+                                {userData.nama}
                             </Text>
                         </VStack>
                     </HStack>
@@ -82,7 +89,7 @@ const Profile = () => {
                                 Email
                             </Text>
                             <Text>
-                                {email}
+                                {userData.email}
                             </Text>
                         </VStack>
                     </HStack>
@@ -96,7 +103,7 @@ const Profile = () => {
                                 No. Telepon
                             </Text>
                             <Text>
-                                {notelp}
+                                {userData.noTelp}
                             </Text>
                         </VStack>
                     </HStack>
@@ -110,7 +117,7 @@ const Profile = () => {
                                 Password
                             </Text>
                             <Text>
-                                {password}
+                                {userData.password}
                             </Text>
                         </VStack>
                     </HStack>

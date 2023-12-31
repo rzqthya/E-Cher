@@ -36,9 +36,13 @@ const Profile = () => {
                 console.error('Error fetching user data:', error);
             }
         };
+      
+        const unsubscribe = navigation.addListener('focus', () => {
+            fetchUserData();
+        });
 
-        fetchUserData();
-    }, []);
+        return unsubscribe;
+    }, [navigation]);
 
     return (
         <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -62,7 +66,7 @@ const Profile = () => {
                 {/* Content Username */}
                 <Box bg="white" p={6} shadow={2} borderRadius={12} width="90%" justifyContent="flex-end" mb={30}>
                     <HStack space={10}>
-                        <VStack alignItems="flex-start" flex={3}>{/* flex-start mengatur tulisan untuk berada di sebelah kiri dan "flex" disini digunakan untuk membagi content antara text dengan button menjadi 2 kolom */}
+                        <VStack alignItems="flex-start" flex={3}>
                             <Text fontSize="xl" fontWeight="semibold">
                                 Nama Lengkap
                             </Text>
@@ -76,7 +80,7 @@ const Profile = () => {
                 {/* Content Email */}
                 <Box bg="white" p={6} shadow={2} borderRadius={12} width="90%" justifyContent="flex-end" mb={30}>
                     <HStack space={10}>
-                        <VStack alignItems="flex-start" flex={3}>{/* flex-start mengatur tulisan untuk berada di sebelah kiri dan "flex" disini digunakan untuk membagi content antara text dengan button menjadi 2 kolom */}
+                        <VStack alignItems="flex-start" flex={3}>
                             <Text fontSize="xl" fontWeight="semibold">
                                 Email
                             </Text>
@@ -90,7 +94,7 @@ const Profile = () => {
                 {/* Content No.telp */}
                 <Box bg="white" p={6} shadow={2} borderRadius={12} width="90%" justifyContent="flex-end" mb={30}>
                     <HStack space={10}>
-                        <VStack alignItems="flex-start" flex={3}>{/* flex-start mengatur tulisan untuk berada di sebelah kiri dan "flex" disini digunakan untuk membagi content antara text dengan button menjadi 2 kolom */}
+                        <VStack alignItems="flex-start" flex={3}>
                             <Text fontSize="xl" fontWeight="semibold">
                                 No. Telepon
                             </Text>

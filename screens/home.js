@@ -126,7 +126,11 @@ const Home = () => {
           <ScrollView>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.navigate('Detail Voucher', { voucherId: item.id })}
+              onPress={() => navigation.navigate('Detail Voucher', {
+                voucherId: item.id,
+                voucher: item.voucher,
+                image: `http://192.168.100.6:8000/storage/${item.image}`,
+              })}
             >
               <Box
                 flexDirection="row"

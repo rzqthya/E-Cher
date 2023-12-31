@@ -6,8 +6,10 @@ import { useNavigation } from "@react-navigation/native";
 
 
 const DetailVoucher = ({ route }) => {
-    const { voucherId } = route.params;
-    console.log('Route Params:', route.params);
+    // const { voucherId } = route.params;
+    // console.log('Route Params:', route.params);
+    const { voucherId, voucher, image } = route.params;
+    console.log('Route Params:', voucherId, voucher, image);
 
     // const [voucherId, setVoucherId] = useState('');
     // const params = route.params.item;
@@ -42,17 +44,17 @@ const DetailVoucher = ({ route }) => {
     return (
         <ScrollView>
             <Box flex={1} bg={'#F0F2F7'}>
-                <Image 
-                    source={{ uri: `http://192.168.100.6:8000/storage/${params.image}` }} 
-                    w={'full'} 
-                    h={340} 
-                    borderBottomRightRadius={5} 
-                    borderBottomLeftRadius={5} 
-                    alt="voucher_img" 
+                <Image
+                    source={{ uri: image }}
+                    w={'full'}
+                    h={340}
+                    borderBottomRightRadius={5}
+                    borderBottomLeftRadius={5}
+                    alt="voucher_img"
                 />
                 <Box p={25}>
                     <Box borderBottomColor={'#D32324'} borderBottomWidth={1} paddingBottom={2}>
-                        <Text fontWeight={600}>{params.voucher}</Text>
+                        <Text fontSize={16} fontWeight="bold">{voucher}</Text>
                     </Box>
                     <HStack py={4}>
                         <Button onPress={handleOverviewButtonClick} mr={4} backgroundColor={selectedButton === 'Overview' ? '#D32324' : '#D9D9D9'}>

@@ -13,24 +13,67 @@ const FormScreen = ({ route }) => {
     console.log('Voucher ID:', voucherId);
 
     const navigation = useNavigation();
-
-    // deklarasi state awal untuk Modal
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
 
-    // deklarasi state awal untuk pick input atau select
-    const [wilayah, setWilayah] = useState('key0');
     const [image, setImage] = useState(null);
 
     const [wilayahOptions, setWilayahOptions] = useState([]);
 
+    const [wilayah, setWilayah] = useState('');
     const [namaLengkap, setNamaLengkap] = useState('');
     const [nomorPolisi, setNomorPolisi] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSend = () => {
-        // validasi dengan memeriksa nilai state
-        if (namaLengkap === '' || email === '' || alamat === '' || nomorPolisi === '') {
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            allowsEditing: true,
+            quality: 1,
+        });
+
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        } else {
+            alert('You did not select any image.');
+        }
+    };
+
+
+    const fetchWilayahOptions = async () => {
+        try {
+            const response = await api.get('/api/getWilayah');
+            const wilayahData = response.data;
+
+            const options = wilayahData.map((wilayah) => ({
+                label: wilayah.samsat,
+                value: wilayah.id,
+            }));
+
+            setWilayahOptions(options);
+        } catch (error) {
+            console.error('Failed to fetch wilayah options:', error.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchWilayahOptions();
+    }, []);
+
+    const getUserIdFromStorage = async () => {
+        try {
+            const userId = await AsyncStorage.getItem('users_id');
+            return userId;
+        } catch (error) {
+            console.error('Error getting user ID:', error);
+        }
+    };
+
+    const handleSend = async () => {
+        console.log('Sending form with voucherId:', voucherId);
+
+        const usersId = await getUserIdFromStorage();
+
+        if (namaLengkap === '' || wilayah === '' || nomorPolisi === '') {
             setErrorMessage('this field is required');
         } else {
             const formData = new FormData();
@@ -82,7 +125,6 @@ const FormScreen = ({ route }) => {
         }
     };
 
-    // membuat fungsi yang dijalankan ketika selesai konfirmasi
     const handleClaimVoucher = () => {
         setShowModal(false);
         setShowModal2(true);

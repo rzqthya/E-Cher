@@ -35,9 +35,9 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
 
     const handleDateSelection = (event, selectedDate) => {
         if (event.type === 'set') {
-            const currentDate = selectedDate || ''; 
+            const currentDate = selectedDate || '';
             toggleDatepicker();
-            const formattedDate = selectedDate ? formatDate(currentDate) : ''; 
+            const formattedDate = selectedDate ? formatDate(currentDate) : '';
             setDateOfExp(formattedDate);
 
             // Pass a callback to ensure the correct value is used
@@ -53,7 +53,11 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
     };
 
 
-    // ...
+    // Filter
+    const applyFilter = () => {
+        handleFilter(selectedBottomSheetCategory);
+        setIsBottomSheetOpen(false);
+    };
 
 
     <DateTimePicker
@@ -149,7 +153,6 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
                                 editable={false}
                                 placeholderTextColor={"#A9A9A9"}
                             />
-
                         </Pressable>)}
                 </Box>
 

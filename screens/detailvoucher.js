@@ -42,7 +42,14 @@ const DetailVoucher = ({ route }) => {
     return (
         <ScrollView>
             <Box flex={1} bg={'#F0F2F7'}>
-                <Image source={{ uri: `http://192.168.118.127:8000/storage/${params.image}` }} w={'full'} h={340} borderBottomRightRadius={5} borderBottomLeftRadius={5} alt="voucher_img" />
+                <Image 
+                    source={{ uri: `http://192.168.100.6:8000/storage/${params.image}` }} 
+                    w={'full'} 
+                    h={340} 
+                    borderBottomRightRadius={5} 
+                    borderBottomLeftRadius={5} 
+                    alt="voucher_img" 
+                />
                 <Box p={25}>
                     <Box borderBottomColor={'#D32324'} borderBottomWidth={1} paddingBottom={2}>
                         <Text fontWeight={600}>{params.voucher}</Text>

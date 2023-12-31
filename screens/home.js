@@ -18,7 +18,6 @@ const Home = () => {
 
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
-
   //KOTA FILTER
   const [listKota, setListKota] = useState([]);
   const [kota, setKota] = useState('');
@@ -49,7 +48,7 @@ const Home = () => {
     }
     try {
       const response = await api.get(`/api/vouchers/by-city/${kota}`);
-      console.log("Data diterima:", response.data); 
+      console.log("Data diterima:", response.data);
 
       setData({ data: response.data });
     } catch (error) {
@@ -60,6 +59,48 @@ const Home = () => {
   useEffect(() => {
     fetchDataByKota();
   }, [kota]);
+
+  //FILTER KATEGORI
+  // const [listCategory, setListCategory] = useState([]);
+  // const [category, setCategory] = useState('');
+
+  // useEffect(() => {
+  //   const fetchCategory = async () => {
+  //     try {
+  //       const response = await api.get('/api/getMerchant');
+  //       const categoryData = await response.data;
+
+  //       const options = categoryData.map((merchant) => ({
+  //         label: merchant.kategori,
+  //         value: merchant.id,
+  //       }));
+
+  //       setListCategory(options);
+  //     } catch (error) {
+  //       console.error('Error fetching kota:', error.message);
+  //     }
+  //   };
+
+  //   fetchCategory();
+  // }, []);
+
+  // const fetchDataByKategori = async () => {
+  //   if (!category) {
+  //     return;
+  //   }
+  //   try {
+  //     const response = await api.get(`/api/merchants/by-category/${category}`);
+  //     console.log("Data diterima:", response.data);
+
+  //     setData({ data: response.data });
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchDataByKategori();
+  // }, [category]);
 
 
   //DATA VOUCHER
@@ -85,7 +126,7 @@ const Home = () => {
           <ScrollView>
             <TouchableOpacity
               activeOpacity={0.5}
-              onPress={() => navigation.navigate('Detail Voucher',  { voucherId: item.id })}
+              onPress={() => navigation.navigate('Detail Voucher', { voucherId: item.id })}
             >
               <Box
                 flexDirection="row"
@@ -105,8 +146,9 @@ const Home = () => {
                 </Box>
                 <Center flex={2}>
                   <Image
-                    source={{ uri: `http://192.168.118.127:8000/storage/${item.image}` }}
+                    source={{ uri: `http://192.168.100.6:8000/storage/${item.image}` }}
                     style={{ width: 100, height: 100 }}
+                    alt="voucher"
                   />
 
                 </Center>
@@ -124,7 +166,7 @@ const Home = () => {
       <Box bg={'#F0F2F7'} flex={1}>
         <Box flexDirection={'column'} justifyItems={'center'} justifyContent={'center'} mx={9}>
           <Box>
-            <Hi_profile title={"Hi, Rizqy Athiyya"} />
+            <Hi_profile />
           </Box>
           <Box pt={1} pb={2} alignItems={'flex-end'}>
             <Box flexDirection="row" alignItems="center" justifyContent="space-between">
@@ -181,7 +223,7 @@ const Home = () => {
 
       }
 
-      {
+      {/* {
         isBottomSheetOpen &&
         <BottomSheetComponent
           isBottomSheetOpen={isBottomSheetOpen}
@@ -190,7 +232,7 @@ const Home = () => {
         // handleFilter={handleFilter}
         />
 
-      }
+      } */}
     </SafeAreaView >
   );
 };

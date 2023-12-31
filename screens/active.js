@@ -57,7 +57,7 @@ const Active = () => {
                     <Image
                         source={{ uri: `http://192.168.118.127:8000/storage/${item.image}` }}
                         style={{ width: 100, height: 100 }}
-                        alt="content"
+                        alt="Deskripsi gambar"
                         // size="xl"
                         borderRadius={5} />
                 </Center>

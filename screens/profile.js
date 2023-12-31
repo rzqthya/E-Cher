@@ -6,19 +6,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../api';
 
 const Profile = () => {
-    // Penggunaan State
-    // const [namalengkap, setNamalengkap] = useState("");
-    // const [email, setEmail] = useState("");
-    // const [notelp, setNotelp] = useState("");
-    // const [password, setPassword] = useState("");
 
     const [userData, setUserData] = useState({});
 
     const navigation = useNavigation();
 
-    // Handel Navigation Button Ubah
     const handleUbah = () => {
-        navigation.navigate('edit-profile');
+        navigation.navigate('edit-profile', { userData });
     };
 
     useEffect(() => {
@@ -33,7 +27,6 @@ const Profile = () => {
                         id: response.data.user.id,
                         nama: response.data.user.nama,
                         email: response.data.user.email,
-                        password: response.data.user.password,
                         noTelp: response.data.user.noTelp,
 
                     };
@@ -43,7 +36,6 @@ const Profile = () => {
                 console.error('Error fetching user data:', error);
             }
         };
-
 
         fetchUserData();
     }, []);
@@ -109,19 +101,6 @@ const Profile = () => {
                     </HStack>
                 </Box>
 
-                {/* Content Ubah Password */}
-                <Box bg="white" p={6} shadow={2} borderRadius={12} width="90%" justifyContent="flex-end" mb={30}>
-                    <HStack space={10}>
-                        <VStack alignItems="flex-start" flex={3}>{/* flex-start mengatur tulisan untuk berada di sebelah kiri dan "flex" disini digunakan untuk membagi content antara text dengan button menjadi 2 kolom */}
-                            <Text fontSize="xl" fontWeight="semibold">
-                                Password
-                            </Text>
-                            <Text>
-                                {userData.password}
-                            </Text>
-                        </VStack>
-                    </HStack>
-                </Box>
                 <Button
                     borderRadius={10}
                     bg="#F82F2D"

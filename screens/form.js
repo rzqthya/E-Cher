@@ -125,11 +125,14 @@ const FormScreen = ({ route }) => {
                     mimeType = 'image/jpeg';
                 }
 
-                // Menambahkan gambar ke FormData
+                const uriParts = image.split('/');
+                const originalFilename = uriParts[uriParts.length - 1];
+
+               
                 formData.append('image', {
                     uri: image,
                     type: mimeType,
-                    name: `stnk.${fileExtension}`,
+                    name: originalFilename,
                 });
             }
 

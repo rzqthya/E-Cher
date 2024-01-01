@@ -6,19 +6,26 @@ import { useNavigation } from "@react-navigation/native";
 
 
 const DetailVoucher = ({ route }) => {
-    const { voucherId } = route.params;
-    console.log('Route Params:', route.params);
+
+    const { voucherId, voucher, image } = route.params;
+    console.log('Route Params:', voucherId, voucher, image);
+
+    // const voucherItem = route.params && route.params.item ? route.params.item : {};
+
+
+    // console.log('Route Params:', route.params);
 
     // const [voucherId, setVoucherId] = useState('');
     // const params = route.params.item;
 
-    const params = route.params && route.params.item ? route.params.item : {};
     // console.log('Voucher ID:', voucherId);
+
+    
     const [voucherInfo, setvoucherInfo] = useState({
         title2: "Overview",
         describe: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     });
-    const [selectedButton, setSelectedButton] = useState('Overview'); // Tambahkan state untuk melacak tombol mana yang sedang diklik
+    const [selectedButton, setSelectedButton] = useState('Overview');
 
     const handleOverviewButtonClick = () => {
         setvoucherInfo({
@@ -26,7 +33,7 @@ const DetailVoucher = ({ route }) => {
             // describe: params.overview,
             describe: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
         });
-        setSelectedButton('Overview'); // Mengatur state tombol yang sedang diklik
+        setSelectedButton('Overview');
     };
 
     const handleSKButtonClick = () => {
@@ -35,24 +42,24 @@ const DetailVoucher = ({ route }) => {
             // describe: params.sk,
             describe: '1. Voucher ini berlaku sesuai dengan tanggal yang tertera pada voucher \n2. Hanya bisa digunakan pada merchant yang sudah dipilih kotanya.',
         });
-        setSelectedButton('SK'); // Mengatur state tombol yang sedang diklik
+        setSelectedButton('SK');
     };
     const navigation = useNavigation();
 
     return (
         <ScrollView>
             <Box flex={1} bg={'#F0F2F7'}>
-                <Image 
-                    source={{ uri: `http://192.168.100.6:8000/storage/${params.image}` }} 
-                    w={'full'} 
-                    h={340} 
-                    borderBottomRightRadius={5} 
-                    borderBottomLeftRadius={5} 
-                    alt="voucher_img" 
+                <Image
+                    source={{ uri: image }}
+                    w={'full'}
+                    h={340}
+                    borderBottomRightRadius={5}
+                    borderBottomLeftRadius={5}
+                    alt="voucher_img"
                 />
                 <Box p={25}>
-                    <Box borderBottomColor={'#D32324'} borderBottomWidth={1} paddingBottom={2}>
-                        <Text fontWeight={600}>{params.voucher}</Text>
+                <Box borderBottomColor={'#D32324'} borderBottomWidth={1} paddingBottom={2}>
+                        <Text fontSize={16} fontWeight="bold">{voucher}</Text>
                     </Box>
                     <HStack py={4}>
                         <Button onPress={handleOverviewButtonClick} mr={4} backgroundColor={selectedButton === 'Overview' ? '#D32324' : '#D9D9D9'}>
@@ -74,11 +81,10 @@ const DetailVoucher = ({ route }) => {
                                     'Apakah yakin akan klaim voucher?',
                                     '',
                                     [
-                                        // { text: 'Cancel', style: 'cancel' },
+                                        { text: 'Cancel', style: 'cancel' },
                                         {
                                             text: 'OK',
                                             onPress: () => {
-                                                // setVoucherId('your_voucher_id');
                                                 navigation.navigate('Form', { voucherId });
                                             },
                                         },

@@ -5,6 +5,7 @@ import api from '../api';
 
 
 const Active = () => {
+
     const navigation = useNavigation();
     const [activeVouchers, setActiveVouchers] = useState([]);
 
@@ -18,8 +19,13 @@ const Active = () => {
             }
         };
 
-        fetchActiveVouchers();
-    }, []);
+        const unsubscribe = navigation.addListener('focus', () => {
+            fetchActiveVouchers();
+        });
+
+        return unsubscribe;
+    }, [navigation]);
+
 
 
     const renderItem = ({ item }) => {
@@ -47,7 +53,13 @@ const Active = () => {
                             borderWidth={1}
                             mt={3}
                             pt={2}
-                            onPress={() => { navigation.navigate('DetailScreen'); }}
+                            // onPress={() => { navigation.navigate('DetailScreen'); }}
+                            onPress={() => navigation.navigate('DetailScreen', {
+                                voucher: item.masaBerlaku,
+                                image: `http://192.168.58.127:8000/storage/${item.image}`,
+                                token: item.token,
+                                namaVou: item.voucher,
+                            })}
                         >
                             <Text fontSize={9} color="#F82F2D">Detail</Text>
                         </Button>
@@ -55,7 +67,7 @@ const Active = () => {
                 </HStack>
                 <Center flex={5}>
                     <Image
-                        source={{ uri: `http://192.168.118.127:8000/storage/${item.image}` }}
+                        source={{ uri: `http://192.168.58.127:8000/storage/${item.image}` }}
                         style={{ width: 100, height: 100 }}
                         alt="Deskripsi gambar"
                         // size="xl"

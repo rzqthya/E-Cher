@@ -1,11 +1,12 @@
-import React, { useRef, useMemo, useCallback, useState } from 'react';
+import React, { useRef, useMemo, useCallback, useState, useEffect } from 'react';
 import { FlatList, Box, Text } from 'native-base';
 import { TouchableOpacity, Pressable, Platform } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { TextInput } from 'react-native-gesture-handler';
+import api from '../api';
 
-const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategori, handleFilter }) => {
+const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleFilter }) => {
     // ref
     const bottomSheetRef = useRef(null);
     // State
@@ -17,6 +18,8 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
     const [selectedCategory, setSelectedCategory] = useState('');
     // variables
     const snapPoints = useMemo(() => ['50%', '90%'], []);
+
+    
 
     const renderBackdrop = useCallback((props) => (
         <BottomSheetBackdrop

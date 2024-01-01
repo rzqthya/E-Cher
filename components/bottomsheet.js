@@ -20,7 +20,6 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
     const snapPoints = useMemo(() => ['50%', '90%'], []);
 
     
-
     const renderBackdrop = useCallback((props) => (
         <BottomSheetBackdrop
             appearsOnIndex={1}
@@ -29,6 +28,7 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
             onPress={() => setIsBottomSheetOpen(false)}
         />
     ), []);
+
     const handleCategorySelection = (category) => {
         handleFilter(category, date);
         setSelectedCategory(category);

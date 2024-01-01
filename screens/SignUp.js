@@ -87,12 +87,12 @@ const SignUp = () => {
       }
       // {
       //   headers: {
-      //     'X-CSRF-TOKEN': csrfToken, // Sertakan CSRF token di sini
+      //     'X-CSRF-TOKEN': csrfToken, 
       //   }
       // }
       );
       // const response = await api.get(`/api/register?nama=${namalengkap}&email=${email}&noTelp=${noTelp}&pasword=${password}`);
-      // console.log("asw ",csrfToken)
+      // console.log("hmm ckck hmm ",csrfToken)
       console.log('Registration successful:', response.data.message);
       navigation.navigate('Login');
     } catch (error) {

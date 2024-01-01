@@ -194,6 +194,7 @@ const SignUp = () => {
                 setPassword(text);
                 setPasswordError('');
               }}
+              secureTextEntry={true}
             />
             <Text style={{ color: 'red', marginBottom: 5 }}>{passwordError}</Text>
 

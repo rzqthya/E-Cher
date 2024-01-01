@@ -60,49 +60,6 @@ const Home = () => {
     fetchDataByKota();
   }, [kota]);
 
-  //FILTER KATEGORI
-  // const [listCategory, setListCategory] = useState([]);
-  // const [category, setCategory] = useState('');
-
-  // useEffect(() => {
-  //   const fetchCategory = async () => {
-  //     try {
-  //       const response = await api.get('/api/getMerchant');
-  //       const categoryData = await response.data;
-
-  //       const options = categoryData.map((merchant) => ({
-  //         label: merchant.kategori,
-  //         value: merchant.id,
-  //       }));
-
-  //       setListCategory(options);
-  //     } catch (error) {
-  //       console.error('Error fetching kota:', error.message);
-  //     }
-  //   };
-
-  //   fetchCategory();
-  // }, []);
-
-  // const fetchDataByKategori = async () => {
-  //   if (!category) {
-  //     return;
-  //   }
-  //   try {
-  //     const response = await api.get(`/api/merchants/by-category/${category}`);
-  //     console.log("Data diterima:", response.data);
-
-  //     setData({ data: response.data });
-  //   } catch (error) {
-  //     console.error('Error fetching data:', error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchDataByKategori();
-  // }, [category]);
-
-
   //DATA VOUCHER
   useEffect(() => {
     fetchData();
@@ -218,8 +175,8 @@ const Home = () => {
         <BottomSheetComponent
           isBottomSheetOpen={isBottomSheetOpen}
           setIsBottomSheetOpen={setIsBottomSheetOpen}
-          kategori={kategori}
-          handleFilter={handleFilter}
+          // categories={kategori}
+          // handleFilter={handleFilter}
         />
 
       }

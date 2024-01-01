@@ -144,8 +144,8 @@ const App = () => {
               component={EditProfile}
               options={{
                 title: "Edit Profile",
-                headerTitleAlign: "center",
-                headerTitleStyle: { color: "#F82F2D" },
+                headerTitleAlign: "left",
+                headerTitleStyle: { color: "#D32324" },
                 headerTintColor: "#D32324",
               }}
             />
@@ -156,8 +156,8 @@ const App = () => {
               component={ContentScreen}
               options={{
                 title: "Tentang Kami",
-                headerTitleAlign: "center",
-                headerTitleStyle: { color: "#F82F2D" },
+                headerTitleAlign: "left",
+                headerTitleStyle: { color: "#D32324" },
                 headerTintColor: "#D32324",
               }}
             />
@@ -166,8 +166,8 @@ const App = () => {
               component={FaqScreen}
               options={{
                 title: "FAQ",
-                headerTitleAlign: "center",
-                headerTitleStyle: { color: "#F82F2D" },
+                headerTitleAlign: "left",
+                headerTitleStyle: { color: "#D32324" },
                 headerTintColor: "#D32324",
               }}
             />
@@ -177,7 +177,7 @@ const App = () => {
               options={{
                 title: "Message",
                 headerTitleAlign: "left",
-                headerTitleStyle: { color: "#F82F2D" },
+                headerTitleStyle: { color: "#D32324" },
                 headerTintColor: "#D32324",
               }}
             />

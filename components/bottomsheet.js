@@ -96,6 +96,54 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
         }
     };
 
+    //FILTER KATEGORI
+    const [listCategory, setListCategory] = useState([]);
+    const [category, setCategory] = useState('');
+
+    useEffect(() => {
+        const fetchCategory = async () => {
+            try {
+                const response = await api.get('/api/getMerchant');
+                const responseData = response.data;
+    
+                if (responseData && responseData.success && Array.isArray(responseData.data)) {
+                    const categoryData = responseData.data;
+    
+                    const options = categoryData.map((merchant) => ({
+                        label: merchant.kategori,
+                        value: merchant.id,
+                    }));
+    
+                    setListCategory(options);
+                } else {
+                    console.error('Invalid category data format:', responseData);
+                }
+            } catch (error) {
+                console.error('Error fetching merchant:', error.message);
+            }
+        };
+    
+        fetchCategory();
+    }, []);
+
+    const fetchDataByKategori = async () => {
+        if (!category) {
+            return;
+        }
+        try {
+            const response = await api.get(`/api/merchants/by-category/${category}`);
+            console.log("Data diterima:", response.data);
+
+            setData({ data: response.data });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchDataByKategori();
+    }, [category]);
+
     return (
         <BottomSheet
             ref={bottomSheetRef}
@@ -105,15 +153,12 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
             backdropComponent={renderBackdrop}
             margin={10}
         >
-            <Box flexDirection="Column" padding={5}>
-                <Box>
-                    <Text fontSize={18} fontWeight={600}>Kota</Text>
-                </Box>
+            <Box flexDirection="Column" padding={5} mt={4}>
                 <Text fontSize={18} fontWeight={600}>Kategori</Text>
                 <FlatList
-                    data={kategori}
+                    data={listCategory}
                     style={{ marginTop: 10, marginBottom: 10 }}
-                    numColumns={3}
+                    numColumns={2}
                     renderItem={({ item }) => (
                         <TouchableOpacity
                             style={{
@@ -123,14 +168,14 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
                                 margin: 5,
                                 borderRadius: 10,
                                 paddingVertical: 7,
-                                width: 100,
+                                width: 150,
                                 height: 40,
                                 alignItems: 'center',
                                 alignContent: 'center',
                             }}
-                            onPress={() => handleCategorySelection(item.kategori)}
+                            onPress={() => handleCategorySelection(item.value)}
                         >
-                            <Text>{item.nama}</Text>
+                            <Text>{item.label}</Text>
                         </TouchableOpacity>)} />
                 <Box>
                     <Text fontSize={18} fontWeight={600}>Masa Berlaku</Text>

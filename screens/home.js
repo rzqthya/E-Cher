@@ -44,6 +44,7 @@ const Home = () => {
 
   const fetchDataByKota = async () => {
     if (!kota) {
+      fetchData(); 
       return;
     }
     try {
@@ -51,6 +52,8 @@ const Home = () => {
       console.log("Data diterima:", response.data);
 
       setData({ data: response.data });
+      console.log("Data kota filter:", response.data);
+
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -59,6 +62,49 @@ const Home = () => {
   useEffect(() => {
     fetchDataByKota();
   }, [kota]);
+
+  //FILTER KATEGORI
+  // const [listCategory, setListCategory] = useState([]);
+  // const [category, setCategory] = useState('');
+
+  // useEffect(() => {
+  //   const fetchCategory = async () => {
+  //     try {
+  //       const response = await api.get('/api/getMerchant');
+  //       const categoryData = await response.data;
+
+  //       const options = categoryData.map((merchant) => ({
+  //         label: merchant.kategori,
+  //         value: merchant.id,
+  //       }));
+
+  //       setListCategory(options);
+  //     } catch (error) {
+  //       console.error('Error fetching kota:', error.message);
+  //     }
+  //   };
+
+  //   fetchCategory();
+  // }, []);
+
+  // const fetchDataByKategori = async () => {
+  //   if (!category) {
+  //     return;
+  //   }
+  //   try {
+  //     const response = await api.get(`/api/merchants/by-category/${category}`);
+  //     console.log("Data diterima:", response.data);
+
+  //     setData({ data: response.data });
+  //   } catch (error) {
+  //     console.error('Error fetching data:', error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchDataByKategori();
+  // }, [category]);
+
 
   //DATA VOUCHER
   useEffect(() => {
@@ -145,7 +191,7 @@ const Home = () => {
                   backgroundColor={'#FAF9F9'}
                   borderColor={'#FAF9F9'}
                 >
-                  <Select.Item label="Semua kota" value="" />
+                  <Select.Item label="" value="" />
                   {
                     listKota.map((option) => (
                       <Select.Item label={option.label} value={option.value} key={option.value} />
@@ -167,7 +213,8 @@ const Home = () => {
         <FlatList
           data={data.data}
           renderItem={renderItem}
-          keyExtractor={(item) => item.id.toString()}
+          keyExtractor={(item) => item.id ? item.id.toString() : `unique-${item.deskripsi}`}
+
         />
       </Box>
       {
@@ -175,22 +222,12 @@ const Home = () => {
         <BottomSheetComponent
           isBottomSheetOpen={isBottomSheetOpen}
           setIsBottomSheetOpen={setIsBottomSheetOpen}
-          // categories={kategori}
-          // handleFilter={handleFilter}
+          kategori={kategori}
+          handleFilter={handleFilter}
         />
 
       }
 
-      {/* {
-        isBottomSheetOpen &&
-        <BottomSheetComponent
-          isBottomSheetOpen={isBottomSheetOpen}
-          setIsBottomSheetOpen={setIsBottomSheetOpen}
-        // kategori={kategori}
-        // handleFilter={handleFilter}
-        />
-
-      } */}
     </SafeAreaView >
   );
 };

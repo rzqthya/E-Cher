@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Input, Button, ScrollView } from 'native-base';
 import { useNavigation } from '@react-navigation/native';

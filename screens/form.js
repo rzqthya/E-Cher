@@ -1,39 +1,31 @@
-import React, { useState } from 'react';
-import { VStack, Input, Box, HStack, Button, Text, Divider, Flex, ScrollView, Modal, Center, Select, Image } from "native-base";
+import React, { useState, useEffect } from 'react';
+import { VStack, Input, Box, HStack, Button, Text,Divider, Flex, ScrollView, Modal, Center, Select, Image } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
-import { Header } from '../components';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as ImagePicker from 'expo-image-picker';
+import { Header } from '../components';
+import api from '../api';
 
-const FormScreen = () => {
+const FormScreen = ({ route }) => {
+    const { voucherId } = route.params;
+    // console.log('Voucher ID:', voucherId);
+
+    const [usersId, setUsersId] = useState(null);
+
     const navigation = useNavigation();
     const [showModal, setShowModal] = useState(false);
     const [showModal2, setShowModal2] = useState(false);
 
-    const [wilayah, setWilayah] = useState('key0');
+    const [image, setImage] = useState(null);
 
+    const [wilayahOptions, setWilayahOptions] = useState([]);
+
+    const [wilayah, setWilayah] = useState('');
     const [namaLengkap, setNamaLengkap] = useState('');
-    const [email, setEmail] = useState('');
-    const [alamat, setAlamat] = useState('');
     const [nomorPolisi, setNomorPolisi] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-
-    const handleSend = () => {
-        // validasi dengan memeriksa nilai state
-        if (namaLengkap === '' || email === '' || alamat === '' || nomorPolisi === '' || selectedImage === '') {
-            setErrorMessage('this field is required');
-        } else {
-            setShowModal(true);
-        }
-    };
-
-    const handleClaimVoucher = () => {
-        setShowModal(false); // menutup modal sebelumnya
-        setShowModal2(true);
-    };
-
-    const [selectedImage, setSelectedImage] = useState('');
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -42,10 +34,135 @@ const FormScreen = () => {
         });
 
         if (!result.canceled) {
-            setSelectedImage(result.assets[0].uri);
+            setImage(result.assets[0].uri);
         } else {
             alert('You did not select any image.');
         }
+    };
+
+
+    const fetchWilayahOptions = async () => {
+        try {
+            const response = await api.get('/api/getWilayah');
+            const wilayahData = response.data;
+
+            const options = wilayahData.map((wilayah) => ({
+                label: wilayah.samsat,
+                value: wilayah.id,
+            }));
+
+            setWilayahOptions(options);
+        } catch (error) {
+            console.error('Failed to fetch wilayah options:', error.message);
+        }
+    };
+
+    useEffect(() => {
+        fetchWilayahOptions();
+    }, []);
+
+    const getUserIdFromStorage = async () => {
+        try {
+            const userId = await AsyncStorage.getItem('users_id');
+            setUsersId(userId);
+            return userId;
+        } catch (error) {
+            console.error('Error getting user ID from AsyncStorage:', error);
+            return null;
+        }
+    };
+
+    useEffect(() => {
+        const fetchUserId = async () => {
+            try {
+                const userId = await getUserIdFromStorage();
+                setUsersId(userId);
+            } catch (error) {
+                console.error('Error fetching user ID:', error);
+            }
+        };
+
+        fetchUserId();
+    }, []);
+
+
+
+    const handleSend = async () => {
+        console.log('Sending form with voucherId:', voucherId);
+
+        const usersId = await getUserIdFromStorage();
+        console.log('Sending form with usersId before:', usersId);
+
+        // const usersId = await getUserIdFromStorage();
+        // // setUsersId(userId);
+        // console.log('users_id:', usersId);
+
+        if (usersId === null) {
+            console.log('Users ID is not available yet. Waiting...');
+            return;
+        }
+
+        console.log('Sending form with usersId after:', usersId);
+
+
+        if (namaLengkap === '' || wilayah === '' || nomorPolisi === '') {
+            setErrorMessage('this field is required');
+        } else {
+            const formData = new FormData();
+            formData.append('voucher_id', voucherId);
+            formData.append('users_id', usersId);
+            formData.append('wilayah_id', wilayah);
+            formData.append('nama', namaLengkap);
+            formData.append('nopol', nomorPolisi);
+            if (image) {
+
+                const fileExtension = image.split('.').pop();
+
+                let mimeType = 'image/jpeg'; // Default MIME type
+                if (fileExtension === 'jpg') {
+                    mimeType = 'image/jpeg';
+                } else if (fileExtension === 'jpeg') {
+                    mimeType = 'image/jpeg';
+                }
+
+                const uriParts = image.split('/');
+                const originalFilename = uriParts[uriParts.length - 1];
+
+               
+                formData.append('image', {
+                    uri: image,
+                    type: mimeType,
+                    name: originalFilename,
+                });
+            }
+
+            try {
+                const response = await api.post('/api/formulir', formData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+
+                console.log('API Response:', response.data);
+
+                setShowModal(true);
+            } catch (error) {
+                if (error.response) {
+                    console.log('Error response data:', error.response.data);
+                    console.log('Error response status:', error.response.status);
+                    console.log('Error response headers:', error.response.headers);
+                } else if (error.request) {
+                    console.log('Error request:', error.request);
+                } else {
+                    console.log('Error message:', error.message);
+                }
+            }
+        }
+    };
+
+    const handleClaimVoucher = () => {
+        setShowModal(false);
+        setShowModal2(true);
     };
 
     return (
@@ -59,7 +176,7 @@ const FormScreen = () => {
                                 <Text>Nama Lengkap</Text>
                                 <Input
                                     variant="outline"
-                                    placeholder="Nama Lengkap"
+                                    placeholder="Nama Lengkap Sesuai STNK"
                                     value={namaLengkap}
                                     onChangeText={setNamaLengkap}
                                     focusBorderColor="#FFFFFF"
@@ -68,41 +185,17 @@ const FormScreen = () => {
                                     <Text color="red.500">{errorMessage}</Text>
                                 )}
                             </Box>
-                            <Box>
-                                <Text>Masukkan Email</Text>
-                                <Input
-                                    variant="outline"
-                                    placeholder="Email"
-                                    value={email}
-                                    onChangeText={setEmail}
-                                />
-                                {email === '' && errorMessage !== '' && (
-                                    <Text color="red.500">{errorMessage}</Text>
-                                )}
-                            </Box>
-                            <Box>
-                                <Text>Masukkan Alamat</Text>
-                                <Input
-                                    variant="outline"
-                                    placeholder="Alamat"
-                                    value={alamat}
-                                    onChangeText={setAlamat}
-                                />
-                                {alamat === '' && errorMessage !== '' && (
-                                    <Text color="red.500">{errorMessage}</Text>
-                                )}
-                            </Box>
+
                             <Box>
                                 <Text>Pilih Wilayah</Text>
                                 <Select
                                     placeholder="Wilayah"
                                     selectedValue={wilayah}
-                                    width={360}
                                     onValueChange={(itemValue) => setWilayah(itemValue)}
                                 >
-                                    <Select.Item label="Samsat Krian" value="key0" />
-                                    <Select.Item label="Samsat Candi" value="key1" />
-                                    <Select.Item label="Samsat Sidoarjo" value="key2" />
+                                    {wilayahOptions.map((option) => (
+                                        <Select.Item key={option.value} label={option.label} value={option.value} />
+                                    ))}
                                 </Select>
                             </Box>
                             <Box>
@@ -119,7 +212,7 @@ const FormScreen = () => {
                             </Box>
                             <Box>
                                 <Text mb={3}>Upload STNK</Text>
-                                {selectedImage === '' && errorMessage !== '' && (
+                                {image === '' && errorMessage !== '' && (
                                     <Text color="red.500">{errorMessage}</Text>
                                 )}
                                 <Button
@@ -133,22 +226,17 @@ const FormScreen = () => {
                                 >
                                     <Text fontWeight="bold">Upload</Text>
                                 </Button>
-                                {selectedImage && (
-                                    <Image source={{ uri: selectedImage }} style={{ width: 200, height: 200 }} alt="buktiImage" />
+                                {image && (
+                                    <Image source={{ uri: image }} style={{ width: 200, height: 200 }} alt="buktiImage" />
                                 )}
                             </Box>
                         </VStack>
                     </Flex>
-                    <Divider />
+
+                    <Divider my={4} />
                     <HStack justifyContent="flex-end" mb={4} pr={4}>
-                        <Button
-                            rounded="2xl"
-                            w="40%"
-                            backgroundColor="#F82F2D"
-                            onPress={handleSend}
-                            _pressed={{ bg: "gray.400" }}
-                            my={2}
-                        >
+                        <Button rounded="2xl" w="40%" backgroundColor="#F82F2D" onPress={handleSend} _pressed={{ bg: "gray.400" }}>
+
                             <Text fontWeight="bold" color="#ffffff" >Send</Text>
                         </Button>
                     </HStack>

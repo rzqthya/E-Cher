@@ -16,6 +16,7 @@ const InfoScreen = () => {
         width="80%"
         alignItems="center"
         mb={4}
+        _pressed={{ bg: "red.300" }}
         onPress={() => navigation.navigate('FaqScreen')}
       >
         <VStack alignItems="center" space={0}>
@@ -34,6 +35,7 @@ const InfoScreen = () => {
         width="80%" 
         alignItems="center"
         mb={4}
+        _pressed={{ bg: "red.300" }}
         onPress={() => navigation.navigate('ContentScreen')}
       >
         <VStack alignItems="center" space={0}>

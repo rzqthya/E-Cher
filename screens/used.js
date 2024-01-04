@@ -1,62 +1,68 @@
-import { View, FlatList, Text, Image, Center, Button } from "native-base";
-
-const datas = [
-    {
-        id: 1,
-        title: "Voucher Diskon 50%",
-        desc: "All Outlet Mixue",
-        image: require('../assets/voucher1.png'),
-        date: "1 Januari 2024",
-        city: "Semarang",
-    },
-];
+import React, { useState, useEffect } from 'react';
+import { View, FlatList, Text, Image, Center, Button, HStack } from "native-base";
+import { useNavigation } from '@react-navigation/native';
+import api from '../api';
 
 const Used = () => {
+    const navigation = useNavigation();
+    const [useVouchers, setUseVouchers] = useState([]);
+
+    useEffect(() => {
+        const fetchUseVouchers = async () => {
+            try {
+                const response = await api.get('/api/use-vouchers');
+                setUseVouchers(response.data.data);
+            } catch (error) {
+                console.error('Error fetching use vouchers:', error.message);
+            }
+        };
+
+        const unsubscribe = navigation.addListener('focus', () => {
+            fetchUseVouchers();
+        });
+
+        return unsubscribe;
+    }, [navigation]);
+
     const renderItem = ({ item }) => {
         return (
-            <View
-                flexDirection= "row"
+            <HStack
+                flexDirection="row"
                 borderRadius={5}
                 marginHorizontal={20}
                 mt={30}
-                backgroundColor= '#7F7F7F'
+                backgroundColor='#7F7F7F'
                 opacity={0.5}
                 elevation={2}
-                >
+            >
                 <View flex={6} p={5}>
-                    <Text fontSize={14} fontWeight={"bold"}>{item.title}</Text>
-                    <Text fontSize={11} fontWeight={500}>{item.desc}</Text>
-                    <Text fontSize={11} fontWeight={500} pt={2}>{item.city}</Text>
-                    <Text color="#7F7F7F" fontSize={9} fontWeight={500} pt={3}>
-                        Berlaku sampai {item.date}
+                    <Text fontSize={14} fontWeight={"bold"}>{item.voucher}</Text>
+                    <Text fontSize={11} fontWeight={"normal"}>{item.deskripsi}</Text>
+                    <Text fontSize={11} fontWeight={"normal"} pt={2}>{item.kota}</Text>
+                    <Text color="#7F7F7F" fontSize={9} fontWeight={"normal"} pt={3}>
+                        Berlaku sampai {item.masaBerlaku}
                     </Text>
                     <Button
-                        width={75}
-                        height={37}
-                        backgroundColor="#D9D9D9"
-                        borderColor="#D9D9D9" 
-                        borderWidth={1}
-                        mt={3}
-                        pt={2}
+                        style={{ width: 75, height: 37, backgroundColor: "#D9D9D9", borderColor: "#D9D9D9", borderWidth: 1, marginTop: 12 }}
                     >
-                            <Text fontSize={9} color="#7F7F7F" fontWeight={"bold"}>Terpakai</Text>
+                        <Text fontSize={9} color="#7F7F7F" fontWeight={"bold"}>Terpakai</Text>
                     </Button>
                 </View>
                 <Center flex={5}>
-                    <Image source={ item.image }
+                    <Image source={{ uri: item.image }}
                         alt="content"
-                        size= "xl"
+                        size="xl"
                         borderRadius={5} />
                 </Center>
-            </View>
+            </HStack>
         );
     };
 
     return (
         <FlatList
-            data={datas}
+            data={useVouchers}
             renderItem={renderItem}
-            keyExtractor={(item) => item.id.toString()} 
+            keyExtractor={(item) => item.id.toString()}
         />
     );
 };

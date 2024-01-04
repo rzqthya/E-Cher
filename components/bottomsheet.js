@@ -1,17 +1,18 @@
-import React, { useRef, useMemo, useCallback, useState } from 'react';
+import React, { useRef, useMemo, useCallback, useState, useEffect } from 'react';
 import { FlatList, Box, Text } from 'native-base';
 import { TouchableOpacity, Pressable, Platform } from 'react-native';
 import BottomSheet, { BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import DateTimePicker from "@react-native-community/datetimepicker";
-// import { TextInput } from 'react-native-gesture-handler';
+import { TextInput } from 'react-native-gesture-handler';
+import api from '../api';
 
-const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategori, handleFilter }) => {
+const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleFilter }) => {
     // ref
     const bottomSheetRef = useRef(null);
     // State
     const initialDate = new Date();
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [date, setDate] = useState(new Date(2025, 10, 20));
+    const [date, setDate] = useState(new Date(2030, 10, 20));
     const [dateOfExp, setDateOfExp] = useState("");
     const [showPicker, setShowPicker] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -26,18 +27,19 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
             onPress={() => setIsBottomSheetOpen(false)}
         />
     ), []);
+
     const handleCategorySelection = (category) => {
         handleFilter(category, date);
         setSelectedCategory(category);
 
         setIsBottomSheetOpen(false);
     };
-    // console.log('date baru',selectedDate)
+
     const handleDateSelection = (event, selectedDate) => {
         if (event.type === 'set') {
-            const currentDate = selectedDate || ''; // Use empty string if selectedDate is not available
+            const currentDate = selectedDate || '';
             toggleDatepicker();
-            const formattedDate = selectedDate ? formatDate(currentDate) : ''; // Format the date only if selected
+            const formattedDate = selectedDate ? formatDate(currentDate) : '';
             setDateOfExp(formattedDate);
 
             // Pass a callback to ensure the correct value is used
@@ -52,11 +54,12 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
         }
     };
 
-    const formattedDate = date.toLocaleDateString(undefined, {
-        year: 'numeric',
-        month: 'long', // You can use 'short' for abbreviated month name
-    });
-    // ...
+
+    // Filter
+    const applyFilter = () => {
+        handleFilter(selectedBottomSheetCategory);
+        setIsBottomSheetOpen(false);
+    };
 
 
     <DateTimePicker
@@ -68,7 +71,6 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
 
 
     // DatePicker
-    console.log(date)
     // console.log('ini date', date)
 
     const toggleDatepicker = () => {
@@ -93,6 +95,55 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
     };
 
 
+    //FILTER KATEGORI
+    const [listCategory, setListCategory] = useState([]);
+    const [category, setCategory] = useState('');
+
+    useEffect(() => {
+        const fetchCategory = async () => {
+            try {
+                const response = await api.get('/api/getMerchant');
+                const responseData = response.data;
+    
+                if (responseData && responseData.success && Array.isArray(responseData.data)) {
+                    const categoryData = responseData.data;
+    
+                    const options = categoryData.map((merchant) => ({
+                        label: merchant.kategori,
+                        value: merchant.id,
+                    }));
+    
+                    setListCategory(options);
+                } else {
+                    console.error('Invalid category data format:', responseData);
+                }
+            } catch (error) {
+                console.error('Error fetching merchant:', error.message);
+            }
+        };
+    
+        fetchCategory();
+    }, []);
+
+    const fetchDataByKategori = async () => {
+        if (!category) {
+            return;
+        }
+        try {
+            const response = await api.get(`/api/merchants/by-category/${category}`);
+            console.log("Data diterima:", response.data);
+
+            setData({ data: response.data });
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
+
+    useEffect(() => {
+        fetchDataByKategori();
+    }, [category]);
+
+
     return (
         <BottomSheet
             ref={bottomSheetRef}
@@ -102,12 +153,12 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
             backdropComponent={renderBackdrop}
             margin={10}
         >
-            <Box flexDirection="Column" padding={5}>
+            <Box flexDirection="Column" padding={5} mt={4}>
                 <Text fontSize={18} fontWeight={600}>Kategori</Text>
                 <FlatList
-                    data={kategori}
+                    data={listCategory}
                     style={{ marginTop: 10, marginBottom: 10 }}
-                    numColumns={3}
+                    numColumns={2}
                     renderItem={({ item }) => (
                         <TouchableOpacity
                             style={{
@@ -117,39 +168,40 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, kategor
                                 margin: 5,
                                 borderRadius: 10,
                                 paddingVertical: 7,
-                                width: 100,
+                                width: 150,
                                 height: 40,
                                 alignItems: 'center',
                                 alignContent: 'center',
                             }}
-                            onPress={() => handleCategorySelection(item.kategori)}
+                            onPress={() => handleCategorySelection(item.value)}
                         >
-                            <Text>{item.nama}</Text>
+                            <Text>{item.label}</Text>
                         </TouchableOpacity>)} />
                 <Box>
                     <Text fontSize={18} fontWeight={600}>Masa Berlaku</Text>
-                    <Pressable onPress={toggleDatepicker} style={{ padding: 10 }}>
-                        <Text p={2} borderWidth={1} borderRadius={5} marginBottom={20}
-                            color={'#A9A9A9'}
-                            borderColor='#A9A9A9'>
-                            {formattedDate}
-                        </Text>
-                    </Pressable>
-                    {showPicker && (
-                        <DateTimePicker
-                            value={date}
-                            mode="date"
-                            display="calendar"
-                            onChange={onChange}
-                            style={{
-                                borderBottomWidth: 3,
-                                borderEndWidth: 3,
-                                borderTopWidth: 1,
-                                borderStartWidth: 1,
-                                borderColor: '#021C35',
-                            }}
-                        />
-                    )}
+                    {showPicker && (<DateTimePicker
+                        mode='date'
+                        display='spinner'
+                        value={date}
+                        onChange={onChange}
+                    />)}
+                    {!showPicker && (
+                        <Pressable onPress={toggleDatepicker}>
+                            <TextInput
+                                style={{
+                                    height: 40,
+                                    margin: 12,
+                                    borderWidth: 1,
+                                    borderColor: '#A9A9A9',
+                                    borderRadius: 6,
+                                    padding: 10
+                                }}
+                                placeholder='Pilih Tanggal'
+                                value={date.toLocaleDateString()}
+                                editable={false}
+                                placeholderTextColor={"#A9A9A9"}
+                            />
+                        </Pressable>)}
                 </Box>
             </Box>
         </BottomSheet >

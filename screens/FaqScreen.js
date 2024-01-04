@@ -32,15 +32,15 @@ const FaqScreen = () => {
                         <Accordion.Item
                             key={index}
                         >
-                            <Accordion.Summary backgroundColor={"#F82F2D"}>
+                            <Accordion.Summary backgroundColor={"#D32324"}>
                                 <Box flexDirection="row" alignItems="center" justifyContent="space-between">
-                                    <Text fontSize="xl" fontWeight="bold">
+                                    <Text fontSize="xl" fontWeight="bold" color="white">
                                         {item.title}
                                     </Text>
                                     <Ionicons
                                         name={activeIndexes.includes(index) ? "chevron-up" : "chevron-down"}
                                         size={24}
-                                        color={activeIndexes.includes(index) ? "black" : "black"}
+                                        color={activeIndexes.includes(index) ? "white" : "white"}
                                     />
                                 </Box>
                             </Accordion.Summary>
@@ -55,7 +55,7 @@ const FaqScreen = () => {
                 Still stuck? Contact us
             </Text>
             <Button
-                bg="#F82F2D"
+                bg="#D32324"
                 _pressed={{ bg: "light.400" }}
                 size="lg"
                 margin={4}

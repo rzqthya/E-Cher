@@ -19,7 +19,6 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
     // variables
     const snapPoints = useMemo(() => ['50%', '90%'], []);
 
-    
     const renderBackdrop = useCallback((props) => (
         <BottomSheetBackdrop
             appearsOnIndex={1}
@@ -72,7 +71,6 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
 
 
     // DatePicker
-
     // console.log('ini date', date)
 
     const toggleDatepicker = () => {
@@ -95,6 +93,7 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
             toggleDatepicker();
         }
     };
+
 
     //FILTER KATEGORI
     const [listCategory, setListCategory] = useState([]);
@@ -143,6 +142,7 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
     useEffect(() => {
         fetchDataByKategori();
     }, [category]);
+
 
     return (
         <BottomSheet
@@ -203,7 +203,6 @@ const BottomSheetComponent = ({ isBottomSheetOpen, setIsBottomSheetOpen, handleF
                             />
                         </Pressable>)}
                 </Box>
-
             </Box>
         </BottomSheet >
     );

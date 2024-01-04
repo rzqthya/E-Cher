@@ -5,6 +5,10 @@ import { useNavigation } from "@react-navigation/native";
 import { Hi_profile, BottomSheetComponent } from "../components";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import api from '../api';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import datas from "../datas";
+
+
 
 const Home = () => {
   const navigation = useNavigation();

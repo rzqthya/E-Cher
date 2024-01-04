@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { VStack, Input, Box, HStack, Button, Text, Divider, Flex, ScrollView, Modal, Center, Select, Image } from "native-base";
+import { VStack, Input, Box, HStack, Button, Text,Divider, Flex, ScrollView, Modal, Center, Select, Image } from "native-base";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
@@ -232,9 +232,11 @@ const FormScreen = ({ route }) => {
                             </Box>
                         </VStack>
                     </Flex>
+
                     <Divider my={4} />
                     <HStack justifyContent="flex-end" mb={4} pr={4}>
                         <Button rounded="2xl" w="40%" backgroundColor="#F82F2D" onPress={handleSend} _pressed={{ bg: "gray.400" }}>
+
                             <Text fontWeight="bold" color="#ffffff" >Send</Text>
                         </Button>
                     </HStack>

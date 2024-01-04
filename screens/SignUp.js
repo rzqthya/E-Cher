@@ -1,10 +1,8 @@
-// SignUp.js
 import React, { useState } from 'react';
-import { View, Text, SafeAreaView} from 'react-native';
+import { View, Text, SafeAreaView, TouchableOpacity } from 'react-native';
 import { Input, Button, ScrollView } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 import api from '../api';
-
 
 const SignUp = () => {
   const [namalengkap, setNamaLengkap] = useState('');
@@ -15,8 +13,32 @@ const SignUp = () => {
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [noTelpError, setNoTelpError] = useState('');
+  // const [csrfToken, setCsrfToken] = useState('');
+
 
   const navigation = useNavigation();
+
+  // useEffect(() => {
+  //   fetchCsrfToken();
+  // }, []);
+
+  // const fetchCsrfToken = async () => {
+  //   try {
+  //     const response = await api.get('/get-csrf-token');
+  //     const csrfToken = response.data.csrf_token;
+
+  //     setCsrfToken(csrfToken);
+
+  //     console.log("token nih bang :", csrfToken);
+
+  //   } catch (error) {
+  //     console.error('Error fetching CSRF token:', error.message);
+  //   }
+  // };
+
+  const handleLogin = () => {
+    navigation.navigate('Login');
+  };
 
   const handleSignUp = async () => {
     // error messages
@@ -52,19 +74,80 @@ const SignUp = () => {
     }
 
     try {
-      const response = await api.post('/register', {
+      // const csrf = await api.get('/get-csrf-token');
+      // const token = csrf.data.csrf_token;
+      // console.log('header', token);
+      // console.log("anying ",csrfToken);
+      const response = await api.post('/api/register', {
         nama: namalengkap,
         email: email,
         noTelp: noTelp,
         password: password,
-      });
-
-      console.log('Registration successful:', response.data.user);
+        // _token: csr
+      }
+      // {
+      //   headers: {
+      //     'X-CSRF-TOKEN': csrfToken, 
+      //   }
+      // }
+      );
+      // const response = await api.get(`/api/register?nama=${namalengkap}&email=${email}&noTelp=${noTelp}&pasword=${password}`);
+      // console.log("hmm ckck hmm ",csrfToken)
+      console.log('Registration successful:', response.data.message);
       navigation.navigate('Login');
     } catch (error) {
-      console.error('Registration failed:', error.message);
+      console.error('Registration failed:', error);
+
+      if (error.response && error.response.data) {
+        console.error('Server error data:', error.response.data);
+      }
+
+      console.error('Full error object:', error);
+
+      if (error.response && error.response.data && error.response.data.error) {
+        const validationErrors = error.response.data.error;
+
+        if (validationErrors.email) {
+          setEmailError(validationErrors.email[0]);
+        }
+        if (validationErrors.noTelp) {
+          setNoTelpError(validationErrors.noTelp[0]);
+        }
+        if (validationErrors.password) {
+          setPasswordError(validationErrors.password[0]);
+        }
+      }
     }
   };
+
+  // const handleSignUp = async () => {
+  //   try {
+  //     const response = await api.post('/api/register', {
+  //       nama: namalengkap,
+  //       email: email,
+  //       noTelp: noTelp,
+  //       password: password,
+  //     });
+
+  //     console.log('Registrasi berhasil:', response.data);
+  //     // Lakukan sesuatu setelah pendaftaran berhasil, misalnya navigasi atau tampilkan pesan.
+  //   } catch (error) {
+  //     console.error('Terjadi kesalahan saat pendaftaran:', error.response);
+  //     // Tangani kesalahan, misalnya tampilkan pesan error.
+  //     if (error.response) {
+  //       // Respon dari server dengan kode status di luar 2xx.
+  //       console.error("Data:", error.response.data);
+  //       console.error("Status:", error.response.status);
+  //       console.error("Headers:", error.response.headers);
+  //     } else if (error.request) {
+  //       // Permintaan dibuat tapi tidak ada respons yang diterima.
+  //       console.error("No response received:", error.request);
+  //     } else {
+  //       // Sesuatu terjadi dalam pengaturan permintaan yang memicu Error.
+  //       console.error('Error', error.message);
+  //     }
+  //   }
+  // };
 
 
   return (
@@ -102,6 +185,20 @@ const SignUp = () => {
             <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
 
             <Text marginBottom={15} marginTop={20}>
+              Password
+            </Text>
+            <Input
+              placeholder="Password"
+              value={password}
+              onChangeText={(text) => {
+                setPassword(text);
+                setPasswordError('');
+              }}
+              secureTextEntry={true}
+            />
+            <Text style={{ color: 'red', marginBottom: 5 }}>{passwordError}</Text>
+
+            <Text marginBottom={15} marginTop={20}>
               Masukkan No. Telphone
             </Text>
             <Input
@@ -113,49 +210,6 @@ const SignUp = () => {
               }}
             />
             <Text style={{ color: 'red', marginBottom: 5 }}>{noTelpError}</Text>
-
-            {/* Inputan Email */}
-            <Text marginBottom={10} marginTop={20}>
-              Masukkan Email
-            </Text>
-            <Input
-              placeholder="Email"
-              value={email}
-              onChangeText={(text) => {
-                setEmail(text);
-                setEmailError('');
-              }}
-            />
-            <Text style={{ color: 'red', marginBottom: 5 }}>{emailError}</Text>
-
-            {/* Inputan No. Telepon */}
-            <Text marginBottom={10} marginTop={20}>
-              Masukkan No. Telepon
-            </Text>
-            <Input
-              placeholder="No. Telepon"
-              value={noTelp}
-              onChangeText={(text) => {
-                setNoTelp(text);
-                setNoTelpError('');
-              }}
-            />
-            <Text style={{ color: 'red', marginBottom: 5 }}>{noTelpError}</Text>
-
-            {/* Inputan Password */}
-            <Text marginBottom={10} marginTop={20}>
-              Masukkan Password
-            </Text>
-            <Input
-              placeholder="Password"
-              value={password}
-              onChangeText={(text) => {
-                setPassword(text);
-                setPasswordError('');
-              }}
-              secureTextEntry={true}
-            />
-            <Text style={{ color: 'red' }}>{passwordError}</Text>
           </View>
           <Button
             onPress={handleSignUp}
@@ -165,7 +219,7 @@ const SignUp = () => {
           >
             Sign Up
           </Button>
-          {/* Hanndle Login */}
+          {/* Handle Login */}
           <View style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Text>Already have an acccount? {' '}</Text>
             <TouchableOpacity onPress={handleLogin}>
@@ -175,20 +229,9 @@ const SignUp = () => {
             </TouchableOpacity>
           </View>
         </View>
-        <Button
-          onPress={handleSignUp}
-          marginTop={10}
-          marginBottom={10}
-          style={{ backgroundColor: '#D32324', width: '80%', borderRadius: 12 }}
-        >
-          Sign Up
-        </Button>
-        <Text onPress={() => navigation.navigate('Login')}>Already have an account? Login</Text>
       </ScrollView>
     </SafeAreaView>
-
   );
 };
-
 
 export default SignUp;

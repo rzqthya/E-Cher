@@ -82,7 +82,7 @@ const Tabs = () => {
         options={{
           title: "History",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" },
+          headerTitleStyle: { color: "#D32324" },
         }}
       />
       <TabBottom.Screen
@@ -91,7 +91,7 @@ const Tabs = () => {
         options={{
           title: "Info",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" },
+          headerTitleStyle: { color: "#D32324" },
 
         }}
       />
@@ -101,7 +101,7 @@ const Tabs = () => {
         options={{
           title: "Profile",
           headerTitleAlign: "center",
-          headerTitleStyle: { color: "#F82F2D" },
+          headerTitleStyle: { color: "#D32324" },
         }}
       />
     </TabBottom.Navigator>
@@ -113,7 +113,7 @@ const App = () => {
     <NativeBaseProvider>
       <NavigationContainer>
         <GestureHandlerRootView style={{ flex: 1 }}>
-          <Stack.Navigator initialRouteName="Home">
+          <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Tabs" component={Tabs} options={{ headerShown: false }} />
             <Stack.Screen name="Login" component={Login} options={{ headerShown: false }} />
             <Stack.Screen name="SignUp" component={SignUp} options={{ headerShown: false }} />
@@ -144,8 +144,8 @@ const App = () => {
               component={EditProfile}
               options={{
                 title: "Edit Profile",
-                headerTitleAlign: "center",
-                headerTitleStyle: { color: "#F82F2D" },
+                headerTitleAlign: "left",
+                headerTitleStyle: { color: "#D32324" },
                 headerTintColor: "#D32324",
               }}
             />
@@ -156,8 +156,8 @@ const App = () => {
               component={ContentScreen}
               options={{
                 title: "Tentang Kami",
-                headerTitleAlign: "center",
-                headerTitleStyle: { color: "#F82F2D" },
+                headerTitleAlign: "left",
+                headerTitleStyle: { color: "#D32324" },
                 headerTintColor: "#D32324",
               }}
             />
@@ -166,8 +166,8 @@ const App = () => {
               component={FaqScreen}
               options={{
                 title: "FAQ",
-                headerTitleAlign: "center",
-                headerTitleStyle: { color: "#F82F2D" },
+                headerTitleAlign: "left",
+                headerTitleStyle: { color: "#D32324" },
                 headerTintColor: "#D32324",
               }}
             />
@@ -177,7 +177,7 @@ const App = () => {
               options={{
                 title: "Message",
                 headerTitleAlign: "left",
-                headerTitleStyle: { color: "#F82F2D" },
+                headerTitleStyle: { color: "#D32324" },
                 headerTintColor: "#D32324",
               }}
             />

@@ -9,11 +9,10 @@ const History = () => {
         <Tab.Navigator 
             screenOptions={{
                 tabBarLabelStyle: { fontWeight: "bold" }, 
-                tabBarIndicatorStyle: { backgroundColor: "#F82F2D" }, 
+                tabBarIndicatorStyle: { backgroundColor: "#D32324" }, 
         }}>
             <Tab.Screen name="Active" component={Active} />
             <Tab.Screen name="Used" component={Used} />
-            {/* <Tab.Screen name="DetailScreen" component={DetailScreen} /> */}
         </Tab.Navigator>
     );
 };

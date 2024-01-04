@@ -5,7 +5,6 @@ import { useNavigation } from "@react-navigation/native";
 import { Hi_profile, BottomSheetComponent } from "../components";
 import Ionicons from '@expo/vector-icons/Ionicons';
 import api from '../api';
-import Ionicons from '@expo/vector-icons/Ionicons';
 import datas from "../datas";
 
 
@@ -136,7 +135,7 @@ const Home = () => {
               onPress={() => navigation.navigate('Detail Voucher', {
                 voucherId: item.id,
                 voucher: item.voucher,
-                image: `http://192.168.58.127:8000/storage/${item.image}`,
+                image: `http://192.168.242.24:8000/storage/${item.image}`,
               })}
             >
               <Box
@@ -157,7 +156,7 @@ const Home = () => {
                 </Box>
                 <Center flex={2}>
                   <Image
-                    source={{ uri: `http://192.168.58.127:8000/storage/${item.image}` }}
+                    source={{ uri: `http://192.168.242.24:8000/storage/${item.image}` }}
                     style={{ width: 100, height: 100 }}
                     alt="voucher"
                   />

@@ -154,10 +154,10 @@ const SignUp = () => {
     <SafeAreaView>
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <View flex={1} justifyContent="center" alignItems="center" marginBottom={10}>
-          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginBottom: 70, marginTop: -20 }}>
+          <Text style={{ fontSize: 40, fontWeight: 'bold', color: '#D32324', marginTop: 30 }}>
             Sign Up
           </Text>
-          <View width="80%" marginBottom={10}>
+          <View width="80%" marginBottom={10} marginTop={40}>
             <Text marginBottom={15} marginTop={20}>
               Nama Lengkap
             </Text>

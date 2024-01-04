@@ -56,7 +56,7 @@ const Active = () => {
                             // onPress={() => { navigation.navigate('DetailScreen'); }}
                             onPress={() => navigation.navigate('DetailScreen', {
                                 voucher: item.masaBerlaku,
-                                image: `http://192.168.58.127:8000/storage/${item.image}`,
+                                image: `http://192.168.242.24:8000/storage/${item.image}`,
                                 token: item.token,
                                 namaVou: item.voucher,
                             })}
@@ -67,7 +67,7 @@ const Active = () => {
                 </HStack>
                 <Center flex={5}>
                     <Image
-                        source={{ uri: `http://192.168.58.127:8000/storage/${item.image}` }}
+                        source={{ uri: `http://192.168.242.24:8000/storage/${item.image}` }}
                         style={{ width: 100, height: 100 }}
                         alt="Deskripsi gambar"
                         // size="xl"

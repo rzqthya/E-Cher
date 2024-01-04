@@ -49,7 +49,7 @@ const Used = () => {
                     </Button>
                 </View>
                 <Center flex={5}>
-                    <Image source={{ uri: item.image }}
+                    <Image source={{ uri: `http://192.168.242.24:8000/storage/${item.image}` }}
                         alt="content"
                         size="xl"
                         borderRadius={5} />
